@@ -60,10 +60,11 @@
       <div class="row">
         <div class="col-lg-20 text-center">
           <h1 class="display-1"><strong>Hi there, Rahul</strong></h1>
-            <p class="lead">Variefy analyzes data of your most top songs and performs calculations to reccomend you fresh songs.</p>
+            <p class="lead">Variefy analyzes data of your most top songs and performs calculations to recommend you fresh songs.</p>
             <br>
             <div id = 'spin-box'>
              </div> 
+            <div id = 'check-box'></div>
              
         
               
@@ -96,8 +97,20 @@
         const calculateButtonHTML = '<a href="/calculate" class="btn btn-primary rounded-pill" style = "background-color: #1db954; color: white"> Calculate my music tastes</a>'
         
         setTimeout(function(){
-          document.getElementById("spin-box").innerHTML = "";
+          document.getElementById("spin-box").innerHTML = checkHTML;
+        }, 2000);
+
+        setTimeout(function() {
+          window.location.replace("genre.html");
         }, 3000);
+        
+
+        const checkHTML = '<h1><span class="bi bi-check"></span></h1>'
+
+        // (document).ready(function() {
+        //   window.location.replace("done_loading.html");
+        // });
+        // document.getElementById("check-box").innerHTML = checkHTML;
 
 
     </script>
