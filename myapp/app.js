@@ -173,7 +173,7 @@ app.get('/next', async (req, res) =>
 		}
         
 
-		const K = 3;
+		const K = 4;
 		
 		console.log('done')
 		// clusters.printKMeansCentroids(K, userAttributeMatrix);
