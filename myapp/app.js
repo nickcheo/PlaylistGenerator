@@ -13,47 +13,6 @@ const { Client } = require('spotify-api.js');
 
 
 
-
-// this can be used as a seperate module
-const encodeFormData = (data) => {
-	return Object.keys(data)
-	  .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-	  .join('&');
-  }
-
-// let SpotifyWebApi = require('spotify-web-api-node');
-// scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private',
-// 'user-read-private', 'user-library-read', 'user-top-read']
-
-
-// var spotifyApi = new SpotifyWebApi({
-// 	clientId: client_id,
-// 	clientSecret: client_secret,
-// 	redirectUri: 'http://localhost:3000/next',
-//   });
-
-// const APIController = (function() {
-
-// 	const _getToken = async () => {
-
-// 		const result = await fetch ('https://accounts.spotify,com/api/token', {
-
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': "application/x-www-form-urlencoded",
-// 				'Authorization' : 'Basic ' + btoa(client_id + ':' + client_secret)
-// 			},
-// 			body: 'grant_type=client_credentials'
-// 		});
-
-// 		const data = await result.json();
-// 		return data.access_token;
-// 	}
-// })();
-
-
-
-
 app.use('/images', express.static(path.join(__dirname, "../images")))
 
 
@@ -107,35 +66,6 @@ function handleLoginRedirect(req){
 	return authCode;
 }
 
-function composeAccessTokenRequest(authCode, req, res)
-{
-	let refresh_token = req.query.refresh_token;
-	let authOptions = {
-		url: 'https://accounts.spotify.com/api/token',
-		form: {
-		  code: authCode,
-		  redirect_uri: 'http://localhost:3000/next',
-		  grant_type: 'authorization_code'
-		},
-		headers: {
-		  'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-		},
-		json: true
-	  };
-
-
-	  request.post(authOptions, function(error, response, body) {
-		if (!error && response.statusCode === 200) {
-		  var access_token = body.access_token;
-		  res.send({
-			'access_token': access_token
-		  });
-		}
-
-	});
-}
-
-
 app.get('/next', async (req, res) =>
 {
 	const authCode = handleLoginRedirect(req);
@@ -174,12 +104,7 @@ app.get('/next', async (req, res) =>
 
 	console.log("this the code " + authCode);
 	console.log('this that token: ' + access_token)
-	// composeAccessTokenRequest(authCode, req, res);
-
-	// var top50Tracks = access_token != "" ? getUserTop50Tracks(access_token) : "something wrong";
-
-
-	const newToken = refresh('https://accounts.spotify.com/api/token?',authCode, access_token)[0];
+	
 	
 	console.log('new tok' + newToken)
 
@@ -191,12 +116,6 @@ app.get('/next', async (req, res) =>
         });
 
 	console.log('promise should be done')
-	
-	
-
-
-
-
 	res.sendFile(path.join(__dirname, '../public', 'intro.html'));
 
 	console.log(result.json())
@@ -204,57 +123,7 @@ app.get('/next', async (req, res) =>
 });
 
 
-const refresh = async(tokenBaseUrl, authCode, oldToken) => {
-	const result = await fetch(tokenBaseUrl, {
-		method: 'POST',
-		headers: {
-			'Content-Type' : "application/x-www-form-urlencoded",
-			'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
-		},
-		body: querystring.stringify({
-			grant_type: oldToken,
-			code: authCode,
-			redirect_uri: 'http://localhost:3000/next',
-		})
-	});
 
-	const data = result.json();
-
-	return data.access_token;
-}
-
-const getUserTop50Tracks = async (access_token) =>
-{
-	const apiBaseUrl = "https://api.spotify.com/v1/"
-	let get50TopTrackUrl = apiBaseUrl +"me/top/tracks?limit=50";
-	
-	console.log('in get tracks and this the token '  +access_token)
-	const result = await fetch(get50TopTrackUrl, {
-		method: 'GET',
-		headers: {
-			'Authorization': 'Bearer ' + access_token,
-			'Content-Type' : 'application/json'
-		}
-	});
-
-	const data = await result.json();
-
-
-	return data.toString();
-
-	// const result = await fetch(getTokenBaseUrl, {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		'Content-Type' : "application/x-www-form-urlencoded",
-	// 		'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
-	// 	},
-	// 	body: querystring.stringify({
-	// 		grant_type: "authorization_code",
-	// 		code: authCode,
-	// 		redirect_uri: 'http://localhost:3000/next',
-	// 	})
-	// });
-}
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
