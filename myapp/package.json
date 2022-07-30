@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@tensorflow/tfjs": "^3.19.0",
+    "export": "^0.1.337",
     "express": "^4.18.1",
-    "package.json": "^2.0.1",
     "scikitjs": "^1.24.0"
   }
 }
