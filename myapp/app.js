@@ -11,7 +11,8 @@ let location = require('location')
 let request = require('request');
 const { Client } = require('spotify-api.js');
 
-
+// cluster.js function import
+const clusters = require('./clusters')
 
 app.use('/images', express.static(path.join(__dirname, "../images")))
 
@@ -167,26 +168,74 @@ app.get('/next', async (req, res) =>
 			var songId = userTopTrackIdList[i];
 			console.log("Data for Song #",i, idToSongName[songId],": ")
 			console.log(userAttributeMatrix[i])
-			dataStr += "<p>Data for Song #" + (i+1) + " "+ idToSongName[songId] +": <br>";
-			dataStr+= (userAttributeMatrix[i]) + '</p><br>';
+			// dataStr += "<p>Data for Song #" + (i+1) + " "+ idToSongName[songId] +": <br>";
+			// dataStr+= (userAttributeMatrix[i]) + '</p><br>';
 		}
         
 
-	
-		res.send(dataStr);
+		const K = 4;
+		
+		console.log('done')
+		// clusters.printKMeansCentroids(K, userAttributeMatrix);
+		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
+		const clusterGroups  = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
+
+		const htmlString = constructClusterHTMLString(clusterGroups);
+
+
+
+		res.send(htmlString);
+		
 		return;
 
 	}
 
-	res.sendFile(path.join(__dirname, '../public', 'genre.html'));
+	res.send("something went wrong");
 
 
 });
 
+function constructClusterHTMLString(clusterGroups)
+{
+	var html = "<div> "
+
+	for(let i = 0; i < clusterGroups.length; i++)
+	{
+		html += "<div><h2> Cluster " + (i+1) + "</h2>"
+		var cluster = clusterGroups[i];
+		for(const song of cluster)
+		{
+			html += "<p> " + song + "</p>"
+		}
+
+		html += "</div>";
+
+	}
+
+	html += '</div>'
+
+	return html;
+}
 
 
+function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k)
+{
+	let clusterGroups = []
+	for(let i = 0; i < k; i++)
+		clusterGroups.push([]);
+
+	for(const [id, label] of  Object.entries(songIdToClusterLabelMap))
+	{
+		clusterGroups[label].push(songIdToNameMap[id]);
+	}
+
+	return clusterGroups;
+
+}
 
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
+
+
