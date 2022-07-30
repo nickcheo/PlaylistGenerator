@@ -106,21 +106,83 @@ app.get('/next', async (req, res) =>
 	console.log('this that token: ' + access_token)
 	
 	
-	console.log('new tok' + newToken)
-
-
-    const result = await fetch('https://api.spotify.com/v1/me/top/tracks', {
+    const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + newToken,
+            headers: { 'Authorization' : 'Bearer ' + access_token,
 					   'Content-Type' : 'application/json'}
         });
 
-	console.log('promise should be done')
-	res.sendFile(path.join(__dirname, '../public', 'intro.html'));
+	const data = await result.json()
 
-	console.log(result.json())
+	let userTopTrackIdList = []
+	let idToSongName = {}
+	// 2D Array of user song vectors, passable into SK.js libraries
+	let userAttributeMatrix = [];
+
+	if (data.items != null)
+	{
+		for(let i = 0; i < data.items.length; i++)
+		{
+			var artist = data.items[i].album.artists[0].name;
+			userTopTrackIdList[i] = data.items[i].id;
+			idToSongName[userTopTrackIdList[i]] = data.items[i].name + " by " + artist;
+			// console.log(userTopTrackIdList[i])
+		}
+
+		const idQueryString = userTopTrackIdList.join(',');
+		// console.log(idQueryString)
+
+		const audioFeaturesResult = await fetch('https://api.spotify.com/v1/audio-features?ids=' + idQueryString, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + access_token,
+					   'Content-Type' : 'application/json'}
+        });
+
+		const audioFeatureData = await audioFeaturesResult.json();
+		// console.log(audioFeatureData)
+		console.log('here the items')
+		// console.log(audioFeatureData.audio_features[0])
+
+		for(let i = 0; i < audioFeatureData.audio_features.length; i++)
+		{
+			var feature_dict = audioFeatureData.audio_features[i];
+			var songVector = []
+			// console.log(feature_dict);
+
+			for(const [key, value] of Object.entries(feature_dict))
+				if(typeof(value) === "number" && key != "duration_ms" && key != "duration_ms"
+					&& key != "time_signature" && key != 'key')
+					{
+						// console.log(key, value);
+						songVector.push(value);
+					}
+
+			userAttributeMatrix.push(songVector);
+		}
+
+		var dataStr = "";
+
+		for(let i = 0; i < userTopTrackIdList.length; i++)
+		{
+			var songId = userTopTrackIdList[i];
+			console.log("Data for Song #",i, idToSongName[songId],": ")
+			console.log(userAttributeMatrix[i])
+			dataStr += "<p>Data for Song #" + (i+1) + " "+ idToSongName[songId] +": <br>";
+			dataStr+= (userAttributeMatrix[i]) + '</p><br>';
+		}
+        
+
+	
+		res.send(dataStr);
+		return;
+
+	}
+
+	res.sendFile(path.join(__dirname, '../public', 'genre.html'));
+
 
 });
+
 
 
 
