@@ -1,3 +1,4 @@
 .cache
 .pycache
 node_modules
+myapp/node_modules
