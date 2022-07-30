@@ -6,10 +6,10 @@ const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
 const client_secret="76669d3b28f94e8da7662d91cc39cc94"
 const querystring = require('querystring');
 const { URLSearchParams } = require('url');
-let window = require('window')
-let location = require('location')
-let request = require('request');
-const { Client } = require('spotify-api.js');
+// let window = require('window')
+// let location = require('location')
+// let request = require('request');
+// const { Client } = require('spotify-api.js');
 
 // cluster.js function import
 const clusters = require('./clusters')
