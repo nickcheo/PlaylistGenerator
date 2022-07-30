@@ -43,6 +43,10 @@ app.get('/testroute', (req, res) =>
 	res.sendFile(path.join(__dirname, '../public', 'genre.html'));
 });
 
+app.get('/loading2', (req,res) => {
+	res.sendFile(path.join(__dirname, '../public', 'loading2.html'));
+});
+
 app.get('/login', async function(req,res){
 
 	var state = generateRandomString(16);
