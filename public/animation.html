@@ -46,8 +46,10 @@
 
         function startAnimation() {
             new_y = center.y - animated_value; 
+            new_x = center.x + Math.sin(animation_value);
 
             card1.style.top = `${new_y}px`; 
+            card1.style.left = `${new_x}px`; 
 
             animated_value++;
             animation_id = requestAnimationFrame(startAnimation)
