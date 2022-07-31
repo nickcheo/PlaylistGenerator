@@ -41,12 +41,13 @@
         }
         let new_x = 0.0; 
         let new_y = 0.0; 
+        let motion_sway = 0.2;
         let new_animatedValue = 0.0; 
         let animation_id = null; 
 
         function startAnimation() {
             new_y = center.y - animated_value; 
-            new_x = center.x + Math.sin(animation_value);
+            new_x = center.x + (60 * Math.sin(motion_sway * animation_value));
 
             card1.style.top = `${new_y}px`; 
             card1.style.left = `${new_x}px`; 
