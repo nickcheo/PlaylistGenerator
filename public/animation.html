@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+                margin: 0; 
+                padding: 0;
+                height: 100vh; 
+                width: 100vh;
+        }
+
+        .card {
+            height: 50px; 
+            width: 120px;
+            background-color: red;
+            opacity: 0;
+
+            position: absolute;
+            left: 50%;
+            top: 80%;
+
+            transform: translate(-50%, -50%);
+
+        }
+    </style>
+
+</head>
+<body>
+    <div class = "card"></div>
+    <script>
+
+        const card1 = document.querySelector('.card');
+
+
+        //motion variables 
+        const center = {
+            x: parseFloat(getComputedStyle(card1).left),
+            y: parseFloat(getComputedStyle(card1).top)
+
+        }
+        let new_x = 0.0; 
+        let new_y = 0.0; 
+        let motion_sway = 0.01;
+        let natural_sway = 0.1; 
+        let animation_value = 0.0; 
+        let animation_id = null; 
+
+        //opacity variables
+
+        let new_opacity = 0.0; 
+        let opacity_speed = .01; 
+
+
+        function startAnimation() {
+
+            //motion modifications 
+            new_y = center.y - animation_value; 
+            new_x = center.x + (60 * Math.sin(motion_sway * animation_value)) + natural_sway;
+
+            card1.style.top = `${new_y}px`; 
+            card1.style.left = `${new_x}px`; 
+
+            //opacity modifications 
+
+            new_opacity = Math.sin(opacity_speed * animation_value);
+
+            card1.style.opacity = new_opacity;
+
+            animation_value++;
+            animation_id = requestAnimationFrame(startAnimation)
+        }
+
+        window.addEventListener('click', () => {
+            startAnimation()
+        })
+        
+        window.addEventListener('keyup', event => {
+            if (event.key === 'a') cancelAnimationFrame(animation_id)
+        })
+       
+    </script>
+    
+</body>
+</html>
