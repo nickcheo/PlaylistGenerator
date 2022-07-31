@@ -17,7 +17,8 @@
         .card {
             height: 50px; 
             width: 120px;
-            background-color: blue;
+            background-color: black;
+            opacity: 0;
 
             position: absolute;
             left: 50%;
@@ -34,6 +35,9 @@
     <script>
 
         const card1 = document.querySelector('.card');
+
+
+        //motion variables 
         const center = {
             x: parseFloat(getComputedStyle(card1).left),
             y: parseFloat(getComputedStyle(card1).top)
@@ -41,16 +45,31 @@
         }
         let new_x = 0.0; 
         let new_y = 0.0; 
-        let motion_sway = 0.02;
+        let motion_sway = 0.01;
+        let natural_sway = 0.1; 
         let new_animatedValue = 0.0; 
         let animation_id = null; 
 
+        //opacity variables
+
+        let new_opacity = 0.0; 
+        let opacity_speed = 0.01; 
+
+
         function startAnimation() {
+
+            //motion modifications 
             new_y = center.y - animated_value; 
-            new_x = center.x + (60 * Math.sin(motion_sway * animation_value));
+            new_x = center.x + (60 * Math.sin(motion_sway * animation_value)) + natural_sway;
 
             card1.style.top = `${new_y}px`; 
             card1.style.left = `${new_x}px`; 
+
+            //opacity modifications 
+
+            new_opacity = Math.sin(opacity_speed * animated_value);
+
+            card1.style.opacity = new_opacity;
 
             animated_value++;
             animation_id = requestAnimationFrame(startAnimation)
