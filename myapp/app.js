@@ -11,6 +11,10 @@ const { URLSearchParams } = require('url');
 // let request = require('request');
 // const { Client } = require('spotify-api.js');
 
+app.listen(port, () => {
+	console.log(`Example app listening on port ${port}`);
+});
+
 // cluster.js function import
 const clusters = require('./clusters')
 
@@ -237,9 +241,5 @@ function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k)
 
 }
 
-
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
-});
 
 
