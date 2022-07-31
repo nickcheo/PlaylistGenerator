@@ -17,7 +17,7 @@
         .card {
             height: 50px; 
             width: 120px;
-            background-color: black;
+            background-color: blue;
 
             position: absolute;
             left: 50%;
@@ -34,8 +34,33 @@
     <script>
 
         const card1 = document.querySelector('.card');
-        
+        const center = {
+            x: parseFloat(getComputedStyle(card1).left),
+            y: parseFloat(getComputedStyle(card1).top)
 
+        }
+        let new_x = 0.0; 
+        let new_y = 0.0; 
+        let new_animatedValue = 0.0; 
+        let animation_id = null; 
+
+        function startAnimation() {
+            new_y = center.y - animated_value; 
+
+            card1.style.top = `${new_y}px`; 
+
+            animated_value++;
+            animation_id = requestAnimationFrame(startAnimation)
+        }
+
+        window.addEventListener('click', () => {
+            startAnimation()
+        })
+        
+        window.addEventListener('keyup', event => {
+            if (event.key === 'a') cancelAnimationFrame(animation_id)
+        })
+       
     </script>
     
 </body>
