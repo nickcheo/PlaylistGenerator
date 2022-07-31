@@ -19,3 +19,10 @@ app.get('/status', (req,res) => {
 
     res.send({ message: "Hello World!"});
 })
+
+app.post('/test', (req, res) =>
+{
+    res.send({
+        message: `This is a test message: ${req.body.test}` + req.body.test
+    })
+})
