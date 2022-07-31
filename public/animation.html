@@ -59,7 +59,7 @@
         function startAnimation() {
 
             //motion modifications 
-            new_y = center.y - animated_value; 
+            new_y = center.y - animation_value; 
             new_x = center.x + (60 * Math.sin(motion_sway * animation_value)) + natural_sway;
 
             card1.style.top = `${new_y}px`; 
@@ -71,7 +71,7 @@
 
             card1.style.opacity = new_opacity;
 
-            animated_value++;
+            animation_value++;
             animation_id = requestAnimationFrame(startAnimation)
         }
 
