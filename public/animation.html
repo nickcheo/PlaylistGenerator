@@ -47,7 +47,7 @@
         let new_y = 0.0; 
         let motion_sway = 0.01;
         let natural_sway = 0.1; 
-        let new_animatedValue = 0.0; 
+        let animation_value = 0.0; 
         let animation_id = null; 
 
         //opacity variables
@@ -67,7 +67,7 @@
 
             //opacity modifications 
 
-            new_opacity = Math.sin(opacity_speed * animated_value);
+            new_opacity = Math.sin(opacity_speed * animation_value);
 
             card1.style.opacity = new_opacity;
 
