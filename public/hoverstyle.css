@@ -1,0 +1,26 @@
+body {
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100vh; 
+    background-color: black;   
+}
+
+.hover-link {
+    margin: 0 auto; 
+    border: none; 
+    background: none;
+    color: white; 
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+    padding: 0 0 0.5rem; 
+    font-family: "Monument Extended";
+    font-size: 3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    
+}
