@@ -70,3 +70,9 @@ body {
     transform: translate(-50%, -50% );
 }
 
+#cursor.button { 
+    width: 5rem; 
+    height: 5rem; 
+    border: solid 1px transparent; 
+    background: rgba(225, 225, 225, 0.5);
+}
