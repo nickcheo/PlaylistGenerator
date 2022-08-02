@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Bootstrap demo</title>
+      <title>Variefy - a playlist generator for daring music listeners </title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
     </head>
 
@@ -32,7 +32,9 @@
               <p class="lead">A playlist generator for daring music listeners.</p>
               <br>
               <p><strong>Get started</strong></p>
-          <a href="/loading2" onclick="window.open('/login', 'popup', 'width=800, height=600');" class="btn btn-dark rounded-pill">
+          <a href="#/" class="btn btn-dark rounded-pill"
+          @click="getSpotifyLogin"
+          >
             <img src="../assets/spotify-logo.png" id="icon"/>
             Connect with Spotify
           </a>
@@ -56,8 +58,65 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    getSpotifyLogin: async () => {
+      /* eslint-disable */
+      const querystring = require('querystring')
+      const scope = 'user-read-private user-read-email user-library-read user-top-read';
+      console.log('login func heree')
+
+      function generateRandomString(n)
+    {  
+      var str = ""
+      for(let i = 0; i < n; i++)
+        str += String(Math.floor(Math.random() * 10));
+
+      return str;
+    }   
+      const state = generateRandomString(16);
+      try {
+        // let response = await fetch('http://localhost:2000/login')
+
+        const clientId="a1c0d6debc2c49038fb8a43eb5df637a"
+        const clientSecret="76669d3b28f94e8da7662d91cc39cc94"
+        const redir = 'http://localhost:8080/next'
+        console.log(redir)
+
+        
+        
+       var authUrl = 'https://accounts.spotify.com/authorize?' +
+		    querystring.stringify({
+		    response_type: 'code',
+		    client_id: clientId,
+		    scope: scope,
+		    redirect_uri: redir,
+		    state: state
+      })
+        console.log('response here hopefully')
+        window.location.href = authUrl
+        console.log('redirect maybe???')
+
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code"); 
+        console.log("this should be the code " + code)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
+
+// async function getSpotifyLogin () {
+//   try {
+//     let response = await fetch('http://localhost:2000/login')
+//     let token = await response.json()
+//     console.log(JSON.stringify(token))
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
 </script>
 <!-- TODO: uncomment and get bootstrap back -->
  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
