@@ -2,7 +2,7 @@
   <div class="hello">
     <h2>WORK PLEASE</h2>
     <h3>{{token}}</h3>
-    <button @click = "alert()">DO IT</button>
+    <button @click = "token = getAccessToken()">DO IT</button>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
     }
   },
    beforeMount(){
-    token = this.getAccessToken()
+    // token = this.getAccessToken()
  },
 
 }
