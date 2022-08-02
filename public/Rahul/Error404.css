@@ -26,7 +26,7 @@
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
-    font-family: "Space Grotesk";
+    font-family: "Halvetica";
     line-height: 100px;
   }
   
@@ -55,7 +55,7 @@
   }
   
   .header > span {
-    font-family: "Maelstrom Sans";
+    font-family: "Halvetica";
     font-size: 40vw;
     position: relative;
   }
@@ -72,7 +72,7 @@
     position: relative;
     top: 30px;
     text-decoration: none;
-    font-family: "Space Grotesk", Helvetica, sans-serif;
+    font-family: "Helvetica";
     font-weight: 400;
     font-size: 1.4em;
     transition: 1s;
