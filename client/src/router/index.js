@@ -1,14 +1,13 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Home from '@/components/Home'
-import Login from '@/components/Login.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import HelloWorld from "@/components/HelloWorld";
+import Home from "@/components/Home";
+import Login from "@/components/Login.vue";
 
-Vue.use(Router)
-
+Vue.use(Router);
+/* eslint-disable */
 export default new Router({
   routes: [
-
     // uncomment and remove other '/' path to get this back
     // {
     //   path: '/',
@@ -17,22 +16,20 @@ export default new Router({
     // },
 
     {
-      path: '/',
-      name: 'Home',
+      path: "/",
+      name: "Home",
       component: Home
     },
     {
-      path: '/next',
-      name: 'Login',
+      path: "/next",
+      name: "Login",
       component: Login
     },
     {
-
-      path: '/hello',
-      name: 'Hello',
+      path: "/hello",
+      name: "Hello",
       component: HelloWorld
     }
-
   ],
-  mode: 'history'
-})
+  mode: "history"
+});
