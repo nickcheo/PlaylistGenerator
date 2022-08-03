@@ -107,6 +107,7 @@ export default {
   },
   mounted() {
       /* eslint-disable */
+      // directs to /next route in router after access token is registered
       if(getCookie("access_token") != "") {
         this.$router.replace("next")
       }

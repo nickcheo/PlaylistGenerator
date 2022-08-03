@@ -1,8 +1,9 @@
 // not to be confused with PlaylistGenerator/myapp/app.js
 // this is for following Vue + Node js setup
 console.log("hello")
+console.log('hello2')
 const express = require('express');
-const port = 3000;
+const port = 2000;
 const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
 const client_secret="76669d3b28f94e8da7662d91cc39cc94"
 const cors = require('cors');
@@ -13,7 +14,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors())
 
-app.listen(process.env.PORT || 2000)
+app.listen( port, () => {
+	console.log(`Example app listening on port ${port}`);
+});
+
+
+
 
 app.get('/status', (req,res) => {
 
@@ -25,7 +31,27 @@ app.post('/test', (req, res) =>
     res.send({
         message: `This is a test message: ${req.body.test}` + req.body.test
     })
-})
+});
+
+
+app.post('/gettracks', async (req,res) =>
+{
+	
+	const token = req.body.token;
+	// incoming access token
+	console.log('get tracks token is ' + token)
+
+	const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token,
+					   'Content-Type' : 'application/json'}
+        });
+	// pls work
+	const data = await result.json()
+
+	res.send(data);
+
+});
 
 
 function generateRandomString(n)

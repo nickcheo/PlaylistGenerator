@@ -1,11 +1,77 @@
 
 <template>
-  <div class="hello">
+  <!-- <div class="hello">
     <h2>WORK PLEASE</h2>
     <h3>{{access_token}}</h3>
-    <!-- <button @click = "access_token = getAccessToken()">DO IT</button> -->
   </div>
+   -->
+
+
+<body>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Bootstrap demo</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <!-- Option 1: Include in HTML -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    </head>
+  
+    <nav class="navbar navbar-light bg-light">
+      
+      <div class="container-fluid">
+        <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+          <div class="collapse" id="navbarToggleExternalContent3">
+            <div class="bg-light shadow-3 p-4">
+              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
+              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
+              <button class="btn btn-link btn-block m-0">Link 3</button>
+            </div>
+          </div>
+    </nav>
+
+    
+
+
+      <div class="hero">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-20 text-center">
+              <h2 class="display-1"><strong>Hello there{{username}}</strong></h2>
+                <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
+                <br>
+                <!-- <div id = 'spin-box'>
+                </div> 
+                <div id = 'check-box'></div> -->
+                
+                <button  class="btn btn-dark rounded-pill"
+                  @click = "calculateTrackData">
+                  Find me fresh music
+                <img src="../assets/rightarrow.png" id="icon"/>
+                </button>
+
+                
+                <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
+                  <!--Button-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+<!--Grid row-->
+  
+
+
+</body>
 </template>
+
 
 <script>
   export default {
@@ -13,7 +79,8 @@
     data () {
       return {
         access_token: 'temp',
-        refresh_token: 'temp'
+        refresh_token: 'temp',
+        username: getCookie('username') ? (', ' + getCookie('username'))  : ''
       }
     },
     methods:
@@ -68,6 +135,30 @@
           return [getCookie("access_token"), getCookie("refresh_token")];
         }
         
+      },
+      calculateTrackData: async () => {
+
+          const querystring = require('querystring')
+          console.log('this that token plssssss ' + getCookie('access_token'));
+          
+          const testResult = await fetch('http://localhost:2000/gettracks',
+          {
+            method: 'POST',
+            body: querystring.stringify({
+              token: getCookie('access_token'),
+            })
+          });
+
+          // pls work 
+
+        //   const testResult = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+        //     method: 'GET',
+        //     headers: { 'Authorization' : 'Bearer ' + getCookie('access_token'),
+				// 	   'Content-Type' : 'application/json'}
+        // });
+
+          const testData = await testResult.json();
+          console.log(testData);
       }
     },
     async mounted(){
@@ -76,6 +167,38 @@
       this.access_token = tokens[0];
       this.refresh_token = tokens[1];
 
+      console.log('token on mount ' + this.access_token)
+
+      if(this.access_token)
+      {
+
+        const usernameResult = await fetch('https://api.spotify.com/v1/me', {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + this.access_token,
+					   'Content-Type' : 'application/json'}
+        });
+
+	      const usernameData  = await (usernameResult.json());
+        // console.log("username ")
+        // console.log(username);
+        if(!getCookie("username"))
+          setCookie("username", usernameData['display_name']);
+        this.username = ", " + getCookie('username');
+        // console.log(this.username)
+
+      //   const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+      //       method: 'GET',
+      //       headers: { 'Authorization' : 'Bearer ' + this.access_token,
+			// 		   'Content-Type' : 'application/json'}
+      //   });
+	    //   // pls work
+    	// const data = await result.json()
+
+      // console.log(data)
+
+
+      }
+      
       window.history.replaceState({}, document.title, "/");
       
   },
@@ -105,10 +228,32 @@
     }
     return "";
   }
+
+  
     
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- <script>
+        const spinHTML = '<div class="spinner-border" role="status"><span class="sr-only"></span></div>'
+        document.getElementById("spin-box").innerHTML = spinHTML;
+        const calculateButtonHTML = '<a href="/calculate" class="btn btn-primary rounded-pill" style = "background-color: #1db954; color: white"> Calculate my music tastes</a>'
+        
+        setTimeout(function(){
+          document.getElementById("spin-box").innerHTML = checkHTML;
+        }, 2000);
+
+        setTimeout(function() {
+          window.location.replace("genre.html");
+        }, 4000);
+        
+
+        const checkHTML = '<h1><span class="bi bi-check"></span></h1>'
+</script> -->
+ 
+
+
+
+
 <style scoped>
 h1, h2 {
   font-weight: normal;
@@ -121,7 +266,33 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
+a, button {
   color: #42b983;
 }
 </style>
+<style>
+      .my-custom-row {
+        background-color:beige;
+        height: 400px;
+      }
+      .hero {
+        background: white;
+        width: 100%;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+      }
+
+      #spotify-container {
+        width: 100vw;
+      }
+
+      #icon {
+        border-radius: 100%;
+        width: 25px;
+        height: auto;
+      }
+    </style>
+
+
+
