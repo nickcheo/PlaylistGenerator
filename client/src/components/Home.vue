@@ -109,6 +109,7 @@ export default {
       /* eslint-disable */
       // directs to /next route in router after access token is registered
       if(getCookie("access_token") != "") {
+        console.log(getCookie("access_token"))
         this.$router.replace("next")
       }
     }

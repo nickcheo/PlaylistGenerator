@@ -51,7 +51,7 @@
                 <div id = 'check-box'></div> -->
                 
                 <button  class="btn btn-dark rounded-pill"
-                  @click = "calculateTrackData">
+                  @click = "goToClusters">
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
@@ -74,6 +74,9 @@
 
 
 <script>
+  import router from '../router';
+import Api from '../services/Api';
+
   export default {
     name: 'Login',
     data () {
@@ -136,29 +139,10 @@
         }
         
       },
-      calculateTrackData: async () => {
+      goToClusters: async () => {
 
-          const querystring = require('querystring')
-          console.log('this that token plssssss ' + getCookie('access_token'));
-          
-          const testResult = await fetch('http://localhost:2000/gettracks',
-          {
-            method: 'POST',
-            body: querystring.stringify({
-              token: getCookie('access_token'),
-            })
-          });
-
-          // pls work 
-
-        //   const testResult = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
-        //     method: 'GET',
-        //     headers: { 'Authorization' : 'Bearer ' + getCookie('access_token'),
-				// 	   'Content-Type' : 'application/json'}
-        // });
-
-          const testData = await testResult.json();
-          console.log(testData);
+          console.log('going to clusters')
+          router.replace({path : '/clusters'});
       }
     },
     async mounted(){
@@ -186,15 +170,6 @@
         this.username = ", " + getCookie('username');
         // console.log(this.username)
 
-      //   const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
-      //       method: 'GET',
-      //       headers: { 'Authorization' : 'Bearer ' + this.access_token,
-			// 		   'Content-Type' : 'application/json'}
-      //   });
-	    //   // pls work
-    	// const data = await result.json()
-
-      // console.log(data)
 
 
       }
@@ -232,24 +207,6 @@
   
     
 </script>
-
-<!-- <script>
-        const spinHTML = '<div class="spinner-border" role="status"><span class="sr-only"></span></div>'
-        document.getElementById("spin-box").innerHTML = spinHTML;
-        const calculateButtonHTML = '<a href="/calculate" class="btn btn-primary rounded-pill" style = "background-color: #1db954; color: white"> Calculate my music tastes</a>'
-        
-        setTimeout(function(){
-          document.getElementById("spin-box").innerHTML = checkHTML;
-        }, 2000);
-
-        setTimeout(function() {
-          window.location.replace("genre.html");
-        }, 4000);
-        
-
-        const checkHTML = '<h1><span class="bi bi-check"></span></h1>'
-</script> -->
- 
 
 
 
