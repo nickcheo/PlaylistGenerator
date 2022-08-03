@@ -188,7 +188,7 @@ app.get('/next', async (req, res) =>
 		
 		console.log('done')
 		// clusters.printKMeansCentroids(K, userAttributeMatrix);
-		const songIdToClusterLabelMap = await  .songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
+		const songIdToClusterLabelMap = await  songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
 		const clusterGroups  = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
 
 		const htmlString = constructClusterHTMLString(clusterGroups);
