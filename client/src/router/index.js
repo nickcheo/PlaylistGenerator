@@ -3,6 +3,7 @@ import Router from "vue-router";
 import HelloWorld from "@/components/HelloWorld";
 import Home from "@/components/Home";
 import Login from "@/components/Login.vue";
+import Clusters from "@/components/Clusters"
 
 Vue.use(Router);
 /* eslint-disable */
@@ -29,6 +30,11 @@ export default new Router({
       path: "/hello",
       name: "Hello",
       component: HelloWorld
+    },
+    {
+      path: "/clusters",
+      name: "Clusters",
+      component: Clusters
     }
   ],
   mode: "history"

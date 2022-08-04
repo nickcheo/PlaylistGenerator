@@ -20,6 +20,9 @@ const clusters = require('./clusters')
 
 app.use('/images', express.static(path.join(__dirname, "../images")))
 
+app.get('/status', (req,res) => {
+	res.send({message: "HELLO YODEL"})
+})
 
 function generateRandomString(n)
 {
@@ -185,7 +188,7 @@ app.get('/next', async (req, res) =>
 		
 		console.log('done')
 		// clusters.printKMeansCentroids(K, userAttributeMatrix);
-		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
+		const songIdToClusterLabelMap = await  songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
 		const clusterGroups  = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
 
 		const htmlString = constructClusterHTMLString(clusterGroups);
