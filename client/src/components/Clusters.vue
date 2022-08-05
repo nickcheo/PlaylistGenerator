@@ -17,24 +17,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-    <nav class="navbar navbar-light bg-light">
-      
-      <div class="container-fluid">
-        <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
 
-          <div class="collapse" id="navbarToggleExternalContent3">
-            <div class="bg-light shadow-3 p-4">
-              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-              <button class="btn btn-link btn-block m-0">Link 3</button>
-            </div>
-          </div>
-    </nav>
     
       <div class="hero" v-if="!dataHasLoaded">
         <div class="container-fluid">
@@ -59,7 +42,7 @@
       <div class="container-fluid">
           <div class="row">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
-                      <h1 class="display-4" align = 'left'><strong>We think you like this{{username}}.</strong></h1>     
+                      <h1 class="display-4" align = 'left' style = "color: black"><strong>We think you like this{{username}}.</strong></h1>     
                         <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
                     </div>
           </div>
@@ -111,8 +94,17 @@
                     </div>
           </div>
             <div class="row">
-              <div class="col-md-12">
-              <img :src="this.clusterImage[this.ID[0]]"/>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
               </div>
           </div>
     <br/>
@@ -120,6 +112,7 @@
 
   </div>  
 </div>
+
 
 </body>
 </template>
@@ -319,6 +312,7 @@ li {
 button {
   color: #42b983;
 }
+
 </style>
 <style>
       .my-custom-row {
