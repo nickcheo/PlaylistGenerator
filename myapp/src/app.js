@@ -70,7 +70,11 @@ app.post('/getclusters', async (req, res) => {
         });
 
 	const data = await result.json()
+	console.log("Hello Kathir");
+	console.log(data.items[0].album.images[0].url);
+	
 
+	let IDtoImageURL = {}
 	let userTopTrackIdList = []
 	let idToSongName = {}
 	// 2D Array of user song vectors, passable into SK.js libraries
@@ -83,8 +87,11 @@ app.post('/getclusters', async (req, res) => {
 			var artist = data.items[i].album.artists[0].name;
 			userTopTrackIdList[i] = data.items[i].id;
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + " by " + artist;
+			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url;
 			// console.log(userTopTrackIdList[i])
 		}
+		console.log("testNick");
+		console.log(IDtoImageURL);
 
 		const idQueryString = userTopTrackIdList.join(',');
 		// console.log(idQueryString)

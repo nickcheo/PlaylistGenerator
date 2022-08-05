@@ -212,6 +212,9 @@
       console.log(clusterResponse);
 
       const clusterGroups = await clusterResponse.data.clusterGroups;
+      const songID = await clusterResponse.data.songIdList;
+
+      console.log(songID);
 
       try
       {
