@@ -259,6 +259,12 @@
       window.history.replaceState({}, document.title, "/");
       
   },
+  beforeMount()
+  {
+     
+      document.getElementById('app').style = "background: linear-gradient(to left, #ff0000, #d6ae7b) !important;"
+      
+  }
 
   }
 
@@ -331,10 +337,11 @@ img {
   border-radius: 10%; 
 }
 
-body {
-    background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
-  /* background-color: #e8c7c8  */
-}
+/* body {
+    /* background: linear-gradient(to left, #eacda3, #d6ae7b) !important; */
+  /* background-color: #e8c7c8  
+} 
+*/
 
 </style>
 <style>

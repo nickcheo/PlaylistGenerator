@@ -213,10 +213,10 @@ a, button {
   color: white;
 }
 
-body {
+/* body {
     background: linear-gradient(to left, #e0eafc, #cfdef3) !important;
-  /* background-color: #e8c7c8  */
-}
+ 
+} */
 </style>
 <style>
       .my-custom-row {

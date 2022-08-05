@@ -147,8 +147,8 @@ a {
 }
 
 body {
-    background: linear-gradient(to left, #e0eafc, #cfdef3) !important;
-  /* background-color: #e8c7c8  */
+    background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
+  
 }
 </style>
 <style>

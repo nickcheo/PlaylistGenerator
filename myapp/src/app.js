@@ -71,8 +71,7 @@ app.post('/getclusters', async (req, res) => {
         });
 
 	const data = await result.json()
-	console.log("Hello Kathir");
-	console.log(data.items[0].album.images[0].url);
+	
 	
 
 	let IDtoImageURL = {}
