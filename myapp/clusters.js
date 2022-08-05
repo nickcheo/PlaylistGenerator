@@ -84,7 +84,10 @@ module.exports.songsToClusters = async function(songIdToName, songIdList, matrix
 
     const clusterTensor = kmean.clusterCenters;
     const labelTensor = kmean.predict(matrix);
+    // console.log('CLUSTTTYTESNRO')
+    // console.log(await clusterTensor.array())
 
+    
     const clusterArray = await clusterTensor.array();
     const labelArray = await labelTensor.array();
     let songIdToClusterLabelMap = {}
@@ -105,3 +108,14 @@ module.exports.songsToClusters = async function(songIdToName, songIdList, matrix
 
 }
 
+module.exports.getCentroids = async (k, matrix) =>
+{
+    const kmean = new scikitjs.KMeans({ nClusters: k })
+    kmean.fit(matrix);
+    console.log('getty centroids')
+
+    const clusterTensor = kmean.clusterCenters;
+    const centroidArray = clusterTensor.array();
+
+    return centroidArray;
+}

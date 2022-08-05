@@ -10,6 +10,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 const bodyParser = require('body-parser');
 const clusters = require('../clusters')
+// const { MinPriorityQueue} = require('@datastructures-js/priority-queue');
 
 const app = express();
 app.use(bodyParser.json());
@@ -139,11 +140,16 @@ app.post('/getclusters', async (req, res) => {
 		// clusters.printKMeansCentroids(K, use rAttributeMatrix);
 		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K);
 		const clusterGroups  = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
+		const centroids = await clusters.getCentroids(K, userAttributeMatrix);
 		let response = {}
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap;
 		response['clusterGroups'] = clusterGroups;
 		response['songIdList'] = userTopTrackIdList;
+		response['songIdToName'] = idToSongName;
 		response['idAndImage'] = IDtoImageURL;
+		response ['centroids'] = centroids;
+		
+		response['clustersBestTwoSongs'] = computeClosestSongsToCentroids(centroids,songIdToClusterLabelMap, userTopTrackIdList, userAttributeMatrix);
 
 
 		res.send(JSON.stringify(response));
@@ -166,6 +172,50 @@ function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k)
 
 	return clusterGroups;
 
+}
+
+function computeClosestSongsToCentroids(centroids, songIdToClusterLabelMap, idList, matrix)
+{
+	// maintain priority queue of points for each cluster
+	let clusterDistances = []
+	for(let i = 0; i < centroids.length; i++)
+		clusterDistances.push([]);
+
+	function _squareDistance(a,b)
+	{
+		let sum = 0;
+		for(let j= 0; j < a.length; j++)
+			sum += ((a[j]-b[j]) ** 2)
+
+		return sum;
+
+	}
+	
+	for(let i = 0; i < idList.length; i++)
+	{
+		let id = idList[i];
+		let label = songIdToClusterLabelMap[id];
+		// make pair of id and distance to it's associated centroid
+		// compute square distance of song data point to its associated cluster
+		let idDistPair = {"id": idList[i], "dist": _squareDistance(matrix[i], centroids[label])}
+		clusterDistances[label].push(idDistPair);
+	}
+
+	for(let i = 0; i < centroids.length; i++)
+		clusterDistances[i].sort((a,b) => {return a['dist'] - b['dist']});
+
+
+	let clustersTopTwoSongIds = []
+	for(let i = 0; i < centroids.length; i++)
+		{
+			// get two songs with closest distance
+			const firstId = clusterDistances[i][0]['id'];
+			const secondId = clusterDistances[i][1]['id'];
+			clustersTopTwoSongIds[i] = [firstId, secondId];
+
+		}
+
+	return clustersTopTwoSongIds;
 }
 
 
