@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@datastructures-js/priority-queue": "^6.1.1",
     "axios": "^0.27.2",
     "querystring": "^0.2.1",
     "vue": "^2.5.2",

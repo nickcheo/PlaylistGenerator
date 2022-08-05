@@ -11,6 +11,11 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data(){
+    return{
+      root: null
+    }
+  },
   router,
   components: { App },
   template: '<App/>',
@@ -26,6 +31,13 @@ new Vue({
       } catch (error) {
         console.log(error)
       }
+    },
+    mounted() {
+        // this.root = document.documentElement.style.cssText;
+        // this.root.style.setProperty("background", "linear-gradient(to bottom, #090909, #f9f7f6)");
+        // this.root.stlye.setProperty("color", "white");
+      
+      }
     }
   }
-})
+)
