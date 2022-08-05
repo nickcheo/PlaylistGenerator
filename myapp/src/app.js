@@ -143,6 +143,7 @@ app.post('/getclusters', async (req, res) => {
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap;
 		response['clusterGroups'] = clusterGroups;
 		response['songIdList'] = userTopTrackIdList;
+		response['idAndImage'] = IDtoImageURL;
 
 
 		res.send(JSON.stringify(response));

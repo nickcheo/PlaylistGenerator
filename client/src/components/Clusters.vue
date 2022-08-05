@@ -110,6 +110,11 @@
                         </div>
                     </div>
           </div>
+            <div class="row">
+              <div class="col-md-12">
+              <img :src="this.clusterImage[this.ID[0]]"/>
+              </div>
+          </div>
     <br/>
       
 
@@ -134,6 +139,8 @@
         clusterList: Array(4),
         compositionRatios: Array(4),
         styleStrings: Array(4),
+        clusterImage: {},
+        ID: Array(50)
       }
     },
     methods:
@@ -213,6 +220,7 @@
 
       const clusterGroups = await clusterResponse.data.clusterGroups;
       const songID = await clusterResponse.data.songIdList;
+      const songImage = await clusterResponse.data.idAndImage;
 
       console.log(songID);
 
@@ -224,6 +232,9 @@
       {
         console.log(error);
       }
+
+      this.clusterImage = songImage;
+      this.ID = songID;
 
       const colorMap = ["#6CC9CF", "#EA8FCB","#F2E991", "#C293FF"]
 
