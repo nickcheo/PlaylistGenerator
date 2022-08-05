@@ -63,25 +63,40 @@
               </div>
 
 
-             <div class = "col-md-2">
-                <br/>
-                 <br/>
-                <br/>
-                
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #6cc9cf; color: white;">
-                            <div class="text-center" style = "text-align: center;">
+              <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
                                     <center>
-                                  
-                                  <h5> Find music like this </h5>
-                                  <br>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
                                   </center>
-
                                   </div>
-                            </div>
+                          </div>
+                          <br/>
                     </div>
-              
-              </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; filter: invert(100%);">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                </div>
 
 
               
@@ -104,25 +119,40 @@
               </div>
 
 
-              <div class = "col-md-2">
-                <br/>
-                 <br/>
-                <br/>
-                
+            <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; color: white;">
-                            <div class="text-center" style = "text-align: center;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
                                     <center>
-                                  
-                                  <h5> Find music like this </h5>
-                                  <br>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
                                   </center>
-
                                   </div>
-                            </div>
+                          </div>
+                          <br/>
                     </div>
-              
-              </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; filter: invert(100%);">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                </div>
 
 
               <div class="col-md-4">
@@ -143,24 +173,39 @@
 
 
                  <div class = "col-md-2">
-                <br/>
-                 <br/>
-                <br/>
-                
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; color: white;">
-                            <div class="text-center" style = "text-align: center;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
                                     <center>
-                                  
-                                  <h5> Find music like this </h5>
-                                  <br>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
                                   </center>
-
                                   </div>
-                            </div>
+                          </div>
+                          <br/>
                     </div>
-              
-              </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; filter: invert(100%);">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                </div>
 
 
 
@@ -181,29 +226,43 @@
 
 
                   <div class = "col-md-2">
-                <br/>
-                 <br/>
-                <br/>
-                
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
-                            <div class="text-center" style = "text-align: center;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
                                     <center>
-                                  
-                                  <h5> Find music like this </h5>
-                                  <br>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
                                   </center>
-
                                   </div>
-                            </div>
+                          </div>
+                          <br/>
                     </div>
-                  </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; filter: invert(100%);">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                </div>
+                
               
-
-
-
                     <div class="col-md-4">
-                    <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
+                      <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
                     </div>
           </div>
             <!-- <div class="row">
@@ -225,8 +284,8 @@
       
 
   </div>  
+</div>
 
-  </div>
   
 
 
