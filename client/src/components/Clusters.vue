@@ -54,7 +54,7 @@
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">
-                        <div class="progress-bar" role="progressbar" :style="this.styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" role="progressbar" :style="this.styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
                               <div class="progress-value">{{this.compositionRatios[0]}}%</div>
                         </div>
 
@@ -86,8 +86,9 @@
 
               
                <div class="col-md-4">
-                <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
-                <br/>
+                <div class="img-container">
+                  <img @mousemove="mousemove" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
+                </div>
               </div>
              
           </div>
@@ -126,7 +127,9 @@
 
 
               <div class="col-md-4">
-                    <img :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]" style= "height: auto; width: 50%;"/>
+                <div class="img-container">
+                  <img @mousemove="mousemove" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                </div>
               </div>
             
           </div>
@@ -165,7 +168,9 @@
 
 
                 <div class="col-md-4">
-                    <img :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]" style= "height: auto; width: 50%;"/>
+                  <div class="img-container">
+                    <img @mousemove="mousemove" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
+                  </div>
                 </div>
           </div>
     <br>
@@ -203,7 +208,9 @@
 
 
                     <div class="col-md-4">
-                    <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
+                      <div class="img-container">
+                        <img @mousemove="mousemove" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
+                      </div>
                     </div>
           </div>
             <!-- <div class="row">
@@ -258,6 +265,23 @@
     },
     methods:
     {
+      mousemove: (e) => {
+        let el = e.currentTarget;
+        let delta_x = parseFloat(e.offsetX / el.offsetWidth).toFixed(3)
+        let delta_y = parseFloat(e.offsetY / el.offsetHeight).toFixed(3)
+        console.log(delta_x, delta_y)
+
+        var transform = "translateY(" + ((delta_y - 0.5) * 30) + "px) " +
+            "translateX(" + (-(delta_x - 0.5) * -30) + "px)"
+        
+        var boxShadow = parseInt(-(delta_x - 0.5) * 12) +"px " + 
+            parseInt(-((delta_y - 0.5) * 12) + 2) + 
+            "px 4px rgba(234, 225, 225, 0.4);"
+
+        el.setAttribute('style', 
+                        "transform: " + transform + "; " + 
+                        "box-shadow: " + boxShadow);
+      },
       getAccessToken: async () => {
         /* eslint-disable */
         if(getCookie("access_token") === "") {
@@ -399,6 +423,7 @@
     return "";
   }
 
+
   
     
 </script>
@@ -419,8 +444,6 @@
 
         const checkHTML = '<h1><span class="bi bi-check"></span></h1>'
 </script> -->
- 
-
 
 
 
@@ -439,16 +462,33 @@ li {
 /* button {
   color: #42b983;
 } */
-
-img {
-  border-radius: 10%; 
+.img-container {
+  transition: all 0.25s;
+  transform-origin: 50% 50%;
+  perspective: 500px;
+}
+/* .img-container:hover {
+  transform: translateZ(25px);
+} */
+.img-container img {
+  border: 5px white solid;
+  border-radius: 5px; 
+  height: auto;
+  width: 50%;
+  box-shadow: 0 2px 4px rgba(234, 225, 225, 0.4);
+  transition: transform 250ms;
+}
+.img-container img:not(:hover) {
+  transform: rotateY(0deg) rotateX(0deg) !important;
+  box-shadow: 0 2px 4px rgba(34, 25, 25, 0.4) !important;
 }
 
-/* body {
-    /* background: linear-gradient(to left, #eacda3, #d6ae7b) !important; */
-  /* background-color: #e8c7c8  
+
+body {
+  background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
+  background-color: #e8c7c8  
 } 
-*/
+
 
 </style>
 <style>
