@@ -17,28 +17,8 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-    <nav class="navbar navbar-light bg-light">
-      
-      <div class="container-fluid">
-        <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-
-          <div class="collapse" id="navbarToggleExternalContent3">
-            <div class="bg-light shadow-3 p-4">
-              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-              <button class="btn btn-link btn-block m-0">Link 3</button>
-            </div>
-          </div>
-    </nav>
-
-    
-
-
+  
+  
       <div class="hero">
         <div class="container-fluid">
           <div class="row">
@@ -74,7 +54,8 @@
 
 
 <script>
-  import router from '../router';
+  import { onBeforeMount } from 'vue';
+import router from '../router';
 import Api from '../services/Api';
 
   export default {
@@ -177,6 +158,11 @@ import Api from '../services/Api';
       window.history.replaceState({}, document.title, "/");
       
   },
+  beforeMount()
+      {
+        document.getElementById('app').style = "background: linear-gradient(to left, #e0eafc, #cfdef3) !important;"
+      }
+
 
   }
 
@@ -224,7 +210,12 @@ li {
   margin: 0 10px;
 }
 a, button {
-  color: #42b983;
+  color: white;
+}
+
+body {
+    background: linear-gradient(to left, #e0eafc, #cfdef3) !important;
+  /* background-color: #e8c7c8  */
 }
 </style>
 <style>
@@ -233,7 +224,7 @@ a, button {
         height: 400px;
       }
       .hero {
-        background: white;
+        /* background: white; */
         width: 100%;
         height: 70vh;
         display: flex;
