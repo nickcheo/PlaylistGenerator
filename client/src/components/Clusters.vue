@@ -51,28 +51,80 @@
 
   <div class="container" style = "color: black">
           <div class="row">
-              <div class="col-md-8" style = "text-align: left;">
+              <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">
+                    <div class="progress" style="height: 60px; width:100%">
                         <div class="progress-bar" role="progressbar" :style="this.styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                               <div class="progress-value">{{this.compositionRatios[0]}}%</div>
                         </div>
+
+                        
                     </div>
               </div>
+
+
+             <div class = "col-md-2">
+                <br/>
+                 <br/>
+                <br/>
+                
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6cc9cf; color: white;">
+                            <div class="text-center" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                  
+                                  <h5> Find music like this </h5>
+                                  <br>
+                                  </center>
+
+                                  </div>
+                            </div>
+                    </div>
+              
+              </div>
+
+
+              
                <div class="col-md-4">
                 <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
+                <br/>
               </div>
+             
           </div>
+
          <br>
           <div class="row">
-              <div class="col-md-8" style = "text-align: left;">
+              <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">                    
+                    <div class="progress" style="height: 60px; width:100%">                    
                         <div class="progress-bar" role="progressbar" :style="this.styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[1]}}%</div>
                         </div>
                     </div>
               </div>
+
+
+              <div class = "col-md-2">
+                <br/>
+                 <br/>
+                <br/>
+                
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; color: white;">
+                            <div class="text-center" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                  
+                                  <h5> Find music like this </h5>
+                                  <br>
+                                  </center>
+
+                                  </div>
+                            </div>
+                    </div>
+              
+              </div>
+
+
               <div class="col-md-4">
                     <img :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]" style= "height: auto; width: 50%;"/>
               </div>
@@ -80,28 +132,76 @@
           </div>
     <br/>
           <div class="row">
-                <div class="col-md-8" style = "text-align: left;">
+                <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">
+                    <div class="progress" style="height: 60px; width:100%">
                         <div class="progress-bar" role="progressbar" :style="this.styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[2]}}%</div>
                         </div>
                     </div>
                 </div>
+
+
+                 <div class = "col-md-2">
+                <br/>
+                 <br/>
+                <br/>
+                
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; color: white;">
+                            <div class="text-center" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                  
+                                  <h5> Find music like this </h5>
+                                  <br>
+                                  </center>
+
+                                  </div>
+                            </div>
+                    </div>
+              
+              </div>
+
+
+
                 <div class="col-md-4">
                     <img :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]" style= "height: auto; width: 50%;"/>
                 </div>
           </div>
     <br>
           <div class="row">
-                    <div class="col-md-8" style = "text-align: left;">
+                    <div class="col-md-6" style = "text-align: left;">
                         <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
-                        <div class="progress" style="height: 60px; width:75%">
+                        <div class="progress" style="height: 60px; width:100%">
                             <div class="progress-bar" role="progressbar" :style="this.styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
                             </div>
                         </div>
                     </div>
+
+
+                  <div class = "col-md-2">
+                <br/>
+                 <br/>
+                <br/>
+                
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
+                            <div class="text-center" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                  
+                                  <h5> Find music like this </h5>
+                                  <br>
+                                  </center>
+
+                                  </div>
+                            </div>
+                    </div>
+                  </div>
+              
+
+
+
                     <div class="col-md-4">
                     <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
                     </div>
@@ -125,7 +225,11 @@
       
 
   </div>  
-</div>
+
+  </div>
+  
+
+
 
 
 </body>
@@ -244,7 +348,10 @@
       this.clustersBestTwoSongIds = clustersBestTwoSongIds;
 
 
-      const colorMap = ["#6CC9CF", "#EA8FCB","#F2E991", "#C293FF"]
+      const colorMap = ["#6CC9CF", "#EA8FCB",
+                    // "#F2E991", pastel yellow
+                    "#77dd77",
+                     "#C293FF"]
 
       for(let i = 0; i < this.compositionRatios.length; i++)
       {
@@ -262,7 +369,7 @@
   beforeMount()
   {
      
-      document.getElementById('app').style = "background: linear-gradient(to left, #ff0000, #d6ae7b) !important;"
+      // document.getElementById('app').style = "background: linear-gradient(to left, #eac9a3, #d6ae7b) !important;"
       
   }
 
@@ -329,9 +436,9 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-button {
+/* button {
   color: #42b983;
-}
+} */
 
 img {
   border-radius: 10%; 
