@@ -94,6 +94,7 @@
                     </div>
           </div>
             <div class="row">
+              <!-- selects image mapped to id of each cluster's most representative song -->
               <div class="col-md-6">
               <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
               </div>
