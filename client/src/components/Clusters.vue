@@ -567,7 +567,7 @@ li {
 }  */
 .img-container img {
   border: 5px white solid;
-  border-radius: 5px; 
+  border-radius: 15px; 
   height: auto;
   width: 50%;
   box-shadow: 0 2px 4px rgba(234, 225, 225, 0.4);
