@@ -146,10 +146,9 @@ a {
   color: #42b983;
 }
 
-body {
-    background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
-  
-}
+/* body {
+	background: transparent;
+} */
 </style>
 <style>
       .my-custom-row {

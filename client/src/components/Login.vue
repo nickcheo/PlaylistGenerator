@@ -160,7 +160,6 @@ import Api from '../services/Api';
   },
   beforeMount()
       {
-        document.getElementById('app').style = "background: linear-gradient(to left, #e0eafc, #cfdef3) !important;"
       }
 
 
@@ -213,10 +212,11 @@ a, button {
   color: white;
 }
 
-/* body {
-    background: linear-gradient(to left, #e0eafc, #cfdef3) !important;
- 
-} */
+body {
+  color: white;
+
+}
+
 </style>
 <style>
       .my-custom-row {

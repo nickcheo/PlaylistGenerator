@@ -19,7 +19,7 @@
   
 
     
-      <div class="hero" v-if="!dataHasLoaded">
+      <div class="hero" id="loading-row" v-if="!dataHasLoaded">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
@@ -42,14 +42,14 @@
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
-                      <h1 class="display-4" align = 'left' style = "color: black"><strong>We think you like this{{username}}.</strong></h1>     
+                      <h1 class="display-4" align = 'left'><strong>We think you like this{{username}}.</strong></h1>     
                         <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
                     </div>
           </div>
       </div>
     </div>
 
-  <div id="" class="container" style = "color: black">
+  <div id="" class="container">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
@@ -83,7 +83,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; filter: invert(100%);">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; filter: invert(100%); color: black;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; filter: invert(100%);">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; filter: invert(100%); color: black;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -195,7 +195,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; filter: invert(100%);">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; filter: invert(100%); color: black;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -250,7 +250,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; filter: invert(100%);">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; filter: invert(100%); color: black;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -473,7 +473,6 @@
   },
   beforeMount()
   {
-      
   }
 
   }
@@ -582,9 +581,12 @@ li {
 
 
 body {
-  background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
-  background-color: #e8c7c8  
-} 
+  color: white;
+}
+
+#loading-row {
+  margin-top: 60px;
+}
 
 .progress-bar {
     -webkit-transition: width 2.5s ease;
