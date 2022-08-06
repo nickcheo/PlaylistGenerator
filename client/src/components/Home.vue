@@ -159,6 +159,7 @@ a {
   color: #42b983;
 }
 
+
 </style>
 <style>
       .my-custom-row {
@@ -174,10 +175,6 @@ a {
         height: 70vh;
         display: flex;
         align-items: center;
-      }
-
-      #spotify-container {
-        width: 100vw;
       }
 
       #icon {

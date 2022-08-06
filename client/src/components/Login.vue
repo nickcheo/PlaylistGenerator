@@ -73,7 +73,8 @@ import Api from '../services/Api';
     {
       getAccessToken: async () => {
         /* eslint-disable */
-        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined) {
+        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
+          || getCookie("username") === "" || getCookie("username") == undefined) {
           const params = new URLSearchParams(document.location.search);
           const authCode = params.get('code');
           const state = params.get('state');
@@ -163,9 +164,21 @@ import Api from '../services/Api';
     },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+
+    const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      // refresh token if access expired
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      {
+        refreshToken();
+        this.access_token = getCookie("access_token");
+
+      }
+      else  {
+
+          this.access_token = tokens[0];
+          this.refresh_token = tokens[1];
+      }
+      
 
       console.log('token on mount ' + this.access_token)
 
@@ -191,9 +204,9 @@ import Api from '../services/Api';
       }
       
       window.history.replaceState({}, document.title, "/");
-      
-  }
-  }
+    }
+}
+  
   
 
 
@@ -245,7 +258,7 @@ import Api from '../services/Api';
               const data = await result.json();
               // store new access token
               console.log("NEW AT:  " + data.access_token)
-              this.access_token = data.access_token;
+              
               setCookie("access_token", data.access_token, 1)
 
         }
@@ -272,6 +285,11 @@ li {
 }
 a, button {
   color: white;
+}
+
+body {
+  color: white;
+
 }
 
 </style>

@@ -1,8 +1,21 @@
 
-
-html, #app, body {
-    background: linear-gradient(to right, #eac9a3, #d6ae7b)
+html, body, #app {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	color: white;
+	height: 100vh;
+	overflow: hidden;
 }
 
-
-
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

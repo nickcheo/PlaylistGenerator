@@ -19,7 +19,7 @@
   
 
     
-      <div class="hero" v-if="!dataHasLoaded">
+      <div class="hero" id="loading-row" v-if="!dataHasLoaded">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
@@ -42,14 +42,14 @@
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
-                      <h1 class="display-4" align = 'left' style = "color: black"><strong>We think you like this{{username}}.</strong></h1>     
+                      <h1 class="display-4" align = 'left'><strong>We think you like this{{username}}.</strong></h1>     
                         <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
                     </div>
           </div>
       </div>
     </div>
 
-  <div id="" class="container" style = "color: black">
+  <div id="" class="container">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
@@ -64,27 +64,38 @@
 
 
               <div class = "col-md-2">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class = "row"></div>
-                    <div class = "row"></div>
-                    <br/>
-                      <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
-                            <br/>
-
-                            <div class="text-center container-fluid row" style = "text-align: center;">
-                                    <a><div>
-                                      <center>
-                                        <br/>
-                                      <h6>&nbsp; Find similar music </h6>
-                                      <br>
-                                    </center>
-                                    </div>
-                                    </a>
-                            </div>
-                            <br/>
-                      </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; filter: invert(100%); color: black;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
                 </div>
 
 
@@ -120,7 +131,22 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; filter: invert(100%); color: black;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
                                     <br>
                                   </center>
                                   </div>
@@ -162,7 +188,22 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; filter: invert(100%); color: black;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
                                     <br>
                                   </center>
                                   </div>
@@ -204,7 +245,22 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; filter: invert(100%); color: black;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
                                     <br>
                                   </center>
                                   </div>
@@ -444,7 +500,6 @@ import Api from '../services/Api';
   },
   beforeMount()
   {
-      
   }
 
   }
@@ -584,6 +639,13 @@ li {
 }
 
 
+body {
+  color: white;
+}
+
+#loading-row {
+  margin-top: 60px;
+}
 
 .progress-bar {
     -webkit-transition: width 2.5s ease;
