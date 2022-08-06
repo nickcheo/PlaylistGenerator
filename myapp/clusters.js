@@ -80,7 +80,7 @@ function computeKMeansClusters(k, data)
 
 module.exports.songsToClusters = async function(songIdToName, songIdList, matrix, k)
 {
-    const kmean = new scikitjs.KMeans({ nClusters: k, randomState: randomState  })
+    const kmean = new scikitjs.KMeans({ nClusters: k})
     kmean.fit(matrix);
 
     const clusterTensor = kmean.clusterCenters;
@@ -111,7 +111,7 @@ module.exports.songsToClusters = async function(songIdToName, songIdList, matrix
 
 module.exports.getCentroids = async (k, matrix) =>
 {
-    const kmean = new scikitjs.KMeans({ nClusters: k, randomState: randomState })
+    const kmean = new scikitjs.KMeans({ nClusters: k })
     kmean.fit(matrix);
     console.log('getty centroids')
 
