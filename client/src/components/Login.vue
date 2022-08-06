@@ -36,6 +36,8 @@
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
 
+               
+
                 
                 <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
                   <!--Button-->
@@ -71,7 +73,8 @@ import Api from '../services/Api';
     {
       getAccessToken: async () => {
         /* eslint-disable */
-        if(getCookie("access_token") === "") {
+        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
+          || getCookie("username") === "" || getCookie("username") == undefined) {
           const params = new URLSearchParams(document.location.search);
           const authCode = params.get('code');
           const state = params.get('state');
@@ -95,8 +98,8 @@ import Api from '../services/Api';
             grant_type: "authorization_code",
             code: authCode,
             redirect_uri: 'http://localhost:8080/next',
-          })
-        });
+            })
+          });
 
 
           const data = await result.json();
@@ -108,8 +111,8 @@ import Api from '../services/Api';
           const access_token = data.access_token;
           const refresh_token = data.refresh_token;
 
-          setCookie("access_token", access_token);
-          setCookie("refresh_token", refresh_token);
+          setCookie("access_token", access_token, 1);
+          setCookie("refresh_token", refresh_token, 24 * 365);
 
           console.log('at: '+ access_token);
 
@@ -123,14 +126,59 @@ import Api from '../services/Api';
       goToClusters: async () => {
 
           console.log('going to clusters')
+          if(getCookie("access_token") === "")
+            refreshToken();
           router.replace({path : '/clusters'});
+      },
+      refreshToken: async () => {
+        console.log("attempting token refresh")
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              this.access_token = data.access_token;
+              setCookie("access_token", data.access_token, 1)
+
+        }
       }
     },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+
+    const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      // refresh token if access expired
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      {
+        refreshToken();
+        this.access_token = getCookie("access_token");
+
+      }
+      else  {
+
+          this.access_token = tokens[0];
+          this.refresh_token = tokens[1];
+      }
+      
 
       console.log('token on mount ' + this.access_token)
 
@@ -147,7 +195,7 @@ import Api from '../services/Api';
         // console.log("username ")
         // console.log(username);
         if(!getCookie("username"))
-          setCookie("username", usernameData['display_name']);
+          setCookie("username", usernameData['display_name'], 1);
         this.username = ", " + getCookie('username');
         // console.log(this.username)
 
@@ -156,19 +204,15 @@ import Api from '../services/Api';
       }
       
       window.history.replaceState({}, document.title, "/");
-      
-  },
-  beforeMount()
-      {
-      }
+    }
+}
+  
+  
 
 
-  }
-
-
-  function setCookie(cname, cvalue, exdays) {
+  function setCookie(cname, cvalue, exhours) {
     const d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    d.setTime(d.getTime() + exhours * 60 * 60 * 1000);
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
@@ -187,6 +231,37 @@ import Api from '../services/Api';
       }
     }
     return "";
+  }
+
+  async function refreshToken () {
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              
+              setCookie("access_token", data.access_token, 1)
+
+        }
   }
 
   

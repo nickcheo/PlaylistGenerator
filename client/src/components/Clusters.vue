@@ -180,6 +180,8 @@
                   <br/>
                   <br/>
                   <div class = "row"></div>
+                   <div class = "row"></div>
+                   <br/>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
@@ -208,6 +210,7 @@
                           </div>
                           <br/>
                     </div>
+                    
                 </div>
 
 
@@ -234,6 +237,7 @@
                   <br/>
                   <br/>
                   <br/>
+                  <div class = "row"></div>
                   <div class = "row"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
                           <br/>
@@ -304,7 +308,8 @@
 
 
 <script>
-  import Api from '../services/Api';
+  import router from '../router';
+import Api from '../services/Api';
 
   export default {
     name: 'Login',
@@ -379,15 +384,37 @@
         }
         
       },
-      calculateTrackData: async () => {
-      
+         toRecommend: async () => {
+          router.replace('/recommend')
       }
-    },
+  },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+      const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      // refresh token if access expired
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      {
+        refreshToken();
+        this.access_token = getCookie("access_token");
+
+      }
+      else  {
+
+          this.access_token = tokens[0];
+          this.refresh_token = tokens[1];
+      }
+      
+      
+      
+      
+
+
+      // go home if both tokens are missing
+      if(getCookie("access_token") === "" && getCookie("refresh_token") === "")
+        router.replace("/")
+
+      // refresh token if access expired
+      
 
       console.log('token on mount ' + this.access_token)
 
@@ -416,7 +443,7 @@
       console.log(songID);
 
       // assign to class instance variables
-      this.clusterList = clusterGroups;
+      this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
       this.clusterImage = songImage;
       this.ID = songID;
       this.songIdToNameMap = songIdToNameMap;
@@ -483,6 +510,38 @@
     return "";
   }
 
+
+  async function refreshToken () {
+    console.log("attempting refresh")
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              
+              setCookie("access_token", data.access_token, 1)
+
+        }
+  }
 
   
     
