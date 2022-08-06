@@ -120,7 +120,7 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <h6>&nbsp; Find similar music </h6>
+                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
                                     <br>
                                   </center>
                                   </div>
@@ -162,7 +162,7 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <h6>&nbsp; Find similar music </h6>
+                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
                                     <br>
                                   </center>
                                   </div>
@@ -204,7 +204,7 @@
                                   <div>
                                     <center>
                                       <br/>
-                                    <h6>&nbsp; Find similar music </h6>
+                                    <a @click = "toRecommend"><h6>&nbsp; Find similar music </h6></a>
                                     <br>
                                   </center>
                                   </div>
@@ -345,6 +345,9 @@ import Api from '../services/Api';
           return [getCookie("access_token"), getCookie("refresh_token")];
         }
         
+      },
+         toRecommend: async () => {
+          router.replace('/recommend')
       }
   },
     async mounted(){
@@ -402,7 +405,7 @@ import Api from '../services/Api';
       console.log(songID);
 
       // assign to class instance variables
-      this.clusterList = clusterGroups.sort((a,b) => {return b.length - a.length;});
+      this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
       this.clusterImage = songImage;
       this.ID = songID;
       this.songIdToNameMap = songIdToNameMap;
