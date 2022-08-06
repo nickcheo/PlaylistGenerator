@@ -40,7 +40,7 @@
 
     <div class="hero gradient">
       <div class="container-fluid">
-          <div class="row">
+          <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
                       <h1 class="display-4" align = 'left' style = "color: black"><strong>We think you like this{{username}}.</strong></h1>     
                         <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
@@ -50,7 +50,7 @@
     </div>
 
   <div id="" class="container" style = "color: black">
-          <div class="row cluster-result">
+          <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">
@@ -109,7 +109,7 @@
           </div>
 
          <br>
-          <div class="row cluster-result">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">                    
@@ -164,7 +164,7 @@
             
           </div>
     <br/>
-          <div class="row cluster-result">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">
@@ -219,7 +219,7 @@
                 </div>
           </div>
     <br>
-          <div class="row cluster-result">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-6" style = "text-align: left;">
                         <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
                         <div class="progress" style="height: 60px; width:100%">
@@ -321,7 +321,9 @@
         ID: Array(50),
         songIdToNameMap: null,
         clustersBestTwoSongIds: null,
-        albumStyles: "opacity: 0%;"
+        albumStyles: "opacity: 0%;",
+        clusterRowStyles: "opacity: 0%;",
+        titleRowStyles: "opacity: 0%;"
       }
     },
     methods:
@@ -445,16 +447,28 @@
                     "#C293FF"]
       
       let updatedStyleStrings = Array(4);
-
+      
       setTimeout(() => {
-        for(let i = 0; i < this.compositionRatios.length; i++) {
-          this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
-          updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
-          this.albumStyles = "opacity: 100%;"
-        }
+        this.titleRowStyles = "opacity: 100%;"
+        setTimeout(() => {
+          this.clusterRowStyles = "opacity: 100%;"
 
-        this.styleStrings = updatedStyleStrings;
-      }, 500);
+          setTimeout(() => {
+            for(let i = 0; i < this.compositionRatios.length; i++) {
+              this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
+              updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
+            }
+
+            this.albumStyles = "opacity: 100%;"
+            this.styleStrings = updatedStyleStrings;
+
+          }, 20);
+        }, 500);
+      }, 10);
+
+
+
+      
       
   },
   beforeMount()
@@ -537,14 +551,20 @@ li {
   width: 55%;
 }
 
-/* .cluster-result {
-  transition: height 0.25s;
-  height: 200px;
+.cluster-result {
+  transition: opacity 500ms;
+  /* transition: height 0.25s;
+  height: 200px; */
 }
 
-.cluster-result:hover {
+#title-row {
+  transition: opacity 500ms;
+
+}
+
+/* .cluster-result:hover {
   height: 300px;
-} */
+}  */
 .img-container img {
   border: 5px white solid;
   border-radius: 5px; 
