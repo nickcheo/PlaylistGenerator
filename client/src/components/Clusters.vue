@@ -438,13 +438,10 @@ import Api from '../services/Api';
 
       
       
-<<<<<<< HEAD
-=======
   },
   beforeMount()
   {
       
->>>>>>> ecd46714c82a83c3ecd9bb0a8ae34678c63e37e9
   }
 
   }
