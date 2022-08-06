@@ -53,7 +53,7 @@
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:100%">
+                    <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
                               <div class="progress-value">{{this.compositionRatios[0]}}%</div>
                         </div>
@@ -83,7 +83,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; filter: invert(100%); color: black;">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #91382f; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -102,7 +102,7 @@
               
                <div class="col-md-4">
                 <div class="img-container">
-                  <img @mousemove="mousemove" :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
+                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
                 </div>
               </div>
              
@@ -112,7 +112,7 @@
           <div class="row cluster-result" :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:100%">                    
+                    <div class="progress">                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[1]}}%</div>
                         </div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; filter: invert(100%); color: black;">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #117133; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -158,7 +158,7 @@
 
               <div class="col-md-4">
                 <div class="img-container">
-                  <img @mousemove="mousemove" :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
                 </div>
               </div>
             
@@ -167,7 +167,7 @@
           <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:100%">
+                    <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[2]}}%</div>
                         </div>
@@ -195,7 +195,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; filter: invert(100%); color: black;">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #872186; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -214,7 +214,7 @@
 
                 <div class="col-md-4">
                   <div class="img-container">
-                    <img @mousemove="mousemove" :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
+                    <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
                   </div>
                 </div>
           </div>
@@ -222,7 +222,7 @@
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-6" style = "text-align: left;">
                         <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
-                        <div class="progress" style="height: 60px; width:100%">
+                        <div class="progress">
                             <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
                             </div>
@@ -250,7 +250,7 @@
                     </div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; filter: invert(100%); color: black;">
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #3c6a00; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
                                   <div>
@@ -267,7 +267,7 @@
                 
                 <div class="col-md-4">
                       <div class="img-container">
-                        <img @mousemove="mousemove" :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
+                        <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
   
                       </div>
                 </div>
@@ -328,24 +328,6 @@
     },
     methods:
     {
-
-      mousemove: (e) => {
-        let el = e.currentTarget;
-        let delta_x = parseFloat(e.offsetX / el.offsetWidth).toFixed(3)
-        let delta_y = parseFloat(e.offsetY / el.offsetHeight).toFixed(3)
-        console.log(delta_x, delta_y)
-
-        var transform = "translateY(" + ((delta_y - 0.5) * 30) + "px) " +
-            "translateX(" + (-(delta_x - 0.5) * -30) + "px)"
-        
-        var boxShadow = parseInt(-(delta_x - 0.5) * 12) +"px " + 
-            parseInt(-((delta_y - 0.5) * 12) + 2) + 
-            "px 4px rgba(234, 225, 225, 0.4);"
-
-        el.setAttribute('style', 
-                        "transform: " + transform + "; " + 
-                        "box-shadow: " + boxShadow);
-      },
       getAccessToken: async () => {
         /* eslint-disable */
         if(getCookie("access_token") === "") {
@@ -540,20 +522,11 @@ li {
 /* button {
   color: #42b983;
 } */
-.img-container {
-  transition: all 0.25s;
-  transform-origin: 50% 50%;
-  perspective: 500px;
-}
-.img-container img:hover {
-  height: auto;
-  width: 55%;
-}
 
 .cluster-result {
   transition: opacity 500ms;
-  /* transition: height 0.25s;
-  height: 200px; */
+  transition: height 0.25s;
+  /* height: 200px; */
 }
 
 #title-row {
@@ -569,16 +542,40 @@ li {
   border-radius: 15px; 
   height: auto;
   width: 50%;
-  box-shadow: 0 2px 4px rgba(234, 225, 225, 0.4);
-  transition: transform 2000ms;
-  transition: width 750ms;
+  transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
-}
-.img-container img:not(:hover) {
-  transform: rotateY(0deg) rotateX(0deg) !important;
-  box-shadow: 0 2px 4px rgba(34, 25, 25, 0.4) !important;
+  transition: width 750ms;
+
 }
 
+.img-container {
+  transition: all 0.25s;
+  transform-origin: 50% 50%;
+  perspective: 500px;
+}
+.img-container img:hover {
+  height: auto;
+  width: 55%;
+  box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4)
+}
+
+.img-container img:not(:hover) {
+  box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4)
+}
+
+.progress {
+  height: 60px; 
+  width:100%;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.progress:hover {
+  box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4)
+}
+
+.progress:not(:hover) {
+  box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4)
+}
 
 body {
   color: white;
