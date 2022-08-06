@@ -49,8 +49,8 @@
       </div>
     </div>
 
-  <div class="container" style = "color: black">
-          <div class="row">
+  <div id="" class="container" style = "color: black">
+          <div class="row cluster-result">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">
@@ -94,7 +94,7 @@
           </div>
 
          <br>
-          <div class="row">
+          <div class="row cluster-result">
               <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">                    
@@ -134,7 +134,7 @@
             
           </div>
     <br/>
-          <div class="row">
+          <div class="row cluster-result">
                 <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
                     <div class="progress" style="height: 60px; width:100%">
@@ -174,7 +174,7 @@
                 </div>
           </div>
     <br>
-          <div class="row">
+          <div class="row cluster-result">
                     <div class="col-md-6" style = "text-align: left;">
                         <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
                         <div class="progress" style="height: 60px; width:100%">
@@ -467,8 +467,18 @@ li {
   transform-origin: 50% 50%;
   perspective: 500px;
 }
-/* .img-container:hover {
-  transform: translateZ(25px);
+.img-container img:hover {
+  height: auto;
+  width: 55%;
+}
+
+/* .cluster-result {
+  transition: height 0.25s;
+  height: 200px;
+}
+
+.cluster-result:hover {
+  height: 300px;
 } */
 .img-container img {
   border: 5px white solid;
@@ -476,7 +486,8 @@ li {
   height: auto;
   width: 50%;
   box-shadow: 0 2px 4px rgba(234, 225, 225, 0.4);
-  transition: transform 250ms;
+  transition: transform 2000ms;
+  transition: width 750ms;
 }
 .img-container img:not(:hover) {
   transform: rotateY(0deg) rotateX(0deg) !important;
