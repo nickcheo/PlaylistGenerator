@@ -265,16 +265,13 @@
                     </div>
                 </div>
                 
-              
-                    <div class="col-md-4">
-<<<<<<< HEAD
-                      <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
-=======
+                <div class="col-md-4">
                       <div class="img-container">
                         <img @mousemove="mousemove" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
+  
                       </div>
->>>>>>> 63ff05faf5a68a3bc4dc5e76e5b7a9d92f7f17e5
-                    </div>
+                </div>
+
           </div>
             <!-- <div class="row">
               
