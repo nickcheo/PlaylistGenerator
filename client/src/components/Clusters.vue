@@ -304,7 +304,8 @@
 
 
 <script>
-  import Api from '../services/Api';
+  import router from '../router';
+import Api from '../services/Api';
 
   export default {
     name: 'Login',
@@ -392,16 +393,35 @@
           return [getCookie("access_token"), getCookie("refresh_token")];
         }
         
-      },
-      calculateTrackData: async () => {
-      
       }
-    },
+  },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+      const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      // refresh token if access expired
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      {
+        refreshToken();
+        this.access_token = getCookie("access_token");
+
+      }
+      else  {
+
+          this.access_token = tokens[0];
+          this.refresh_token = tokens[1];
+      }
+      
+      
+      
+      
+
+
+      // go home if both tokens are missing
+      if(getCookie("access_token") === "" && getCookie("refresh_token") === "")
+        router.replace("/")
+
+      // refresh token if access expired
+      
 
       console.log('token on mount ' + this.access_token)
 
@@ -425,7 +445,7 @@
       console.log(songID);
 
       // assign to class instance variables
-      this.clusterList = clusterGroups;
+      this.clusterList = clusterGroups.sort((a,b) => {return b.length - a.length;});
       this.clusterImage = songImage;
       this.ID = songID;
       this.songIdToNameMap = songIdToNameMap;
@@ -448,12 +468,6 @@
 
       
       window.history.replaceState({}, document.title, "/");
-      
-  },
-  beforeMount()
-  {
-     
-      // document.getElementById('app').style = "background: linear-gradient(to left, #eac9a3, #d6ae7b) !important;"
       
   }
 
@@ -483,6 +497,38 @@
     return "";
   }
 
+
+  async function refreshToken () {
+    console.log("attempting refresh")
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              
+              setCookie("access_token", data.access_token, 1)
+
+        }
+  }
 
   
     
@@ -544,10 +590,6 @@ li {
 }
 
 
-body {
-  background: linear-gradient(to left, #eacda3, #d6ae7b) !important;
-  background-color: #e8c7c8  
-} 
 
 
 </style>

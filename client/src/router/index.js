@@ -35,6 +35,11 @@ export default new Router({
       path: "/clusters",
       name: "Clusters",
       component: Clusters
+    },
+    {
+      path: "/recommend",
+      name: "Recommend",
+      component: HelloWorld
     }
   ],
   mode: "history"
