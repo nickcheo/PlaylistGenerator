@@ -594,6 +594,10 @@ li {
   color: #42b983;
 } */
 
+.progress:hover {
+		transform: scale(1.05) perspective(1px)
+	}
+
 .cluster-result {
   transition: opacity 500ms;
   transition: height 0.25s;
