@@ -49,7 +49,7 @@ app.post('/gettopcovers', async(req, res) => {
 	const token = req.body.token
 	console.log('this that token: ' + token)
 
-	const result = await fetch('https://api.spotify.com/v1/playlists/playlist_id/tracks', {
+	const result = await fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp?si=d2de65961e964ab2/tracks', {
 		method: 'GET',
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
