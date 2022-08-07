@@ -1,8 +1,21 @@
 *{ 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
 .btn{
     position: absolute;
@@ -19,6 +32,7 @@
     text-transform: uppercase;
     font-size: 2em;
     cursor: pointer;
+    color: white;
 }
 
 .header {
@@ -39,7 +53,12 @@
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: rgb(98, 20, 187);
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 30s ease infinite;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
     z-index: -1;
   }
   
