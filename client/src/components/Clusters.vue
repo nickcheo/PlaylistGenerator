@@ -464,6 +464,9 @@ import Api from '../services/Api';
       // retrieve data from top response
       const topSongID = await topResponse.data.topTracksID
 
+      console.log("nick2");
+      console.log(topSongID);
+
       console.log(songID);
 
       // assign to class instance variables
