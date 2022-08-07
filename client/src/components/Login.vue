@@ -343,10 +343,7 @@ body {
         width: 25px;
         height: auto;
       }
-      .btn{
-        
-
-      }
+    
     </style>
 
 
