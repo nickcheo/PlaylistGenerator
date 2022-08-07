@@ -475,6 +475,7 @@ import Api from '../services/Api';
       this.ID = songID;
       this.songIdToNameMap = songIdToNameMap;
       this.clustersBestTwoSongIds = clustersBestTwoSongIds;
+      
 
 
       const colorMap = ["#6CC9CF", "#EA8FCB",

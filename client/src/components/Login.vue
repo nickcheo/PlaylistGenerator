@@ -200,6 +200,11 @@ import Api from '../services/Api';
 
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
+
+      const topResponse = await Api().post('gettopcovers', {token: this.access_token})
+      const topSongID = await topResponse.data.topTracksID
+
+      this.topSongID = topSongID;
     }
 }
   
