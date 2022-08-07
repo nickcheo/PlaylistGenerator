@@ -300,6 +300,20 @@ import Api from '../services/Api';
 
 
 <style scoped>
+      .btn{
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 12px; 
+
+      }
+      .btn:hover{ 
+        border: 3.5px white solid; 
+
+
+      }
+      .btn:hover {
+        
+      }
 h1, h2 {
   font-weight: normal;
 }
@@ -342,10 +356,6 @@ body {
         border-radius: 100%;
         width: 25px;
         height: auto;
-      }
-      .btn{
-        
-
       }
     </style>
 
