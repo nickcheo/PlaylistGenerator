@@ -49,11 +49,24 @@ app.post('/gettopcovers', async(req, res) => {
 	const token = req.body.token
 	console.log('this that token: ' + token)
 
-	const result = await fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp?si=d2de65961e964ab2/tracks', {
+	const result = await fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp?si=d2de65961e964ab2/', {
 		method: 'GET',
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
-}
+
+	const data = await result.json()
+	let playlistTracks = []
+
+	let response = {}
+	response['topTracks'] = playlistTracks
+	res.send(JSON.stringify(response))
+
+	// if (data.items != null) {
+	// 	for (let i = 0; i < data.items.length; i++) {
+
+	// 	}
+	// }
+})
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
 
