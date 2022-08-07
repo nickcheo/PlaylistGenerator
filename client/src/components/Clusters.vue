@@ -50,10 +50,10 @@
     </div>
 <!-- <a href="http://google.come"> -->
   <div id="" class="container">
-      <div class="row cluster-result " :style="this.clusterRowStyles">
+      <div class="row " :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">You like songs similar to:</h3>
-                    <br></br>
+                    <br>
                     </div>
                     </div>
   <a href="http://google.com" style="text-decoration: none; color:white">
@@ -110,7 +110,7 @@
               
                <div class="col-md-5">
                 <div class="img-container">
-                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
+                  <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
                 </div>
               </div>
              
@@ -170,7 +170,7 @@
 
               <div class="col-md-5">
                 <div class="img-container">
-                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                  <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
                 </div>
               </div>
             
@@ -231,7 +231,7 @@
 
                 <div class="col-md-5">
                   <div class="img-container">
-                    <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
+                    <img :style="this.albumStyles" id="third-img" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
                   </div>
                 </div>
           </div>
@@ -288,7 +288,7 @@
                 
                 <div class="col-md-5">
                       <div class="img-container">
-                        <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
+                        <img :style="this.albumStyles" id="fourth-img" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
   
                       </div>
                 </div>
@@ -600,33 +600,70 @@ li {
   color: #42b983;
 } */
 
-.progress:hover {
-		transform: scale(1.05) perspective(1px)
-	}
-
 .cluster-result {
   transition: opacity 500ms;
   transition: height 0.25s;
-  /* height: 200px; */
+  height: 200px;
+  position: relative;
 }
+
+.cluster-result:hover {
+  z-index: 10;
+}
+
+.cluster-result:hover .img-container img{
+    height: auto;
+    width: 50%;
+    box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
+} 
+
+.cluster-result:not(:hover) .img-container img{
+    box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4);
+    z-index: -10;
+} 
+
+.cluster-result:hover .progress{
+    box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4);
+    transform: scale(1.05) perspective(1px);
+} 
+
+.cluster-result:not(:hover) .progress{
+    box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4);
+} 
 
 #title-row {
   transition: opacity 500ms;
 
 }
 
-/* .cluster-result:hover {
-  height: 300px;
-}  */
 .img-container img {
   border: 5px white solid;
   border-radius: 15px; 
   height: auto;
-  width: 50%;
+  width: 45%;
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
-  transition: width 750ms;
+  transition: width 250ms ease-in-out;
+  animation: float 6s ease-in-out infinite;
 
+}
+
+@keyframes float {
+	0% {
+		transform: translate(0px, 0px) rotate(0deg);
+    box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4);
+	}
+
+  50% {
+    transform: translate(10px, -10px);
+    box-shadow: -4px 8px 8px rgba(59, 50, 50, 0.4);
+
+  }
+	100% {
+    transform: translate(0px, 0px) rotate(0deg);
+    box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4);
+
+	}
 }
 
 .img-container {
@@ -634,7 +671,28 @@ li {
   transform-origin: 50% 50%;
   perspective: 500px;
 }
-.img-container img:hover {
+
+#first-img {
+  position: relative;
+  left: 100px;
+}
+
+#second-img {
+  animation-delay: 1s;
+}
+
+#third-img {
+  position: relative;
+  left: 100px;
+  animation-delay: 2s;
+}
+
+#fourth-img {
+  animation-delay: 3s;
+}
+
+
+/* .img-container img:hover {
   height: auto;
   width: 55%;
   box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4)
@@ -642,22 +700,32 @@ li {
 
 .img-container img:not(:hover) {
   box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4)
-}
+} */
 
 .progress {
   height: 100px; 
   width:100%;
   border-radius: 15px;
   transition: box-shadow 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+
 }
 
-.progress:hover {
-  box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4)
+.progress-bar {
+    -webkit-transition: width 2.5s ease;
+    transition: width 2.5s ease;
+    
+}
+
+/* .progress:hover {
+  box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4);
+	transform: scale(1.05) perspective(1px);
+
 }
 
 .progress:not(:hover) {
   box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4)
-}
+} */
 
 body {
   color: white;
@@ -667,11 +735,6 @@ body {
   margin-top: 60px;
 }
 
-.progress-bar {
-    -webkit-transition: width 2.5s ease;
-    transition: width 2.5s ease;
-    
-}
 
 
 </style>
