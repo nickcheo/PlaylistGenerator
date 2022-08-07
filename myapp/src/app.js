@@ -45,7 +45,15 @@ app.post('/gettracks', async (req, res) => {
 
 	res.send(data)
 })
+app.post('/gettopcovers', async(req, res) => {
+	const token = req.body.token
+	console.log('this that token: ' + token)
 
+	const result = await fetch('https://api.spotify.com/v1/playlists/playlist_id/tracks', {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+}
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
 
