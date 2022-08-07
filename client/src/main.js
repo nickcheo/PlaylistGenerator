@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// rsetting back to when page routing and any tokens were working
 import Vue from 'vue'
 import App from './App'
 import router from './router'
