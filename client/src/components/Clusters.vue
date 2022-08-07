@@ -52,7 +52,7 @@
   <div id="" class="container">
   <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
-              <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
+              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
                     <div class="progress">
                     
@@ -102,7 +102,7 @@
 
 
               
-               <div class="col-md-4">
+               <div class="col-md-5">
                 <div class="img-container">
                   <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
                 </div>
@@ -114,7 +114,7 @@
          <br>
          <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-              <div class="col-md-6" style = "text-align: left;">
+              <div class="col-md-7" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
                     <div class="progress">                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -162,7 +162,7 @@
                 <!-- </div> -->
 
 
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <div class="img-container">
                   <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
                 </div>
@@ -173,7 +173,7 @@
     <br/>
     <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-                <div class="col-md-6" style = "text-align: left;">
+                <div class="col-md-7" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -223,7 +223,7 @@
 
 
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div class="img-container">
                     <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
                   </div>
@@ -233,7 +233,7 @@
     <br>
     <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-                    <div class="col-md-6" style = "text-align: left;">
+                    <div class="col-md-7" style = "text-align: left;">
                         <h4 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h4>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -280,7 +280,7 @@
                     </div> -->
                 <!-- </div> -->
                 
-                <div class="col-md-4">
+                <div class="col-md-5">
                       <div class="img-container">
                         <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
   
