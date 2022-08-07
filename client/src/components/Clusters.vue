@@ -53,7 +53,7 @@
       <div class="row " :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">You like songs similar to:</h3>
-                    <br>
+                    <br></br>
                     </div>
                     </div>
   <a href="http://google.com" style="text-decoration: none; color:white">
