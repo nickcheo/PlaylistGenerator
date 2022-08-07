@@ -41,8 +41,8 @@
     <div class="hero gradient">
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
-                    <div class="col-lg-20 offset-1" style = "text-align: left;">
-                      <h1 class="display-4" align = 'left'><strong>Here are your favorite genres{{username}}.</strong></h1>     
+                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
+                      <h1 class="display-4" align = 'left'><strong>Here are your music categories{{username}}.</strong></h1>     
                         <p class="lead"><strong>Clicking each row generates a playlist similar to those songs!</strong></p>
                     </div>
           </div>
@@ -663,6 +663,7 @@ body {
 .progress-bar {
     -webkit-transition: width 2.5s ease;
     transition: width 2.5s ease;
+    
 }
 
 

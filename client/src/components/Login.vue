@@ -23,7 +23,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
-              <h2 class="display-1"><strong>Hello there{{username}}</strong></h2>
+              <h2 class="display-1"><strong >Hello there{{username}}</strong></h2>
                 <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
                 <br>
                 <!-- <div id = 'spin-box'>
@@ -66,7 +66,7 @@ import Api from '../services/Api';
       return {
         access_token: 'temp',
         refresh_token: 'temp',
-        username: getCookie('username') ? (', ' + getCookie('username'))  : ''
+        username: getCookie('username') != "" ? (', ' + getCookie('username'))  : ''
       }
     },
     methods:
@@ -176,12 +176,13 @@ import Api from '../services/Api';
         console.log('new stuff ' + this.access_token);
         this.access_token = tokens[0];
         this.refresh_token = tokens[1];
+        getUsername();
 
       }
       else  {
 
           // need to go back to login
-          if(getCookie("refresh_token") == "" )
+          if(getCookie("refresh_token") == "" || getCookie("refresh_token") == "undefined")
             {
               router.replace("/")
               return;
@@ -191,17 +192,25 @@ import Api from '../services/Api';
           refreshToken();
           this.access_token = getCookie("access_token")
           this.refresh_token = getCookie("refresh_token")
+          getUsername();
       }
+
+
       
 
-      console.log('token on mount ' + this.access_token)
-
-      if(this.access_token)
+      console.log('token on mount ' + this.access_token)      
+      window.history.replaceState({}, document.title, "/");
+    }
+}
+  
+  async function getUsername()
+  {
+    if(getCookie("access_token") != "")
       {
 
         const usernameResult = await fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + this.access_token,
+            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
 					   'Content-Type' : 'application/json'}
         });
 
@@ -209,19 +218,17 @@ import Api from '../services/Api';
         // console.log("username ")
         // console.log(username);
         if(getCookie("username") === "")
+        {
           setCookie("username", usernameData['display_name'], 1);
-        this.username = ", " + getCookie('username');
+          this.username = ", " + getCookie('username');
+        }
+          
         // console.log(this.username)
 
 
 
       }
-      
-      window.history.replaceState({}, document.title, "/");
-    }
-}
-  
-  
+  }
 
 
   function setCookie(cname, cvalue, exhours) {
