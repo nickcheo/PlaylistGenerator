@@ -55,17 +55,22 @@ app.post('/gettopcovers', async(req, res) => {
 	})
 
 	const data = await result.json()
-	let playlistTracks = []
+	let playlistTracksID = []
+
+	if (data.tracks != null) {
+		for (let i = 0; i < data.tracks.length; i++) {
+			playlistTracksID[i] = data.tracks.items[i].track.id
+		}
+	}
+
+	console.log("nick1")
+	console.log(data.tracks.items[0].track.id)
 
 	let response = {}
-	response['topTracks'] = playlistTracks
+	response['topTracksID'] = playlistTracksID
 	res.send(JSON.stringify(response))
 
-	// if (data.items != null) {
-	// 	for (let i = 0; i < data.items.length; i++) {
-
-	// 	}
-	// }
+	
 })
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
