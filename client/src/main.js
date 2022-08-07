@@ -1,9 +1,11 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// rsetting back to when page routing and any tokens were working
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import "@/assets/global.css"
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
@@ -11,6 +13,11 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data(){
+    return{
+      root: null
+    }
+  },
   router,
   components: { App },
   template: '<App/>',
@@ -26,6 +33,15 @@ new Vue({
       } catch (error) {
         console.log(error)
       }
+    },
+    mounted() {
+        // this.root = document.documentElement.style.cssText;
+        // this.root.style.setProperty("background", "linear-gradient(to bottom, #090909, #f9f7f6)");
+        // this.root.stlye.setProperty("color", "white");
+      
+      }
     }
   }
-})
+)
+
+

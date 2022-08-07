@@ -3,6 +3,7 @@ const scikitjs = require('scikitjs');
 const tf = require('@tensorflow/tfjs');
 const { mod } = require('@tensorflow/tfjs');
 scikitjs.setBackend(tf);
+const randomState = 12345654321;
 
 
 
@@ -25,7 +26,7 @@ let X = [
 
 function computeKMeansClusters(k, data)
 {
-    const kmean = new scikitjs.KMeans({ nClusters: k })
+    const kmean = new scikitjs.KMeans({ nClusters: k, randomState: randomState  })
     kmean.fit(data)
 
     return kmean.clusterCenters;
@@ -37,7 +38,7 @@ function computeKMeansClusters(k, data)
  {
     // const clusterTensor = computeKMeansClusters(k, X);
 
-    const kmean = new scikitjs.KMeans({ nClusters: k })
+    const kmean = new scikitjs.KMeans({ nClusters: k, randomState: randomState  })
     kmean.fit(X)
 
     const clusterTensor = kmean.clusterCenters;
@@ -59,7 +60,7 @@ function computeKMeansClusters(k, data)
  module.exports.printKMeansCentroids = function(k, X)
  {
 
-    const kmean = new scikitjs.KMeans({ nClusters: k })
+    const kmean = new scikitjs.KMeans({ nClusters: k, randomState: randomState  })
     kmean.fit(X)
 
     const clusterTensor = kmean.clusterCenters;
@@ -79,7 +80,7 @@ function computeKMeansClusters(k, data)
 
 module.exports.songsToClusters = async function(songIdToName, songIdList, matrix, k)
 {
-    const kmean = new scikitjs.KMeans({ nClusters: k })
+    const kmean = new scikitjs.KMeans({ nClusters: k})
     kmean.fit(matrix);
 
     const clusterTensor = kmean.clusterCenters;

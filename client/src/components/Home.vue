@@ -1,5 +1,5 @@
 <template>
-<div class = "home">
+<div class = "">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,46 +7,43 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
     </head>
 
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
-  <div class="collapse" id="navbarToggleExternalContent3">
-    <div class="bg-light shadow-3 p-4">
-      <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-      <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-      <button class="btn btn-link btn-block m-0">Link 3</button>
-    </div>
-  </div>
+  
 
-    <div class="hero">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-20 text-center">
-            <h1 class="display-1"><strong>Variefy</strong></h1>
-              <p class="lead">A playlist generator for daring music listeners.</p>
-              <br>
-              <p><strong>Get started</strong></p>
-          <a href="#/" class="btn btn-dark rounded-pill"
-          @click="getSpotifyLogin"
-          >
-            <img src="../assets/spotify-logo.png" id="icon"/>
-            Connect with Spotify
-          </a>
-          <br/>
 
-              <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
-                <!--Button-->
+<div class="hero">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-20 text-center">
+              <h2 class="display-1"><strong>Variefy</strong></h2>
+                <p class="lead">A playlist generator for daring music listeners.</p>
+                <br>
+                <!-- <div id = 'spin-box'>
+                </div> 
+                <div id = 'check-box'></div> -->
+                
+                <!-- <button  class="btn btn-dark rounded-pill"
+                  @click = "goToClusters">
+                  Find me fresh music
+                <img src="../assets/rightarrow.png" id="icon"/>
+                </button> -->
+                <a href="#/" class="btn btn-dark rounded-pill"
+                 @click="getSpotifyLogin"
+                >
+                  <img src="../assets/spotify-logo.png" id="icon"/>
+                  Connect with Spotify
+                </a>
+                <br/>
+
+               
+
+          
+                <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
+                  <!--Button-->
+            </div>
           </div>
         </div>
       </div>
-    </div>
-</div>
+  </div>
 
 <!--Grid row-->
 </template>
@@ -108,7 +105,7 @@ export default {
   mounted() {
       /* eslint-disable */
       // directs to /next route in router after access token is registered
-      if(getCookie("access_token") != "") {
+      if(getCookie("access_token") != "" || getCookie("refresh_token") != "" ) {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       }
@@ -161,6 +158,8 @@ li {
 a {
   color: #42b983;
 }
+
+
 </style>
 <style>
       .my-custom-row {
@@ -171,15 +170,11 @@ a {
 
     <style>
       .hero {
-        background: white;
+        /* background: white; */
         width: 100%;
         height: 70vh;
         display: flex;
         align-items: center;
-      }
-
-      #spotify-container {
-        width: 100vw;
       }
 
       #icon {

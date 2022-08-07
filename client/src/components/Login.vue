@@ -17,28 +17,8 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-    <nav class="navbar navbar-light bg-light">
-      
-      <div class="container-fluid">
-        <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-
-          <div class="collapse" id="navbarToggleExternalContent3">
-            <div class="bg-light shadow-3 p-4">
-              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-              <button class="btn btn-link btn-block m-0">Link 3</button>
-            </div>
-          </div>
-    </nav>
-
-    
-
-
+  
+  
       <div class="hero">
         <div class="container-fluid">
           <div class="row">
@@ -55,6 +35,8 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
+
+               
 
                 
                 <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
@@ -74,7 +56,8 @@
 
 
 <script>
-  import router from '../router';
+  import { onBeforeMount } from 'vue';
+import router from '../router';
 import Api from '../services/Api';
 
   export default {
@@ -90,7 +73,8 @@ import Api from '../services/Api';
     {
       getAccessToken: async () => {
         /* eslint-disable */
-        if(getCookie("access_token") === "") {
+        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
+          || getCookie("username") === "" || getCookie("username") == undefined) {
           const params = new URLSearchParams(document.location.search);
           const authCode = params.get('code');
           const state = params.get('state');
@@ -114,8 +98,8 @@ import Api from '../services/Api';
             grant_type: "authorization_code",
             code: authCode,
             redirect_uri: 'http://localhost:8080/next',
-          })
-        });
+            })
+          });
 
 
           const data = await result.json();
@@ -127,8 +111,8 @@ import Api from '../services/Api';
           const access_token = data.access_token;
           const refresh_token = data.refresh_token;
 
-          setCookie("access_token", access_token);
-          setCookie("refresh_token", refresh_token);
+          setCookie("access_token", access_token, 1);
+          setCookie("refresh_token", refresh_token, 24 * 365);
 
           console.log('at: '+ access_token);
 
@@ -142,14 +126,73 @@ import Api from '../services/Api';
       goToClusters: async () => {
 
           console.log('going to clusters')
+          if(getCookie("access_token") === "")
+            refreshToken();
           router.replace({path : '/clusters'});
+      },
+      refreshToken: async () => {
+        console.log("attempting token refresh")
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              this.access_token = data.access_token;
+              setCookie("access_token", data.access_token, 1)
+
+        }
       }
     },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+
+      let tokens = await this.getAccessToken();
+      console.log(tokens);
+      // refresh token if access expired
+      if( (this.access_token === "" || !this.access_token || getCookie("access_token") === "") && getCookie("refresh_token") != "")
+      {
+        tokens = await this.getAccessToken();
+        refreshToken();
+        this.access_token = getCookie("access_token");
+        console.log('new stuff ' + this.access_token);
+        this.access_token = tokens[0];
+        this.refresh_token = tokens[1];
+
+      }
+      else  {
+
+          // need to go back to login
+          if(getCookie("refresh_token") == "" )
+            {
+              router.replace("/")
+              return;
+            }
+          
+          // refresh token present to renew 
+          refreshToken();
+          this.access_token = getCookie("access_token")
+          this.refresh_token = getCookie("refresh_token")
+      }
+      
 
       console.log('token on mount ' + this.access_token)
 
@@ -165,8 +208,8 @@ import Api from '../services/Api';
 	      const usernameData  = await (usernameResult.json());
         // console.log("username ")
         // console.log(username);
-        if(!getCookie("username"))
-          setCookie("username", usernameData['display_name']);
+        if(getCookie("username") === "")
+          setCookie("username", usernameData['display_name'], 1);
         this.username = ", " + getCookie('username');
         // console.log(this.username)
 
@@ -175,15 +218,15 @@ import Api from '../services/Api';
       }
       
       window.history.replaceState({}, document.title, "/");
-      
-  },
+    }
+}
+  
+  
 
-  }
 
-
-  function setCookie(cname, cvalue, exdays) {
+  function setCookie(cname, cvalue, exhours) {
     const d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    d.setTime(d.getTime() + exhours * 60 * 60 * 1000);
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
@@ -202,6 +245,37 @@ import Api from '../services/Api';
       }
     }
     return "";
+  }
+
+  async function refreshToken () {
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              
+              setCookie("access_token", data.access_token, 1)
+
+        }
   }
 
   
@@ -224,8 +298,14 @@ li {
   margin: 0 10px;
 }
 a, button {
-  color: #42b983;
+  color: white;
 }
+
+body {
+  color: white;
+
+}
+
 </style>
 <style>
       .my-custom-row {
@@ -233,7 +313,7 @@ a, button {
         height: 400px;
       }
       .hero {
-        background: white;
+        /* background: white; */
         width: 100%;
         height: 70vh;
         display: flex;

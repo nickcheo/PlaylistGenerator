@@ -17,26 +17,9 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-    <nav class="navbar navbar-light bg-light">
-      
-      <div class="container-fluid">
-        <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
 
-          <div class="collapse" id="navbarToggleExternalContent3">
-            <div class="bg-light shadow-3 p-4">
-              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-              <button class="btn btn-link btn-block m-0">Link 3</button>
-            </div>
-          </div>
-    </nav>
     
-      <div class="hero" v-if="!dataHasLoaded">
+      <div class="hero" id="loading-row" v-if="!dataHasLoaded">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
@@ -55,9 +38,9 @@
 
 <div id = 'cluster-page' v-if="dataHasLoaded">
 
-    <div class="hero">
+    <div class="hero gradient">
       <div class="container-fluid">
-          <div class="row">
+          <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
                       <h1 class="display-4" align = 'left'><strong>We think you like this{{username}}.</strong></h1>     
                         <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
@@ -66,67 +49,272 @@
       </div>
     </div>
 
-  <div class="container">
-          <div class="row">
-              <div class="col-md-12" style = "text-align: left;">
+  <div id="" class="container">
+          <div class="row cluster-result " :style="this.clusterRowStyles">
+              <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">
-                        <div class="progress-bar" role="progressbar" :style="this.styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
                               <div class="progress-value">{{this.compositionRatios[0]}}%</div>
                         </div>
+
+                        
                     </div>
               </div>
+
+
+              <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                  <div class = "row"></div>
+                  <br/>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #91382f; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div> -->
+                </div>
+
+
+              
+               <div class="col-md-4">
+                <div class="img-container">
+                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
+                </div>
+              </div>
+             
           </div>
+
          <br>
-          <div class="row">
-              <div class="col-md-12" style = "text-align: left;">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
+              <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">                    
-                        <div class="progress-bar" role="progressbar" :style="this.styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress">                    
+                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[1]}}%</div>
                         </div>
                     </div>
               </div>
+
+
+            <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                  <div class = "row"></div>
+                  <br/>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #117133; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div> -->
+                </div>
+
+
+              <div class="col-md-4">
+                <div class="img-container">
+                  <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                </div>
+              </div>
+            
           </div>
     <br/>
-          <div class="row">
-                <div class="col-md-12" style = "text-align: left;">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
+                <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
-                    <div class="progress" style="height: 60px; width:75%">
-                        <div class="progress-bar" role="progressbar" :style="this.styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[2]}}%</div>
                         </div>
                     </div>
                 </div>
+
+
+                 <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                   <div class = "row"></div>
+                   <br/>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #872186; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div> -->
+                    
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="img-container">
+                    <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
+                  </div>
+                </div>
           </div>
     <br>
-          <div class="row">
-                    <div class="col-md-12" style = "text-align: left;">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
+                    <div class="col-md-6" style = "text-align: left;">
                         <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
-                        <div class="progress" style="height: 60px; width:75%">
-                            <div class="progress-bar" role="progressbar" :style="this.styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
                             </div>
                         </div>
                     </div>
+
+
+                  <div class = "col-md-2">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class = "row"></div>
+                  <div class = "row"></div>
+                  <br/>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find similar music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <div class="progress button" style="height: 60px; width:100%; background-color: #3c6a00; color: white;">
+                          <br/>
+                          <div class="text-center container-fluid row" style = "text-align: center;">
+                                  <div>
+                                    <center>
+                                      <br/>
+                                    <h6>&nbsp; Find different music </h6>
+                                    <br>
+                                  </center>
+                                  </div>
+                          </div>
+                          <br/>
+                    </div> -->
+                </div>
+                
+                <div class="col-md-4">
+                      <div class="img-container">
+                        <img :style="this.albumStyles" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
+  
+                      </div>
+                </div>
+
           </div>
-            <div class="row">
-              <div class="col-md-12">
-              <img :src="this.clusterImage[this.ID[0]]"/>
+            <!-- <div class="row">
+              
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
               </div>
-          </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+              <div class="col-md-6">
+              <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
+              </div>
+          </div> -->
     <br/>
       
 
   </div>  
 </div>
 
+  
+
+
+
+
 </body>
 </template>
 
 
 <script>
-  import Api from '../services/Api';
+  import router from '../router';
+import Api from '../services/Api';
 
   export default {
     name: 'Login',
@@ -142,7 +330,10 @@
         clusterImage: {},
         ID: Array(50),
         songIdToNameMap: null,
-        clustersBestTwoSongIds: null
+        clustersBestTwoSongIds: null,
+        albumStyles: "opacity: 0%;",
+        clusterRowStyles: "opacity: 0%;",
+        titleRowStyles: "opacity: 0%;"
       }
     },
     methods:
@@ -198,25 +389,52 @@
         }
         
       },
-      calculateTrackData: async () => {
-      
+         toRecommend: async () => {
+          router.replace('/recommend')
       }
-    },
+  },
     async mounted(){
       /* eslint-disable */
-      const tokens = await this.getAccessToken()
-      this.access_token = tokens[0];
-      this.refresh_token = tokens[1];
+      const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      // refresh token if access expired
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      {
+        refreshToken();
+        this.access_token = getCookie("access_token");
+
+      }
+      else  {
+
+          this.access_token = tokens[0];
+          this.refresh_token = tokens[1];
+      }
+      
+      
+      
+      
+
+
+      // go home if both tokens are missing
+      if(getCookie("access_token") === "" && getCookie("refresh_token") === "")
+        router.replace("/")
+
+      // refresh token if access expired
+      
 
       console.log('token on mount ' + this.access_token)
 
       if(!this.access_token)
         return;
+
+      for(let i = 0; i < 4; i++) {
+        this.styleStrings[i] = "width: 0%";
+      }
+
+      this.dataHasLoaded = true;
       
-      const clusterResponse = await Api().post('/getclusters', 
-      {
-        token: this.access_token
-      })
+      window.history.replaceState({}, document.title, "/");
+
+      const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
 
       console.log(clusterResponse);
 
@@ -230,28 +448,46 @@
       console.log(songID);
 
       // assign to class instance variables
-      this.clusterList = clusterGroups;
+      this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
       this.clusterImage = songImage;
       this.ID = songID;
       this.songIdToNameMap = songIdToNameMap;
       this.clustersBestTwoSongIds = clustersBestTwoSongIds;
 
 
-      const colorMap = ["#6CC9CF", "#EA8FCB","#F2E991", "#C293FF"]
+      const colorMap = ["#6CC9CF", "#EA8FCB",
+                    // "#F2E991", pastel yellow
+                    "#77dd77",
+                    "#C293FF"]
+      
+      let updatedStyleStrings = Array(4);
+      
+      setTimeout(() => {
+        this.titleRowStyles = "opacity: 100%;"
+        setTimeout(() => {
+          this.clusterRowStyles = "opacity: 100%;"
 
-      for(let i = 0; i < this.compositionRatios.length; i++)
-      {
-        this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
-        this.styleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
-      }
+          setTimeout(() => {
+            for(let i = 0; i < this.compositionRatios.length; i++) {
+              this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
+              updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
+            }
 
-       this.dataHasLoaded = true;
+            this.albumStyles = "opacity: 100%;"
+            this.styleStrings = updatedStyleStrings;
+
+          }, 20);
+        }, 500);
+      }, 10);
+
 
 
       
-      window.history.replaceState({}, document.title, "/");
       
   },
+  beforeMount()
+  {
+  }
 
   }
 
@@ -279,6 +515,39 @@
     return "";
   }
 
+
+  async function refreshToken () {
+    console.log("attempting refresh")
+        if(getCookie("access_token") === "" )
+        {
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const querystring = require('querystring')
+          
+          
+              const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+            
+              const result = await fetch(tokenBaseUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type' : "application/x-www-form-urlencoded",
+                'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+              },
+              body: querystring.stringify({
+                grant_type: "refresh_token",
+                refresh_token: getCookie("refresh_token"),
+                })
+              });
+
+              const data = await result.json();
+              // store new access token
+              console.log("NEW AT:  " + data.access_token)
+              
+              setCookie("access_token", data.access_token, 1)
+
+        }
+  }
+
   
     
 </script>
@@ -299,8 +568,6 @@
 
         const checkHTML = '<h1><span class="bi bi-check"></span></h1>'
 </script> -->
- 
-
 
 
 
@@ -316,9 +583,78 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-button {
+/* button {
   color: #42b983;
+} */
+
+.cluster-result {
+  transition: opacity 500ms;
+  transition: height 0.25s;
+  /* height: 200px; */
 }
+
+#title-row {
+  transition: opacity 500ms;
+
+}
+
+/* .cluster-result:hover {
+  height: 300px;
+}  */
+.img-container img {
+  border: 5px white solid;
+  border-radius: 15px; 
+  height: auto;
+  width: 50%;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 500ms;
+  transition: width 750ms;
+
+}
+
+.img-container {
+  transition: all 0.25s;
+  transform-origin: 50% 50%;
+  perspective: 500px;
+}
+.img-container img:hover {
+  height: auto;
+  width: 55%;
+  box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4)
+}
+
+.img-container img:not(:hover) {
+  box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4)
+}
+
+.progress {
+  height: 60px; 
+  width:100%;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.progress:hover {
+  box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4)
+}
+
+.progress:not(:hover) {
+  box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4)
+}
+
+body {
+  color: white;
+}
+
+#loading-row {
+  margin-top: 60px;
+}
+
+.progress-bar {
+    -webkit-transition: width 2.5s ease;
+    transition: width 2.5s ease;
+}
+
+
 </style>
 <style>
       .my-custom-row {
@@ -326,7 +662,6 @@ button {
         height: 400px;
       }
       .hero {
-        background: white;
         width: 100%;
         height: 70vh;
         display: flex;
@@ -352,7 +687,7 @@ button {
 
     <style>
       .hero {
-        background: white;
+        /* background: white; */
         width: 100%;
         height: 20vh;
         display: flex;
