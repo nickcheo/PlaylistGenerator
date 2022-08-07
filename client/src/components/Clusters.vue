@@ -448,7 +448,10 @@ import Api from '../services/Api';
       window.history.replaceState({}, document.title, "/");
 
       const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
+      const topResponse = await Api().post('gettopcovers', {token: this.access_token})
 
+      console.log("test_nick");
+      console.log(topResponse);
       console.log(clusterResponse);
 
       // retrieve data from server response
@@ -457,6 +460,12 @@ import Api from '../services/Api';
       const songImage = await clusterResponse.data.idAndImage;
       const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
       const songIdToNameMap = await clusterResponse.data.songIdToName;
+
+      // retrieve data from top response
+      const topSongID = await topResponse.data.topTracksID
+
+      console.log("nick2");
+      console.log(topSongID);
 
       console.log(songID);
 
@@ -716,6 +725,10 @@ li {
     -webkit-transition: width 2.5s ease;
     transition: width 2.5s ease;
     
+}
+
+.progress-value {
+  font-size: 18px;
 }
 
 /* .progress:hover {
