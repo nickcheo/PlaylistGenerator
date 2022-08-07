@@ -42,28 +42,28 @@
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
-                      <h1 class="display-4" align = 'left'><strong>We think you like this{{username}}.</strong></h1>     
-                        <p class="lead"><strong>Here's a breakdown your music taste according to our algorithms:</strong></p>
+                      <h1 class="display-4" align = 'left'><strong>Here are your favorite genres{{username}}.</strong></h1>     
+                        <p class="lead"><strong>Click a bar to generate a playlist!</strong></p>
                     </div>
           </div>
       </div>
     </div>
-
+<!-- <a href="http://google.come"> -->
   <div id="" class="container">
+  <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left; padding-right: 10px;">
                   <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
                     <div class="progress">
+                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
                               <div class="progress-value">{{this.compositionRatios[0]}}%</div>
                         </div>
-
                         
                     </div>
               </div>
 
-
-              <div class = "col-md-2">
+              <!-- <div class = "col-md-2">
                   <br/>
                   <br/>
                   <br/>
@@ -82,7 +82,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                     <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #91382f; color: white;">
@@ -98,7 +98,7 @@
                           </div>
                           <br/>
                     </div> -->
-                </div>
+                <!-- </div> -->
 
 
               
@@ -109,6 +109,7 @@
               </div>
              
           </div>
+          </a>
 
          <br>
           <div class="row cluster-result" :style="this.clusterRowStyles">
@@ -228,7 +229,7 @@
     <br>
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-6" style = "text-align: left;">
-                        <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h3>
+                        <h4 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h4>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
