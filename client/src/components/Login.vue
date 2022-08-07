@@ -165,16 +165,24 @@ import Api from '../services/Api';
     async mounted(){
       /* eslint-disable */
 
-    const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      let tokens = [getCookie("access_token"), getCookie("refresh_token")]
+      console.log(tokens);
       // refresh token if access expired
-      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "" && getCookie("refresh_token"))
       {
+        tokens = await this.getAccessToken();
         refreshToken();
         this.access_token = getCookie("access_token");
+        console.log('new stuff ' + this.access_token);
 
       }
       else  {
 
+          if(getCookie("refresh_token") == "")
+            {
+              router.replace("/")
+              return;
+            }
           this.access_token = tokens[0];
           this.refresh_token = tokens[1];
       }
