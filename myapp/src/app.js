@@ -54,19 +54,25 @@ app.post('/gettopcovers', async(req, res) => {
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
 
-	const data = await result.json()
+	let response = {}
+	let IDtoImageURL = {}
 	let playlistTracksID = []
+	const data = await result.json()
+	
 
 	if (data.tracks != null) {
 		for (let i = 0; i < data.tracks.length; i++) {
 			playlistTracksID[i] = data.tracks.items[i].track.id
+			IDtoImageURL[playlistTracksID[i]] = data.tracks.items[0].track.album.images[0].url
 		}
 	}
 
-	console.log("nick1")
-	console.log(data.tracks.items[0].track.id)
+	console.log("nick3")
+	console.log(IDtoImageURL)
+	console.log(playlistTracksID)
 
-	let response = {}
+	
+
 	response['topTracksID'] = playlistTracksID
 	res.send(JSON.stringify(response))
 
