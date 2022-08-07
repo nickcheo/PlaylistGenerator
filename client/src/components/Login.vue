@@ -30,9 +30,9 @@
                 </div> 
                 <div id = 'check-box'></div> -->
                 
-                <button  class="btn btn-dark rounded-pill"
+                <button  class="btn btn"
                   @click = "goToClusters">
-                  Find me fresh music
+                  Find me fresh music!
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
 
