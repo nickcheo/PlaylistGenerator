@@ -30,7 +30,7 @@
                 </div> 
                 <div id = 'check-box'></div> -->
                 
-                <button  class="btn btn"
+                <button  class="btn"
                   @click = "goToClusters">
                   Find me fresh music!
                 <img src="../assets/rightarrow.png" id="icon"/>
@@ -337,6 +337,10 @@ body {
         border-radius: 100%;
         width: 25px;
         height: auto;
+      }
+      .btn{
+        
+
       }
     </style>
 
