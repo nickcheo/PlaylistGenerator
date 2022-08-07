@@ -311,7 +311,8 @@ import Api from '../services/Api';
 
 
       }
-      .btn:hover {
+      .btn:hover + .display-1  {
+        box-shadow: -2px 6px 8pxgba(59, 50, 50,  r0.4)
         
       }
 h1, h2 {
