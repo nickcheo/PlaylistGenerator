@@ -45,6 +45,9 @@
           </div>
         </div>
       </div>
+      <div>
+      <img :src="this.topURLImage[this.topSongID[0]]"/>
+      </div>
 
   
 <!--Grid row-->
@@ -203,10 +206,12 @@ import Api from '../services/Api';
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
 
-      const topResponse = await Api().post('gettopcovers', {token: this.access_token})
+      const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
       const topSongID = await topResponse.data.topTracksID
+      const topURLImage = await topResponse.data.topImageToURL
 
       this.topSongID = topSongID;
+      this.topURLImage = topURLImage;
     }
 }
   
