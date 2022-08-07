@@ -30,9 +30,9 @@
                 </div> 
                 <div id = 'check-box'></div> -->
                 
-                <button  class="btn btn-dark rounded-pill"
+                <button  class="btn btn"
                   @click = "goToClusters">
-                  Find me fresh music
+                  Find me fresh music!
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
 
@@ -171,7 +171,7 @@ import Api from '../services/Api';
       if( (this.access_token === "" || !this.access_token || getCookie("access_token") === "") && getCookie("refresh_token") != "")
       {
         tokens = await this.getAccessToken();
-        refreshToken();
+        await refreshToken();
         this.access_token = getCookie("access_token");
         console.log('new stuff ' + this.access_token);
         this.access_token = tokens[0];
@@ -189,15 +189,17 @@ import Api from '../services/Api';
             }
           
           // refresh token present to renew 
-          refreshToken();
+          await refreshToken();
           this.access_token = getCookie("access_token")
           this.refresh_token = getCookie("refresh_token")
-          getUsername();
+          await getUsername();
+          
       }
 
+      this.username = await (", " + getCookie('username'))
 
+      // really make sure username is visble after first login
       
-
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
 
@@ -210,7 +212,8 @@ import Api from '../services/Api';
   
   async function getUsername()
   {
-    if(getCookie("access_token") != "")
+    console.log("GET USERNAME CALLED");
+    if(getCookie("access_token") != "" && getCookie("access_token") != "undefined")
       {
 
         const usernameResult = await fetch('https://api.spotify.com/v1/me', {
@@ -225,10 +228,9 @@ import Api from '../services/Api';
         if(getCookie("username") === "")
         {
           setCookie("username", usernameData['display_name'], 1);
-          this.username = ", " + getCookie('username');
         }
           
-        // console.log(this.username)
+        
 
 
 
