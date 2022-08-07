@@ -724,6 +724,10 @@ li {
     
 }
 
+.progress-value {
+  font-size: 18px;
+}
+
 /* .progress:hover {
   box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4);
 	transform: scale(1.05) perspective(1px);
