@@ -32,7 +32,7 @@
                 
                 <button  class="btn"
                   @click = "goToClusters">
-                  Find me fresh music!
+                  Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button>
 
@@ -304,7 +304,7 @@ import Api from '../services/Api';
       font-size: 20px;
       cursor: pointer;
       border-radius: 12px; 
-
+    
       }
       .btn:hover{ 
         border: 3.5px white solid; 
