@@ -110,8 +110,11 @@ export default {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       }
-    }
+  }
+    
 }
+
+
 
 function getCookie(cname) {
   let name = cname + "=";
