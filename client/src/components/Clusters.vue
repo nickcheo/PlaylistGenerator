@@ -42,18 +42,24 @@
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
-                      <h1 class="display-4" align = 'left'><strong>Here are your music categories{{username}}.</strong></h1>     
-                        <p class="lead"><strong>Clicking each row generates a playlist similar to those songs!</strong></p>
+                      <h1 class="display-4" align = 'left'><strong>Here are your favorite categories{{username}}.</strong></h1>     
+                        <p class="lead"><strong>Click each row to generate similar playlists!</strong></p>
                     </div>
           </div>
       </div>
     </div>
 <!-- <a href="http://google.come"> -->
   <div id="" class="container">
+      <div class="row cluster-result " :style="this.clusterRowStyles">
+              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
+                  <h3 class="progress-title">You like songs similar to:</h3>
+                    <br></br>
+                    </div>
+                    </div>
   <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
-                  <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h3>
+                  <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h5>
                     <div class="progress">
                     
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
@@ -111,11 +117,11 @@
           </div>
           </a>
 
-         <br>
+        
          <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left;">
-                    <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
+                    <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h5>
                     <div class="progress">                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[1]}}%</div>
@@ -170,11 +176,11 @@
             
           </div>
           </a>
-    <br/>
+    
     <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-7" style = "text-align: left;">
-                    <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
+                    <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h5>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-value">{{this.compositionRatios[2]}}%</div>
@@ -230,11 +236,11 @@
                 </div>
           </div>
           </a>
-    <br>
+
     <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
-                        <h4 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h4>
+                        <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h5>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[3]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
@@ -304,7 +310,7 @@
               <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
               </div>
           </div> -->
-    <br/>
+   
       
 
   </div>  
@@ -639,8 +645,9 @@ li {
 }
 
 .progress {
-  height: 60px; 
+  height: 100px; 
   width:100%;
+  border-radius: 15px;
   transition: box-shadow 0.1s ease-in-out;
 }
 
