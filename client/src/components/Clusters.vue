@@ -623,7 +623,7 @@ li {
 
 .cluster-result:hover .img-container img{
     height: auto;
-    width: 50%;
+    width: 265px;
     box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
 } 
 
@@ -650,7 +650,7 @@ li {
   border: 5px white solid;
   border-radius: 15px; 
   height: auto;
-  width: 45%;
+  width: 235px;
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;
