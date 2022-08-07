@@ -192,12 +192,14 @@ import Api from '../services/Api';
           await refreshToken();
           this.access_token = getCookie("access_token")
           this.refresh_token = getCookie("refresh_token")
-          getUsername();
+          await getUsername();
+          
       }
 
+      this.username = await (", " + getCookie('username'))
 
       // really make sure username is visble after first login
-      getUsername();
+      
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
     }
@@ -221,7 +223,6 @@ import Api from '../services/Api';
         if(getCookie("username") === "")
         {
           setCookie("username", usernameData['display_name'], 1);
-          this.username = ", " + getCookie('username');
         }
           
         
