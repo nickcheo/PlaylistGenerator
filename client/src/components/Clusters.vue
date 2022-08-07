@@ -476,7 +476,7 @@ import Api from '../services/Api';
 
           setTimeout(() => {
             for(let i = 0; i < this.compositionRatios.length; i++) {
-              this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
+              this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / this.clusterList[0].length) * 100)));
               updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
             }
 
