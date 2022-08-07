@@ -68,6 +68,8 @@
                   <br/>
                   <br/>
                   <div class = "row"></div>
+                  <div class = "row"></div>
+                  <br/>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
@@ -81,7 +83,7 @@
                           </div>
                           <br/>
                     </div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #91382f; color: white;">
                           <br/>
@@ -95,7 +97,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -125,6 +127,8 @@
                   <br/>
                   <br/>
                   <div class = "row"></div>
+                  <div class = "row"></div>
+                  <br/>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
@@ -138,7 +142,7 @@
                           </div>
                           <br/>
                     </div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #117133; color: white;">
                           <br/>
@@ -152,7 +156,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -195,7 +199,7 @@
                           </div>
                           <br/>
                     </div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #872186; color: white;">
                           <br/>
@@ -209,7 +213,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                     
                 </div>
 
@@ -239,6 +243,7 @@
                   <br/>
                   <div class = "row"></div>
                   <div class = "row"></div>
+                  <br/>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
                           <br/>
                           <div class="text-center container-fluid row" style = "text-align: center;">
@@ -252,7 +257,7 @@
                           </div>
                           <br/>
                     </div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
+                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #3c6a00; color: white;">
                           <br/>
@@ -266,7 +271,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="col-md-4">

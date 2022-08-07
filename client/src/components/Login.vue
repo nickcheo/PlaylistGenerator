@@ -168,7 +168,7 @@ import Api from '../services/Api';
       let tokens = await this.getAccessToken();
       console.log(tokens);
       // refresh token if access expired
-      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "" && getCookie("refresh_token") != "")
+      if( (this.access_token === "" || !this.access_token || getCookie("access_token") === "") && getCookie("refresh_token") != "")
       {
         tokens = await this.getAccessToken();
         refreshToken();
@@ -180,13 +180,17 @@ import Api from '../services/Api';
       }
       else  {
 
+          // need to go back to login
           if(getCookie("refresh_token") == "" )
             {
               router.replace("/")
               return;
             }
-          this.access_token = tokens[0];
-          this.refresh_token = tokens[1];
+          
+          // refresh token present to renew 
+          refreshToken();
+          this.access_token = getCookie("access_token")
+          this.refresh_token = getCookie("refresh_token")
       }
       
 
@@ -204,7 +208,7 @@ import Api from '../services/Api';
 	      const usernameData  = await (usernameResult.json());
         // console.log("username ")
         // console.log(username);
-        if(!getCookie("username"))
+        if(getCookie("username") === "")
           setCookie("username", usernameData['display_name'], 1);
         this.username = ", " + getCookie('username');
         // console.log(this.username)
