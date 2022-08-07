@@ -43,7 +43,7 @@
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-20 offset-1" style = "text-align: left;">
                       <h1 class="display-4" align = 'left'><strong>Here are your favorite genres{{username}}.</strong></h1>     
-                        <p class="lead"><strong>Click a bar to generate a playlist!</strong></p>
+                        <p class="lead"><strong>Clicking each row generates a playlist similar to those songs!</strong></p>
                     </div>
           </div>
       </div>
@@ -112,6 +112,7 @@
           </a>
 
          <br>
+         <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
               <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h3>
@@ -122,7 +123,7 @@
                     </div>
               </div>
 
-
+<!-- 
             <div class = "col-md-2">
                   <br/>
                   <br/>
@@ -142,7 +143,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                     <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #117133; color: white;">
@@ -158,7 +159,7 @@
                           </div>
                           <br/>
                     </div> -->
-                </div>
+                <!-- </div> -->
 
 
               <div class="col-md-4">
@@ -168,7 +169,9 @@
               </div>
             
           </div>
+          </a>
     <br/>
+    <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-6" style = "text-align: left;">
                     <h3 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h3>
@@ -180,7 +183,7 @@
                 </div>
 
 
-                 <div class = "col-md-2">
+                 <!-- <div class = "col-md-2">
                   <br/>
                   <br/>
                   <br/>
@@ -199,7 +202,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                     <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #872186; color: white;">
@@ -216,7 +219,7 @@
                           <br/>
                     </div> -->
                     
-                </div>
+                <!-- </div> -->
 
 
 
@@ -226,7 +229,9 @@
                   </div>
                 </div>
           </div>
+          </a>
     <br>
+    <a href="http://google.com" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-6" style = "text-align: left;">
                         <h4 class="progress-title">Music like {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} and <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h4>
@@ -238,7 +243,7 @@
                     </div>
 
 
-                  <div class = "col-md-2">
+                  <!-- <div class = "col-md-2">
                   <br/>
                   <br/>
                   <br/>
@@ -257,7 +262,7 @@
                                   </div>
                           </div>
                           <br/>
-                    </div>
+                    </div> -->
                     <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
                     <div class="progress button" style="height: 60px; width:100%; background-color: #3c6a00; color: white;">
@@ -273,7 +278,7 @@
                           </div>
                           <br/>
                     </div> -->
-                </div>
+                <!-- </div> -->
                 
                 <div class="col-md-4">
                       <div class="img-container">
@@ -283,6 +288,7 @@
                 </div>
 
           </div>
+          </a>
             <!-- <div class="row">
               
               <div class="col-md-6">
