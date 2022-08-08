@@ -56,7 +56,7 @@
                     <br>
                     </div>
                     </div>
-  <a href="http://google.com" style="text-decoration: none; color:white">
+  <a @click="goToRecommend" style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
                   <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h5>
@@ -402,8 +402,11 @@ import Api from '../services/Api';
         }
         
       },
-         toRecommend: async () => {
-          router.replace('/recommend')
+         goToRecommend: async () => {
+
+           window.location.href = "http://localhost:8080/recommend?test=pizza";
+          // router.replace('/recommend/chicken')
+
       }
   },
     async mounted(){
