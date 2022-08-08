@@ -27,9 +27,10 @@
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
                 <button  class="loginbutton"
-                <img src="../assets/spotifylogo.png">
-                  @click = "getSpotifyLogin">
-                  Connect with Spotify
+                   @click = "getSpotifyLogin">
+                   <img src="../assets/spotifylogo.png" id="icon"/>
+                   Connect with Spotify
+                
                 </button>
                 
 
