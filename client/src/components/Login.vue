@@ -69,7 +69,10 @@ import Api from '../services/Api';
       return {
         access_token: 'temp',
         refresh_token: 'temp',
-        username: getCookie('username') != "" ? (', ' + getCookie('username'))  : ''
+        username: getCookie('username') != "" ? (', ' + getCookie('username'))  : '',
+        topSongID: "",
+        topURLImage: "",
+
       }
     },
     methods:
@@ -198,7 +201,7 @@ import Api from '../services/Api';
           await getUsername();
           
       }
-
+      
       this.username = await (", " + getCookie('username'))
 
       // really make sure username is visble after first login
@@ -210,8 +213,8 @@ import Api from '../services/Api';
       const topSongID = await topResponse.data.topTracksID
       const topURLImage = await topResponse.data.topImageToURL
 
-      this.topSongID = topSongID;
-      this.topURLImage = topURLImage;
+      this.topSongID = await topSongID;
+      this.topURLImage = await topURLImage;
     }
 }
   
