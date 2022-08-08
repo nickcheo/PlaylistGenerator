@@ -26,13 +26,10 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
-                <a href="#/" class="btn btn-dark rounded-pill"
-                 @click="getSpotifyLogin"
-                >
-                  <img src="../assets/spotify-logo.png" id="icon"/>
+                <button  class="btn"
+                  @click = "getSpotifyLogin">
                   Connect with Spotify
-                </a>
-                <br/>
+                </button>
 
                
 
@@ -187,3 +184,6 @@ a {
         height: auto;
       }
     </style>
+
+
+
