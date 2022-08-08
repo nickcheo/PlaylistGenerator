@@ -210,14 +210,23 @@ import Api from '../services/Api';
       window.history.replaceState({}, document.title, "/");
 
       // getTopTrackImage(this.access_token);
-       const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
-      console.log(topResponse)
-      const topSongID = await topResponse.data.topTracksID
-      const topURLImage = await topResponse.data.topImageToURL
+      try {
+        const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
+        console.log(topResponse)
+        const topSongID = await topResponse.data.topTracksID
+        const topURLImage = await topResponse.data.topImageToURL
 
-      // ensure page waits for image to be loaded
-      this.topSongID = await topSongID;
-      this.topURLImage = await topURLImage;
+        // ensure page waits for image to be loaded
+        this.topSongID = await topSongID;
+        this.topURLImage = await topURLImage;
+      }
+      catch (error){
+        console.log('something went wrong fetching top album pics');
+        console.log(error);
+      }
+
+
+
     }
 }
 
