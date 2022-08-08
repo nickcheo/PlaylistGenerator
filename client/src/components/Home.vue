@@ -26,10 +26,11 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
-                <button  class="btn"
+                <button  class="loginbutton palm"
                   @click = "getSpotifyLogin">
                   Connect with Spotify
                 </button>
+                
 
                
 
@@ -158,11 +159,12 @@ li {
 }
 a {
   color: #42b983;
-}
+} 
 
 
 </style>
 <style>
+
       .my-custom-row {
         background-color:beige;
         height: 400px;
@@ -183,6 +185,63 @@ a {
         width: 25px;
         height: auto;
       }
+      .loginbutton{
+      font-size: 20px;
+      border-radius: 12px; 
+      color: white;  
+      box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.2);
+      background: #1DB954;
+      border: none; 
+      }
+      .loginbutton:link,
+.loginbutton:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: absolute;
+}
+      .loginbutton:hover{ 
+        transform: translateY(-3px);
+    box-shadow: -2px 20px 30px rgba(0, 0, 0, 0.2);
+      }
+      .loginbutton:after{
+         content: "";
+         display: inline-block;
+         height: 100%;
+         width: 100%;
+         border-radius: 100px;
+         position: absolute;
+         top: 0;
+         left: 0; 
+         z-index: -1;
+         transition: all .4s;
+      }
+      .loginbutton-white::after {
+    background-color: #fff;
+      }
+      .loginbutton:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+      }
+      .loginbutton-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+}
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
     </style>
 
 
