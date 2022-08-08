@@ -209,14 +209,30 @@ import Api from '../services/Api';
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
 
-      const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
+      // getTopTrackImage(this.access_token);
+       const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
+      console.log(topResponse)
       const topSongID = await topResponse.data.topTracksID
       const topURLImage = await topResponse.data.topImageToURL
 
+      // ensure page waits for image to be loaded
       this.topSongID = await topSongID;
       this.topURLImage = await topURLImage;
     }
 }
+
+
+  async function getTopTrackImage(token)
+  {
+      const topResponse = await Api().post('/gettopcovers', {token: token})
+      console.log(topResponse)
+      const topSongID = await topResponse.data.topTracksID
+      const topURLImage = await topResponse.data.topImageToURL
+
+      // ensure page waits for image to be loaded
+      this.topSongID = await topSongID;
+      this.topURLImage = await topURLImage;
+  }
   
   async function getUsername()
   {
