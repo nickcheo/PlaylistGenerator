@@ -856,6 +856,7 @@ li {
 
 body {
   color: white;
+	overflow-y: auto;
 }
 
 #loading-row {
