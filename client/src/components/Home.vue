@@ -26,9 +26,11 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
-                <button  class="loginbutton"
-                  @click = "getSpotifyLogin">
-                  Connect with Spotify
+                 <button  class="loginbutton"
+                   @click = "getSpotifyLogin">
+                   <img src="../assets/spotifylogo.png" id="icon"/>
+                   Connect with Spotify
+                
                 </button>
                 
 
