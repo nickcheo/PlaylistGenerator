@@ -359,6 +359,8 @@ import Api from '../services/Api';
       font-size: 20px;
       cursor: pointer;
       border-radius: 12px; 
+      box-shadow: -4px 20px 30px rgba(2, 2, 2, 0.2);
+      transition: all 0.2s ease-in-out;
     
       }
       .btn:hover{ 

@@ -26,8 +26,9 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
-                <button  class="loginbutton palm"
+                <button  class="loginbutton"
                   @click = "getSpotifyLogin">
+                   <img src="spotifylogo.png">
                   Connect with Spotify
                 </button>
                 
@@ -188,10 +189,11 @@ a {
       .loginbutton{
       font-size: 20px;
       border-radius: 12px; 
-      color: white;  
+      color: gradient rgb (#ee7752, #e73c7e, #23a6d5, #23d5ab);  
       box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.2);
       background: #1DB954;
       border: none; 
+      transition: all 0.2s ease-in-out;
       }
       .loginbutton:link,
 .loginbutton:visited {
@@ -205,8 +207,9 @@ a {
 }
       .loginbutton:hover{ 
         transform: translateY(-3px);
-    box-shadow: -2px 20px 30px rgba(0, 0, 0, 0.2);
-      }
+        box-shadow: -4px 20px 30px rgba(2, 2, 2, 0.2); 
+
+        }
       .loginbutton:after{
          content: "";
          display: inline-block;
