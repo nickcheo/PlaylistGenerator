@@ -45,7 +45,7 @@ app.post('/gettracks', async (req, res) => {
 
 	res.send(data)
 })
-app.post('/gettopcovers', async(req, res) => {
+app.post('/gettopcovers', async (req, res) => {
 	const token = req.body.token
 	console.log('this that token: ' + token)
 
@@ -55,30 +55,28 @@ app.post('/gettopcovers', async(req, res) => {
 	})
 
 	let response = {}
-	let IDtoImageURL = {}
-	let playlistTracksID = []
+	let ImageURLs = []
+	// let playlistTracksID = []
 	const data = await result.json()
-	
 
 	if (data.tracks != null) {
 		for (let i = 0; i < 50; i++) {
-			playlistTracksID[i] = data.tracks.items[i].track.id
-			IDtoImageURL[playlistTracksID[i]] = data.tracks.items[0].track.album.images[0].url
+			// playlistTracksID[i] = data.tracks.items[i].track.id
+			// IDtoImageURL[playlistTracksID[i]] = data.tracks.items[i].track.album.images[0].url
+			ImageURLs.push(data.tracks.items[i].track.album.images[0].url)
 		}
 	}
 
-	console.log("nick3")
+	console.log('nick3')
 	console.log(data.tracks)
-	console.log(IDtoImageURL)
-	
+	console.log(ImageURLs)
 
-	
+	// remove duplicates
+	uniqueImageURLs = [...new Set(ImageURLs)]
 
-	response['topTracksID'] = playlistTracksID
-	response['topImageToURL'] = IDtoImageURL
+	// response['topTracksID'] = playlistTracksID
+	response['ImageURLs'] = uniqueImageURLs
 	res.send(JSON.stringify(response))
-
-	
 })
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
@@ -91,9 +89,8 @@ app.post('/getclusters', async (req, res) => {
 	})
 
 	const data = await result.json()
-	console.log("Hello Kathir");
+	console.log('Hello Kathir')
 	// console.log(data.items[0].album.images[0].url);
-	
 
 	let IDtoImageURL = {}
 	let userTopTrackIdList = []
@@ -229,8 +226,6 @@ function generateRandomString(n) {
 
 	return str
 }
-
-
 
 // app.get('/next', async (req, res) =>
 // {

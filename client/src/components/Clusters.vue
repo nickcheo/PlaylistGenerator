@@ -843,15 +843,15 @@ li {
 }
 
 #second-img {
-  animation-delay: 1s;
+  animation-delay: -1s;
 }
 
 #third-img {
-  animation-delay: 2s;
+  animation-delay: -2s;
 }
 
 #fourth-img {
-  animation-delay: 3s;
+  animation-delay: -3s;
 }
 
 body {
