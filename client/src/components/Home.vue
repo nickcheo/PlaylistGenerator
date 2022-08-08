@@ -26,10 +26,9 @@
                   Find me fresh music
                 <img src="../assets/rightarrow.png" id="icon"/>
                 </button> -->
-                <button  class="loginbutton"
-                <img src="../assets/spotifylogo.png">
-                  @click = "getSpotifyLogin">
+                <button  class="loginbutton" @click = "getSpotifyLogin">
                   Connect with Spotify
+                  <img src="../assets/spotify-icon-2.png" id="icon"/>
                 </button>
                 
 
@@ -194,6 +193,7 @@ a {
       background: #1DB954;
       border: none; 
       transition: all 0.2s ease-in-out;
+      padding: 5px 10px;
       }
       .loginbutton:link,
 .loginbutton:visited {
