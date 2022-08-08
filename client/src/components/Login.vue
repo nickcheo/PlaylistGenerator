@@ -23,7 +23,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
-              <h2 class="display-1"><strong >Hello there{{username}}</strong></h2>
+              <h2 class="display-1"><strong >Hello there{{username}}.</strong></h2>
                 <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
                 <br>
                 <!-- <div id = 'spin-box'>

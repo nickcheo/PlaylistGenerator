@@ -23,7 +23,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
-              <h2 class="display-1"><strong>Hello there{{username}}</strong></h2>
+              <h2 class="display-1"><strong>Hello there{{username}}.</strong></h2>
                 <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
                 <br>
                 <div class="spinner-border" role="status">
@@ -613,7 +613,6 @@ li {
 .cluster-result {
   transition: opacity 500ms;
   transition: height 0.25s;
-  height: 200px;
   position: relative;
 }
 
@@ -622,8 +621,6 @@ li {
 }
 
 .cluster-result:hover .img-container img{
-    height: auto;
-    width: 265px;
     box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
 } 
 
@@ -649,12 +646,175 @@ li {
 .img-container img {
   border: 5px white solid;
   border-radius: 15px; 
-  height: auto;
-  width: 235px;
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;
-  animation: float 6s ease-in-out infinite;
+
+}
+
+.progress {
+  height: 100px; 
+  width:100%;
+  border-radius: 15px;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  margin-top: 20px;
+
+}
+
+.progress-bar {
+    -webkit-transition: width 2.5s ease;
+    transition: width 2.5s ease;
+    
+}
+
+.progress-value {
+  font-size: 18px;
+}
+
+
+@media (min-width: 768px) {
+  .img-container img {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  #third-img {
+    position: relative;
+    left: 100px;
+  }
+
+  #first-img {
+    position: relative;
+    left: 100px;
+  }
+
+  .cluster-result {
+    height: 200px;
+  }
+
+}
+
+@media (min-width: 1200px) {
+
+  .img-container img {
+    height: auto;
+    width: 235px;
+  }
+
+  .cluster-result:hover .img-container img{
+    height: auto;
+    width: 265px;
+  }
+
+
+}
+
+@media (max-width: 1199px) {
+
+  .img-container {
+    float: left;
+  }
+
+  .img-container img {
+    height: auto;
+    width: 215px;
+  }
+
+  #second-img {
+    position: relative;
+    left: 45px;
+  }
+
+  #fourth-img {
+    position: relative;
+    left: 45px;
+  }
+
+    #third-img {
+    position: relative;
+    left: 130px;
+  }
+
+  #first-img {
+    position: relative;
+    left: 130px;
+  }
+
+  .cluster-result:hover .img-container img{
+    height: auto;
+    width: 235px;
+  }
+
+  .progress {
+    height: 90px; 
+  }
+}
+
+@media (max-width: 991px) {
+
+  .img-container img {
+    height: auto;
+    width: 200px;
+  }
+
+  .cluster-result:hover .img-container img{
+    height: auto;
+    width: 220px;
+  }
+
+  .img-container {
+    float: left;
+  }
+
+  .img-container img {
+    height: auto;
+    width: 190px;
+  }
+
+  .cluster-result:hover .img-container img{
+    height: auto;
+    width: 210px;
+  }
+
+  .progress {
+    height: 80px; 
+  }
+}
+
+@media (max-width: 767px) {
+  .img-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+
+  /* .cluster-result {
+    height: 460px;
+  } */
+
+  #second-img {
+    position: relative;
+    left: 0px;
+  }
+
+  #fourth-img {
+    position: relative;
+    left: 0px;
+  }
+
+    #third-img {
+    position: relative;
+    left: 0px;
+  }
+
+  #first-img {
+    position: relative;
+    left: 0px;
+  }
+
 
 }
 
@@ -678,13 +838,8 @@ li {
 
 .img-container {
   transition: all 0.25s;
-  transform-origin: 50% 50%;
+  /* transform-origin: 50% 50%; */
   perspective: 500px;
-}
-
-#first-img {
-  position: relative;
-  left: 100px;
 }
 
 #second-img {
@@ -692,55 +847,12 @@ li {
 }
 
 #third-img {
-  position: relative;
-  left: 100px;
   animation-delay: 2s;
 }
 
 #fourth-img {
   animation-delay: 3s;
 }
-
-
-/* .img-container img:hover {
-  height: auto;
-  width: 55%;
-  box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4)
-}
-
-.img-container img:not(:hover) {
-  box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4)
-} */
-
-.progress {
-  height: 100px; 
-  width:100%;
-  border-radius: 15px;
-  transition: box-shadow 0.1s ease-in-out;
-  transition: transform 0.1s ease-in-out;
-  margin-top: 20px;
-
-}
-
-.progress-bar {
-    -webkit-transition: width 2.5s ease;
-    transition: width 2.5s ease;
-    
-}
-
-.progress-value {
-  font-size: 18px;
-}
-
-/* .progress:hover {
-  box-shadow: -2px 6px 8px rgba(59, 50, 50, 0.4);
-	transform: scale(1.05) perspective(1px);
-
-}
-
-.progress:not(:hover) {
-  box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4)
-} */
 
 body {
   color: white;
