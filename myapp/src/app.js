@@ -230,6 +230,8 @@ function generateRandomString(n) {
 	return str
 }
 
+
+
 // app.get('/next', async (req, res) =>
 // {
 // 	const authCode = handleLoginRedirect(req);

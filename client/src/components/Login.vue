@@ -20,6 +20,8 @@
   
   
       <div class="hero">
+       <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
+      <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-20 text-center">
@@ -45,8 +47,14 @@
           </div>
         </div>
       </div>
-      <div>
-      <img :src="this.topURLImage[this.topSongID[0]]"/>
+
+
+  
+
+  <div>
+      <p>{{this.topURLImage[this.topSongID[0]]}}</p>
+      <img :src="this.topURLImage[this.topSongID[0]]" alt="bg image"/>
+      
       </div>
 
   
@@ -59,9 +67,10 @@
 
 
 <script>
-  import { onBeforeMount } from 'vue';
+  import Vue, { onBeforeMount, ref } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
+
 
   export default {
     name: 'Login',
@@ -72,9 +81,17 @@ import Api from '../services/Api';
         username: getCookie('username') != "" ? (', ' + getCookie('username'))  : '',
         topSongID: "",
         topURLImage: "",
-
+        // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
       }
     },
+    // name: "App",
+    // data() {
+    //   return {
+    //     // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
+    //   }
+    // },
+
+
     methods:
     {
       getAccessToken: async () => {
@@ -166,6 +183,11 @@ import Api from '../services/Api';
               setCookie("access_token", data.access_token, 1)
 
         }
+      },
+
+      changeImage: async () => {
+        console.log("attempting to change image");
+
       }
     },
     async mounted(){
@@ -377,7 +399,7 @@ body {
         height: 400px;
       }
       .hero {
-        /* background: white; */
+        background-image: v-bind(background-image);
         width: 100%;
         height: 70vh;
         display: flex;
@@ -392,6 +414,10 @@ body {
         border-radius: 100%;
         width: 25px;
         height: auto;
+      }
+
+      .myDiv {
+        height:100px;
       }
     </style>
 
