@@ -56,6 +56,7 @@ app.post('/gettopcovers', async (req, res) => {
 
 	let response = {}
 	let ImageURLs = []
+	let ArtistURLs = []
 	// let playlistTracksID = []
 	const data = await result.json()
 
@@ -67,9 +68,9 @@ app.post('/gettopcovers', async (req, res) => {
 		}
 	}
 
-	console.log('nick3')
-	console.log(data.tracks)
-	console.log(ImageURLs)
+	console.log('nick4')
+	console.log(data.tracks.items[0].track.album.images)
+	// console.log(ImageURLs)
 
 	// remove duplicates
 	uniqueImageURLs = [...new Set(ImageURLs)]
