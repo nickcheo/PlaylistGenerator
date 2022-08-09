@@ -30,7 +30,31 @@ app.post('/test', (req, res) => {
 		message: `This is a test message: ${req.body.test}` + req.body.test,
 	})
 })
+app.post('/getprofile', async (req, res) => {
+	const token = req.body.token
+	console.log('get profile token is ' + token)
 
+	const result = await fetch('https://api.spotify.com/v1/me', {
+		method: 'GET',
+		headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	let response = {}
+	let profileURLs = []
+
+	
+
+	const data = await result.json()
+
+	res.send(data)
+
+	console.log('nick6')
+	console.log(data.images[0].url)
+
+	response['pfp'] = profileURLs
+
+	res.send(JSON.stringify(response))
+})
 app.post('/gettracks', async (req, res) => {
 	const token = req.body.token
 	// incoming access token
