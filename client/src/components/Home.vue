@@ -12,15 +12,15 @@
   
 
  <div id="login-container">
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <div class="row main-row justify-content-between align-items-center">
         <div class="col-sm">
-            <img :src="../assets/jack.jpg" alt="bg image" class="album-covers" id="first-img"/>
+            <img src="../assets/harlow2.jpg" alt="bg image" class="album-covers" id="first-img"/>
         </div>
         <div class="col-sm">
-            <img :src="../assets/taylor_swift.jpg" alt="bg image" class="album-covers" id="second-img"/>
+            <img src="../assets/taylor_swift.jpg" alt="bg image" class="album-covers" id="second-img"/>
         </div>
         <div class="col-sm">
-            <img :src="../assets/weeknd.jpg" alt="bg image" class="album-covers" id="third-img"/>
+            <img src="../assets/weeknd.jpg" alt="bg image" class="album-covers" id="third-img"/>
         </div>
       </div>
 
@@ -54,15 +54,16 @@
             </div>
       </div>
 
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+
+      <div class="row main-row justify-content-between align-items-center">
         <div class="col-sm">
-            <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
+            <img src="../assets/drake.jpg" alt="bg image" class="album-covers" id="fourth-img"/>
         </div>
         <div class="col-sm">
-            <img :src="this.topURLImages[4]" alt="bg image" class="album-covers" id="fifth-img"/>
+            <img src="../assets/grande.jpg" alt="bg image" class="album-covers" id="fifth-img"/>
         </div>
         <div class="col-sm">
-            <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
+            <img src="../assets/gunna.jpg" alt="bg image" class="album-covers" id="sixth-img"/>
         </div>
       </div>
     </div>
