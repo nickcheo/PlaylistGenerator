@@ -16,7 +16,15 @@
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
-
+<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg" v-if="dataHasLoaded"><div class="container"><div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a><button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button></div><div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false"><div class="navbar-collapse-header"><div class="row"><div class="collapse-brand col-6"><a href="#pablo"><div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div></a></div><div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div></div></div><ul class="navbar-nav">
+<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div></li>
+<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div></li>
+<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/dashboard">Contact</a></div></li><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><li class="nav-item"><button  class="loginbutton2" >
+                  
+                  <img src="../assets/spotify-icon-2.png" id="icon"/>
+                </button></li></div></ul></div></div></nav>
+<br>
+<br><br>
 
     <div id="login-container">
       <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
@@ -30,6 +38,7 @@
             <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
       </div>
+      
 
       <div class="row main-row align-items-center">
         <div class="container">
