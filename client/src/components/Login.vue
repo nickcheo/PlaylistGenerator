@@ -269,7 +269,6 @@ import Api from '../services/Api';
           shuffledImages = shuffledImages.concat(currentImages);
           
           this.topURLImages = shuffledImages;
-          console.log(this.topURLImages)
         }, 10000);
       }
       catch (error){

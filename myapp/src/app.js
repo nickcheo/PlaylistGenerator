@@ -93,14 +93,14 @@ app.post('/gettopartists', async (req, res) => {
 
 	if (playlistData.tracks != null) {
 		for (let i = 0; i < 50; i++) {
-			artistsIDs.push(playlistData.tracks.items[i].track.artists[0].id)
+			let artistID = playlistData.tracks.items[i].track.artists[0].id
+			if (!artistsIDs.includes(artistID)) {
+				artistsIDs.push(artistID)
+			}
 		}
 	}
 
-	// remove duplicates
-	uniqueArtistsIDs = [...new Set(artistsIDs)]
-
-	const artistsResult = await fetch(`https://api.spotify.com/v1/artists?ids=${uniqueArtistsIDs.join(',')}`, {
+	const artistsResult = await fetch(`https://api.spotify.com/v1/artists?ids=${artistsIDs.join(',')}`, {
 		method: 'GET',
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
