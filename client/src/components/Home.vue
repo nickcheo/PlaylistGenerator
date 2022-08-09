@@ -14,13 +14,13 @@
  <div id="login-container">
       <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
-            <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
+            <img :src="../assets/jack.jpg" alt="bg image" class="album-covers" id="first-img"/>
         </div>
         <div class="col-sm">
-            <img :src="this.topURLImages[1]" alt="bg image" class="album-covers" id="second-img"/>
+            <img :src="../assets/taylor_swift.jpg" alt="bg image" class="album-covers" id="second-img"/>
         </div>
         <div class="col-sm">
-            <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
+            <img :src="../assets/weeknd.jpg" alt="bg image" class="album-covers" id="third-img"/>
         </div>
       </div>
 
@@ -198,6 +198,16 @@ a {
 #display1 {
   font-size: 5rem;
   line-height: 1.2;
+}
+.album-covers {
+  border: 5px white solid;
+  border-radius: 15px; 
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 500ms;
+  transition: width 250ms ease-in-out;
+  animation: float 6s ease infinite;
+
+
 }
 
 
