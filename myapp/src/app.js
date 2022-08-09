@@ -45,6 +45,7 @@ app.post('/gettracks', async (req, res) => {
 
 	res.send(data)
 })
+
 app.post('/gettopcovers', async (req, res) => {
 	const token = req.body.token
 	console.log('this that token: ' + token)
@@ -56,29 +57,67 @@ app.post('/gettopcovers', async (req, res) => {
 
 	let response = {}
 	let ImageURLs = []
-	let ArtistURLs = []
-	// let playlistTracksID = []
+
 	const data = await result.json()
 
 	if (data.tracks != null) {
 		for (let i = 0; i < 50; i++) {
-			// playlistTracksID[i] = data.tracks.items[i].track.id
-			// IDtoImageURL[playlistTracksID[i]] = data.tracks.items[i].track.album.images[0].url
 			ImageURLs.push(data.tracks.items[i].track.album.images[0].url)
 		}
 	}
 
 	console.log('nick4')
 	console.log(data.tracks.items[0].track.album.images)
-	// console.log(ImageURLs)
 
 	// remove duplicates
 	uniqueImageURLs = [...new Set(ImageURLs)]
 
-	// response['topTracksID'] = playlistTracksID
 	response['ImageURLs'] = uniqueImageURLs
 	res.send(JSON.stringify(response))
 })
+
+app.post('/gettopartists', async (req, res) => {
+	const token = req.body.token
+	console.log('this that token: ' + token)
+
+	const playlistResult = await fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp?si=d2de65961e964ab2/', {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	let response = {}
+	let ImageURLs = []
+	let artistsIDs = []
+
+	const playlistData = await playlistResult.json()
+
+	if (playlistData.tracks != null) {
+		for (let i = 0; i < 50; i++) {
+			artistsIDs.push(playlistData.tracks.items[i].track.artists[0].id)
+		}
+	}
+
+	// remove duplicates
+	uniqueArtistsIDs = [...new Set(artistsIDs)]
+
+	const artistsResult = await fetch(`https://api.spotify.com/v1/artists?ids=${uniqueArtistsIDs.join(',')}`, {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	const artistsData = await artistsResult.json()
+
+	for (let artist of artistsData.artists) {
+		ImageURLs.push(artist.images[0].url)
+	}
+
+	// remove duplicates
+	uniqueImageURLs = [...new Set(ImageURLs)]
+
+	response['ImageURLs'] = uniqueImageURLs
+	res.send(JSON.stringify(response))
+})
+
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
 
