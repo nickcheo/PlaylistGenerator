@@ -1,47 +1,73 @@
 <template>
-<div class = "">
+
+<body>
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Variefy - a playlist generator for daring music listeners </title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
+      <title>Bootstrap demo</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <!-- Option 1: Include in HTML -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
-
   
 
+ <div id="login-container">
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+        <div class="col-sm">
+            <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[1]" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
+        </div>
+      </div>
 
-<div class="hero">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-20 text-center">
-              <h2 class="display-1"><strong>Variefy</strong></h2>
-                <p class="lead">A playlist generator for daring music listeners.</p>
-                <br>
-                <!-- <div id = 'spin-box'>
-                </div> 
-                <div id = 'check-box'></div> -->
-                
-                <!-- <button  class="btn btn-dark rounded-pill"
-                  @click = "goToClusters">
-                  Find me fresh music
-                <img src="../assets/rightarrow.png" id="icon"/>
-                </button> -->
-                <button  class="loginbutton" @click = "getSpotifyLogin">
+      <div class="row main-row align-items-center">
+        <div class="container">
+              <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
+              <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-lg-20 text-center">
+                      <h2 id="display1"><strong >Variefy</strong></h2>
+                        <p class="lead">A playlist generator for daring music listeners</p>
+                        <br>
+                        <!-- <div id = 'spin-box'>
+                        </div> 
+                        <div id = 'check-box'></div> -->
+                        
+                        <button  class="loginbutton" @click = "getSpotifyLogin">
                   Connect with Spotify
                   <img src="../assets/spotify-icon-2.png" id="icon"/>
                 </button>
-                
 
-               
+                      
 
-          
-                <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
-                  <!--Button-->
+                        
+                        <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
+                          <!--Button-->
+                    </div>
+                  </div>
+                </div>
             </div>
-          </div>
+      </div>
+
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+        <div class="col-sm">
+            <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[4]" alt="bg image" class="album-covers" id="fifth-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
         </div>
       </div>
-  </div>
+    </div>
+    </body>
+
 
 <!--Grid row-->
 </template>
@@ -161,6 +187,20 @@ a {
   color: #42b983;
 } 
 
+#login-container {
+  height: 100%;
+  color: white;
+}
+.main-row {
+  height: 33%;
+}
+
+#display1 {
+  font-size: 5rem;
+  line-height: 1.2;
+}
+
+
 
 </style>
 <style>
@@ -172,6 +212,9 @@ a {
     </style>
 
     <style>
+    body {
+      color: white
+        }
       .hero {
         /* background: white; */
         width: 100%;
@@ -246,6 +289,36 @@ a {
 }
 
     </style>
+
+    <style>
+      .my-custom-row {
+        background-color:beige;
+        height: 400px;
+      }
+      .hero {
+        background-image: v-bind(background-image);
+        width: 100%;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+      }
+
+      #spotify-container {
+        width: 100vw;
+      }
+
+      #icon {
+        border-radius: 100%;
+        width: 25px;
+        height: auto;
+      }
+
+      .myDiv {
+        height:100px;
+      }
+    </style>
+
+
 
 
 
