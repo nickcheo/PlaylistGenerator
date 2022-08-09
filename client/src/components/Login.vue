@@ -50,6 +50,11 @@
                           Find me fresh music
                         <img src="../assets/rightarrow.png" id="icon"/>
                         </button>
+                        <button  class="btn"
+                          @click = "logout">
+                          Logout
+                        <img src="../assets/rightarrow.png" id="icon"/>
+                        </button>
 
                       
 
@@ -165,6 +170,47 @@ import Api from '../services/Api';
         }
         
       },
+
+      logout: async() => {
+        console.log('hello')
+  
+          
+         const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+            const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+
+          const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
+        
+          const result = await fetch(tokenBaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type' : "application/x-www-form-urlencoded",
+            'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+          },
+          });
+        
+          
+
+        console.log('logging out')
+        const data = await result.json()
+        const access_token = data.access_token;
+        const refresh_token = data.refresh_token;
+        
+        
+        setCookie("access_token", data.access_token, 0);
+        setCookie("refresh_token", data.refresh_token, 0);
+        window.location.reload();
+        console.log('hello')
+        console.log(document.cookie);
+
+       
+
+        
+     
+
+        
+        
+      },
+
       goToClusters: async () => {
 
           console.log('going to clusters')
