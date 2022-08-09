@@ -283,21 +283,22 @@ a {
   border-radius: 15px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
-  transition: width 250ms ease-in-out;
+  transition: width 250ms ease-in-out, height 250ms ease-in-out;
   animation: float 6s ease infinite;
+  overflow: hidden;
 
 
 }
 
 .album-covers:hover{
     box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
-    height: auto;
+    height: 275px;
     width: 275px;
 } 
 
 .album-covers:not(:hover){
     box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4);
-    height: auto;
+    height: 250px;
     width: 250px;
 } 
 
