@@ -15,18 +15,71 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+      
     </head>
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg"><div class="container"><div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a><button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button></div><div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false"><div class="navbar-collapse-header"><div class="row"><div class="collapse-brand col-6"><a href="#pablo"><div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div></a></div><div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div></div></div><ul class="navbar-nav">
-<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div></li>
-<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div></li>
-<li class="nav-item"><div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/dashboard">Contact</a></div></li>
-<div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
-  <li class="nav-item">
+
+    
+<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
+  
+  <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
+    <div class="navbar-collapse-header">
+      <div class="row">
+        <div class="collapse-brand col-6">
+          <a href="#pablo">
+            <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
+          </a>
+        </div>
+        <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
+      </div>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+      </li>
+      <li class="nav-item">
+
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+              <button class="loginbutton2" v-else key="off" @click="show = true">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+          <!-- Dropdown Menu -->
+            <div class="dropdown__menu"  v-if="show">
+                <li class="dropdown__menu-item">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
+                </li>
+                <hr>
+                <li class="dropdown__menu-item" @click="logout">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
                   
-                  <div class="profile-pic-div shadow-lg img-fluid" style="background-image: url('https://google.com')"></div>
-                </li></div></ul></div></div></nav>
-<br>
-<br><br>
+                </li>
+            </div>
+  
+
+        
+        
+        
+        
+        </li>
+        </ul>
+  </div>
+  </div>
+  
+</nav>
+
 
     <div id="login-container">
       <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
@@ -61,15 +114,6 @@
                           Find me fresh music
                         <img src="../assets/rightarrow.png" id="icon"/>
                         </button>
-                        <button  class="btn"
-                          @click = "logout">
-                          Logout
-                        <img src="../assets/rightarrow.png" id="icon"/>
-                        </button>
-
-                      
-
-                        
                         <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
                           <!--Button-->
                     </div>
@@ -102,6 +146,8 @@
 
 
 <script>
+
+
   import Vue, { onBeforeMount, ref } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
@@ -116,6 +162,7 @@ import Api from '../services/Api';
         username: getCookie('username') != "" ? (', ' + getCookie('username'))  : '',
         dataHasLoaded: false,
         topURLImages: [],
+        profileStyle: ""
         // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
       }
     },
@@ -129,6 +176,7 @@ import Api from '../services/Api';
 
     methods:
     {
+
       getAccessToken: async () => {
         /* eslint-disable */
         if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
@@ -183,43 +231,10 @@ import Api from '../services/Api';
       },
 
       logout: async() => {
-        console.log('hello')
-  
-          
-         const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-            const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+        setCookie("access_token", "", 0);
+        setCookie("refresh_token", "", 0);
 
-          const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
-        
-          const result = await fetch(tokenBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type' : "application/x-www-form-urlencoded",
-            'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
-          },
-          });
-        
-          
-
-        console.log('logging out')
-        const data = await result.json()
-        const access_token = data.access_token;
-        const refresh_token = data.refresh_token;
-        
-        
-        setCookie("access_token", data.access_token, 0);
-        setCookie("refresh_token", data.refresh_token, 0);
         window.location.reload();
-        console.log('hello')
-        console.log(document.cookie);
-
-       
-
-        
-     
-
-        
-        
       },
 
       goToClusters: async () => {
@@ -334,9 +349,10 @@ import Api from '../services/Api';
       }
 
       try {
-        const profile = await Api().post('/getprofile', {token: this.access_token})
-        console.log(profile)
-        const pfp = await profile.data.pfp
+        const response = await Api().post('/getprofile', {token: this.access_token})
+        const pfp = await response.data.pfp;
+
+        this.profileStyle = "background-image: url('" + pfp + "');";
       }
       catch (error) {
         console.log('something went wrong fetching profile picture');
@@ -504,6 +520,24 @@ a, button {
 body {
   color: white;
 
+}
+
+#profile-pic {
+  /* display: inline-block; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: white;
+  text-shadow: -1px 1px 8px white;
 }
 
 #login-container {
