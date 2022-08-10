@@ -15,10 +15,17 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+      
     </head>
 
     
 <nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
   
   <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
     <div class="navbar-collapse-header">
@@ -41,11 +48,34 @@
       <li class="nav-item">
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
       </li>
-      <li class="nav-item"  @click="logout">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Log Out</a></div>
-      </li>
-      <li class="nav-item"><img id="profile-pic" :style="this.profileStyle"></li>
-    </ul>
+      <li class="nav-item">
+
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+              <button class="loginbutton2" v-else key="off" @click="show = true">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+          <!-- Dropdown Menu -->
+            <div class="dropdown__menu"  v-if="show">
+                <li class="dropdown__menu-item">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
+                </li>
+                <hr>
+                <li class="dropdown__menu-item" @click="logout">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
+                  
+                </li>
+            </div>
+  
+
+        
+        
+        
+        
+        </li>
+        </ul>
+  </div>
   </div>
   
 </nav>
@@ -116,6 +146,8 @@
 
 
 <script>
+
+
   import Vue, { onBeforeMount, ref } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
@@ -144,6 +176,7 @@ import Api from '../services/Api';
 
     methods:
     {
+
       getAccessToken: async () => {
         /* eslint-disable */
         if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined

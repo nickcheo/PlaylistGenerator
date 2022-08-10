@@ -18,7 +18,12 @@
     </head>
   
 <nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg" v-if="dataHasLoaded">
-  
+  <div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
   <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
     <div class="navbar-collapse-header">
       <div class="row">
@@ -40,14 +45,38 @@
       <li class="nav-item">
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
       </li>
-      <li class="nav-item"  @click="logout">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Log Out</a></div>
-      </li>
-      <li class="nav-item"><img id="profile-pic" :style="this.profileStyle"></li>
+     <li class="nav-item">
+
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+              <button class="loginbutton2" v-else key="off" @click="show = true">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+          <!-- Dropdown Menu -->
+            <div class="dropdown__menu"  v-if="show">
+                <li class="dropdown__menu-item">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
+                </li>
+                <hr>
+                <li class="dropdown__menu-item" @click="logout">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
+                  
+                </li>
+            </div>
+  
+
+        
+        
+        
+        
+        </li>
     </ul>
+  </div>
   </div>
   
 </nav>
+
 
       <div class="hero" id="loading-row" v-if="!dataHasLoaded">
         <div class="container-fluid">

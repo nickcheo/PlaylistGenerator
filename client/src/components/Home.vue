@@ -11,6 +11,12 @@
     </head>
   
 <nav class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
 
   <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
     <div class="navbar-collapse-header">
@@ -33,7 +39,15 @@
       <li class="nav-item">
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
       </li>
+      <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+    <li class="nav-item">
+    <button  class="loginbutton2" @click="getSpotifyLogin" >
+
+                  <img src="../assets/spotify-icon-2.png" id="icon"/>
+                </button></li></div> 
+             
     </ul>
+  </div>
   </div>
 </nav>
 
