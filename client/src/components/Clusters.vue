@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg" v-if="dataHasLoaded">
+<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
   <div class="container">
 <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
 <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
