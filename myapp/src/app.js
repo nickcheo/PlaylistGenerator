@@ -55,6 +55,28 @@ app.post('/getprofile', async (req, res) => {
 	res.send(JSON.stringify(response))
 })
 
+app.post('/createplaylist', async (req, res) => {
+	const token = req.body.token
+	// incoming access token
+	console.log('create playlist token is ' + token)
+
+	const result = await fetch('https://api.spotify.com/v1/users/user_id/playlists', {
+		method: 'POST',
+		headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' }, 
+		data: {name: "New Playlist", description:"Test Description", public:true}, 
+	})
+	
+
+	const data = await result.json()
+	
+	let response = {}
+
+	res.send(data)
+
+
+
+})
+
 app.post('/gettracks', async (req, res) => {
 	const token = req.body.token
 	// incoming access token
