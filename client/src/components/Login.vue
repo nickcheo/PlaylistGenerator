@@ -15,6 +15,8 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+      
       
     </head>
 
@@ -49,15 +51,10 @@
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
       </li>
       <li class="nav-item">
-
-              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
-              <img id="profile-pic" :style="this.profileStyle"/>
-              </button>
-              <button class="loginbutton2" v-else key="off" @click="show = true">
-              <img id="profile-pic" :style="this.profileStyle"/>
-              </button>
+      <div class="dropdown"> <button class="btn-primary dropdown-toggle" data-toggle="dropdown" aria-pressed="false" autocomplete="off"><img id="profile-pic" :style="this.profileStyle"/></button>
+             
           <!-- Dropdown Menu -->
-            <div class="dropdown__menu"  v-if="show">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown__menu-item">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
                 </li>
@@ -67,15 +64,12 @@
                   
                 </li>
             </div>
-  
-
-        
-        
-        
-        
-        </li>
-        </ul>
+       </div>
+       </li>
+       </ul>
+      
   </div>
+  
   </div>
   
 </nav>
@@ -148,6 +142,8 @@
 <script>
 
 
+
+
   import Vue, { onBeforeMount, ref } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
@@ -176,7 +172,8 @@ import Api from '../services/Api';
 
     methods:
     {
-
+   
+    
       getAccessToken: async () => {
         /* eslint-disable */
         if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
@@ -610,6 +607,7 @@ body {
 }
 </style>
 <style>
+      
       .my-custom-row {
         background-color:beige;
         height: 400px;
