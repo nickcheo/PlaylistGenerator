@@ -1,56 +1,134 @@
 <template>
-<div class = "">
+
+<body>
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Variefy - a playlist generator for daring music listeners </title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
+      <title>Bootstrap demo</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <!-- Option 1: Include in HTML -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
-
   
+<nav class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
+
+  <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
+    <div class="navbar-collapse-header">
+      <div class="row">
+        <div class="collapse-brand col-6">
+          <a href="#pablo">
+            <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
+          </a>
+        </div>
+        <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
+      </div>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+      </li>
+      <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+    <li class="nav-item">
+    <button  class="loginbutton2" @click="getSpotifyLogin" >
+
+                  <img src="../assets/spotify-icon-2.png" id="icon"/>
+                </button></li></div> 
+             
+    </ul>
+  </div>
+  </div>
+</nav>
 
 
-<div class="hero">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-20 text-center">
-              <h2 class="display-1"><strong>Variefy</strong></h2>
-                <p class="lead">A playlist generator for daring music listeners.</p>
-                <br>
-                <!-- <div id = 'spin-box'>
-                </div> 
-                <div id = 'check-box'></div> -->
-                
-                <!-- <button  class="btn btn-dark rounded-pill"
-                  @click = "goToClusters">
-                  Find me fresh music
-                <img src="../assets/rightarrow.png" id="icon"/>
-                </button> -->
-                <button  class="btn"
-                  @click = "getSpotifyLogin">
-                  Connect with Spotify
-                </button>
 
-               
-
-          
-                <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
-                  <!--Button-->
-            </div>
-          </div>
+ <div id="login-container">
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+        <div class="col-sm">
+            <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[1]" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
       </div>
-  </div>
+
+      <div class="row main-row align-items-center">
+        <div class="container">
+              <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
+              <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-lg-20 text-center">
+                      <h2 id="display1"><strong >Variefy</strong></h2>
+                        <p class="lead">A playlist generator for daring music listeners</p>
+                        <br>
+                        <!-- <div id = 'spin-box'>
+                        </div> 
+                        <div id = 'check-box'></div> -->
+                        
+                        <button  class="loginbutton" @click = "getSpotifyLogin">
+                  Connect with Spotify
+                  <img src="../assets/spotify-icon-2.png" id="icon"/>
+                </button>
+
+                      
+
+                        
+                        <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
+                          <!--Button-->
+                    </div>
+                  </div>
+                </div>
+            </div>
+      </div>
+
+
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+        <div class="col-sm">
+            <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[4]" alt="bg image" class="album-covers" id="fifth-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
+        </div>
+      </div>
+    </div>
+    </body>
+
 
 <!--Grid row-->
 </template>
 
 <script>
+
+import router from '../router';
+import Api from '../services/Api';
+
+
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      access_token: "",
+      dataHasLoaded: false,
+      topURLImages: [],
     }
   },
   methods: {
@@ -99,17 +177,85 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
       /* eslint-disable */
       // directs to /next route in router after access token is registered
       // enough information to either query songs or refresh the access token upon login
       if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
+      } else {
+          const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+          const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+          const querystring = require('querystring')
+          
+          const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
+        
+          const result = await fetch(tokenBaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type' : "application/x-www-form-urlencoded",
+            'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+          },
+          body: querystring.stringify({
+            grant_type: "client_credentials"
+            })
+          });
+
+
+          const data = await result.json();
+          this.access_token = data.access_token;
+
+          try {
+            const topResponse = await Api().post('/gettopartists', {token: this.access_token})
+            console.log(topResponse)
+            // const topSongID = await topResponse.data.topTracksID
+            const topURLImages = await topResponse.data.ImageURLs
+
+            // ensure page waits for image to be loaded
+            // this.topSongID = await topSongID;
+            this.topURLImages = await shuffle(topURLImages);
+
+            this.dataHasLoaded = true;
+
+            setInterval(() => {
+              let currentImages = this.topURLImages.slice(0, 6);
+              let shuffledImages = shuffle(this.topURLImages.slice(6));
+              shuffledImages = shuffledImages.concat(currentImages);
+              
+              this.topURLImages = shuffledImages;
+            }, 10000);
+          }
+          catch (error){
+            console.log('something went wrong fetching top album pics');
+            console.log(error);
+          }
+          
+
       }
   }
     
 }
+
+function shuffle(array) {
+  let new_array = array.slice()
+  let currentIndex = new_array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [new_array[currentIndex], new_array[randomIndex]] = [
+      new_array[randomIndex], new_array[currentIndex]];
+  }
+
+  return new_array;
+}
+
 
 
 
@@ -158,11 +304,100 @@ li {
 }
 a {
   color: #42b983;
+} 
+
+#login-container {
+  height: 100%;
+  color: white;
+}
+.main-row {
+  height: 33%;
+}
+
+#display1 {
+  font-size: 5rem;
+  line-height: 1.2;
+}
+
+
+.album-covers {
+  border: 5px white solid;
+  border-radius: 15px; 
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 500ms;
+  transition: width 250ms ease-in-out, height 250ms ease-in-out;
+  animation: float 6s ease infinite;
+  overflow: hidden;
+
+
+}
+
+.album-covers:hover{
+    box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
+    height: 275px;
+    width: 275px;
+} 
+
+.album-covers:not(:hover){
+    box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4);
+    height: 250px;
+    width: 250px;
+} 
+
+@keyframes float {
+	0% {
+		transform: translate(0px, 0px) rotate(0deg);
+    box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4);
+	}
+
+  50% {
+    transform: translate(10px, -10px);
+    box-shadow: -4px 8px 8px rgba(59, 50, 50, 0.4);
+
+  }
+	100% {
+    transform: translate(0px, 0px) rotate(0deg);
+    box-shadow: -2px 4px 4px rgba(59, 50, 50, 0.4);
+
+	}
+}
+
+#second-img {
+  animation-delay: -1s;
+}
+
+#third-img {
+  animation-delay: -2s;
+}
+
+#fourth-img {
+  animation-delay: -3s;
+}
+
+#fifth-img {
+  animation-delay: -4s;
+}
+
+#sixth-img {
+  animation-delay: -5s;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.nav-link:hover {
+  color: white !important;
+  text-shadow: -1px 1px 8px white;
 }
 
 
 </style>
 <style>
+
+#smallButton {
+  background-color: #1DB954;
+}
       .my-custom-row {
         background-color:beige;
         height: 400px;
@@ -170,6 +405,10 @@ a {
     </style>
 
     <style>
+
+    body {
+      color: white
+        }
       .hero {
         /* background: white; */
         width: 100%;
@@ -183,7 +422,108 @@ a {
         width: 25px;
         height: auto;
       }
+      .loginbutton{
+      font-size: 20px;
+      border-radius: 12px; 
+      color: gradient rgb (#ee7752, #e73c7e, #23a6d5, #23d5ab);  
+      box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.2);
+      background: #1DB954;
+      border: none; 
+      transition: all 0.2s ease-in-out;
+      padding: 5px 10px;
+      }
+      .loginbutton2 {
+        font-size: 0px;
+      border-radius: 100%; 
+      color: gradient rgb (#ee7752, #e73c7e, #23a6d5, #23d5ab);  
+      box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.2);
+      background: transparent;
+      border: none; 
+      transition: all 0.2s ease-in-out;
+      padding: 0px 0px;
+      
+      }
+      .loginbutton:link,
+.loginbutton:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: absolute;
+}
+      .loginbutton:hover{ 
+        transform: translateY(-3px);
+        box-shadow: -4px 20px 30px rgba(2, 2, 2, 0.2); 
+
+        }
+      .loginbutton:after{
+         content: "";
+         display: inline-block;
+         height: 100%;
+         width: 100%;
+         border-radius: 100px;
+         position: absolute;
+         top: 0;
+         left: 0; 
+         z-index: -1;
+         transition: all .4s;
+      }
+      .loginbutton-white::after {
+    background-color: #fff;
+      }
+      .loginbutton:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+      }
+      .loginbutton-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+}
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
     </style>
+
+    <style>
+      .my-custom-row {
+        background-color:beige;
+        height: 400px;
+      }
+      .hero {
+        background-image: v-bind(background-image);
+        width: 100%;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+      }
+
+      #spotify-container {
+        width: 100vw;
+      }
+
+      #icon {
+        border-radius: 100%;
+        width: 25px;
+        height: auto;
+      }
+
+      .myDiv {
+        height:100px;
+      }
+    </style>
+
+
 
 
 

@@ -31,6 +31,30 @@ app.post('/test', (req, res) => {
 	})
 })
 
+app.post('/getprofile', async (req, res) => {
+	const token = req.body.token
+	console.log('get profile token is ' + token)
+
+	const result = await fetch('https://api.spotify.com/v1/me', {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	let response = {}
+	let profileURL = ''
+
+	const data = await result.json()
+
+	console.log('nick6')
+	console.log(data.images[0].url)
+
+	profileURL = data.images[0].url
+
+	response['pfp'] = profileURL
+
+	res.send(JSON.stringify(response))
+})
+
 app.post('/gettracks', async (req, res) => {
 	const token = req.body.token
 	// incoming access token
@@ -45,7 +69,8 @@ app.post('/gettracks', async (req, res) => {
 
 	res.send(data)
 })
-app.post('/gettopcovers', async(req, res) => {
+
+app.post('/gettopcovers', async (req, res) => {
 	const token = req.body.token
 	console.log('this that token: ' + token)
 
@@ -55,31 +80,68 @@ app.post('/gettopcovers', async(req, res) => {
 	})
 
 	let response = {}
-	let IDtoImageURL = {}
-	let playlistTracksID = []
+	let ImageURLs = []
+
 	const data = await result.json()
-	
 
 	if (data.tracks != null) {
 		for (let i = 0; i < 50; i++) {
-			playlistTracksID[i] = data.tracks.items[i].track.id
-			IDtoImageURL[playlistTracksID[i]] = data.tracks.items[0].track.album.images[0].url
+			ImageURLs.push(data.tracks.items[i].track.album.images[0].url)
 		}
 	}
 
-	console.log("nick3")
-	console.log(data.tracks)
-	console.log(IDtoImageURL)
-	
+	console.log('nick4')
+	console.log(data.tracks.items[0].track.album.images)
 
-	
+	// remove duplicates
+	uniqueImageURLs = [...new Set(ImageURLs)]
 
-	response['topTracksID'] = playlistTracksID
-	response['topImageToURL'] = IDtoImageURL
+	response['ImageURLs'] = uniqueImageURLs
 	res.send(JSON.stringify(response))
-
-	
 })
+
+app.post('/gettopartists', async (req, res) => {
+	const token = req.body.token
+	console.log('this that token: ' + token)
+
+	const playlistResult = await fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp?si=d2de65961e964ab2/', {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	let response = {}
+	let ImageURLs = []
+	let artistsIDs = []
+
+	const playlistData = await playlistResult.json()
+
+	if (playlistData.tracks != null) {
+		for (let i = 0; i < 50; i++) {
+			let artistID = playlistData.tracks.items[i].track.artists[0].id
+			if (!artistsIDs.includes(artistID)) {
+				artistsIDs.push(artistID)
+			}
+		}
+	}
+
+	const artistsResult = await fetch(`https://api.spotify.com/v1/artists?ids=${artistsIDs.join(',')}`, {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+	const artistsData = await artistsResult.json()
+
+	for (let artist of artistsData.artists) {
+		ImageURLs.push(artist.images[0].url)
+	}
+
+	// remove duplicates
+	uniqueImageURLs = [...new Set(ImageURLs)]
+
+	response['ImageURLs'] = uniqueImageURLs
+	res.send(JSON.stringify(response))
+})
+
 app.post('/getclusters', async (req, res) => {
 	const token = req.body.token
 
@@ -91,9 +153,8 @@ app.post('/getclusters', async (req, res) => {
 	})
 
 	const data = await result.json()
-	console.log("Hello Kathir");
+	console.log('Hello Kathir')
 	// console.log(data.items[0].album.images[0].url);
-	
 
 	let IDtoImageURL = {}
 	let userTopTrackIdList = []

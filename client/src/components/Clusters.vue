@@ -17,8 +17,67 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
+<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+  <div class="container">
+<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+</button>
+</div>
+  <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
+    <div class="navbar-collapse-header">
+      <div class="row">
+        <div class="collapse-brand col-6">
+          <a href="#pablo">
+            <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
+          </a>
+        </div>
+        <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
+      </div>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
+      </li>
+      <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+      </li>
+     <li class="nav-item">
 
-    
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+              <button class="loginbutton2" v-else key="off" @click="show = true">
+              <img id="profile-pic" :style="this.profileStyle"/>
+              </button>
+          <!-- Dropdown Menu -->
+            <div class="dropdown__menu"  v-if="show">
+                <li class="dropdown__menu-item">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
+                </li>
+                <hr>
+                <li class="dropdown__menu-item" @click="logout">
+                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
+                  
+                </li>
+            </div>
+  
+
+        
+        
+        
+        
+        </li>
+    </ul>
+  </div>
+  </div>
+  
+</nav>
+
+
       <div class="hero" id="loading-row" v-if="!dataHasLoaded">
         <div class="container-fluid">
           <div class="row">
@@ -346,7 +405,8 @@ import Api from '../services/Api';
         clustersBestTwoSongIds: null,
         albumStyles: "opacity: 0%;",
         clusterRowStyles: "opacity: 0%;",
-        titleRowStyles: "opacity: 0%;"
+        titleRowStyles: "opacity: 0%;",
+        profileStyle: ""
       }
     },
     methods:
@@ -402,6 +462,7 @@ import Api from '../services/Api';
         }
         
       },
+<<<<<<< HEAD
          goToRecommend: async () => {
 
            window.location.href = "http://localhost:8080/recommend?test=pizza";
@@ -417,105 +478,126 @@ import Api from '../services/Api';
       {
         refreshToken();
         this.access_token = getCookie("access_token");
+=======
+      toRecommend: async () => {
+          router.replace('/recommend')
+      },
+      logout: async() => {
+        setCookie("access_token", "", 0);
+        setCookie("refresh_token", "", 0);
+>>>>>>> d3e372052817f8eea62f8995ef29b04d4112c5f1
 
-      }
-      else  {
-
-          this.access_token = tokens[0];
-          this.refresh_token = tokens[1];
-      }
-      
-      
-      
-      
-
-
-      // go home if both tokens are missing
-      if(getCookie("access_token") === "" && getCookie("refresh_token") === "")
-        router.replace("/")
-
-      // refresh token if access expired
-      
-
-      console.log('token on mount ' + this.access_token)
-
-      if(!this.access_token)
-        return;
-
-      for(let i = 0; i < 4; i++) {
-        this.styleStrings[i] = "width: 0%";
-      }
-
-      this.dataHasLoaded = true;
-      
-      window.history.replaceState({}, document.title, "/");
-
-      const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
-      const topResponse = await Api().post('gettopcovers', {token: this.access_token})
-
-      console.log("test_nick");
-      console.log(topResponse);
-      console.log(clusterResponse);
-
-      // retrieve data from server response
-      const clusterGroups = await clusterResponse.data.clusterGroups;
-      const songID = await clusterResponse.data.songIdList;
-      const songImage = await clusterResponse.data.idAndImage;
-      const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
-      const songIdToNameMap = await clusterResponse.data.songIdToName;
-
-      // retrieve data from top response
-      const topSongID = await topResponse.data.topTracksID
-
-      console.log("nick2");
-      console.log(topSongID);
-
-      console.log(songID);
-
-      // assign to class instance variables
-      this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
-      this.clusterImage = songImage;
-      this.ID = songID;
-      this.songIdToNameMap = songIdToNameMap;
-      this.clustersBestTwoSongIds = clustersBestTwoSongIds;
-      
-
-
-      const colorMap = ["#6CC9CF", "#EA8FCB",
-                    // "#F2E991", pastel yellow
-                    "#77dd77",
-                    "#C293FF"]
-      
-      let updatedStyleStrings = Array(4);
-      
-      setTimeout(() => {
-        this.titleRowStyles = "opacity: 100%;"
-        setTimeout(() => {
-          this.clusterRowStyles = "opacity: 100%;"
-
-          setTimeout(() => {
-            for(let i = 0; i < this.compositionRatios.length; i++) {
-              this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
-              updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
-            }
-
-            this.albumStyles = "opacity: 100%;"
-            this.styleStrings = updatedStyleStrings;
-
-          }, 20);
-        }, 500);
-      }, 10);
-
-
-
-      
-      
+        window.location.reload();
+      },
   },
-  beforeMount()
-  {
-  }
 
+  async mounted(){
+    /* eslint-disable */
+    const tokens = [getCookie("access_token"), getCookie("refresh_token")]
+    // refresh token if access expired
+    if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
+    {
+      refreshToken();
+      this.access_token = getCookie("access_token");
+
+    }
+    else  {
+
+        this.access_token = tokens[0];
+        this.refresh_token = tokens[1];
+    }
+    
+    
+
+
+    // go home if both tokens are missing
+    if(getCookie("access_token") === "" && getCookie("refresh_token") === "")
+      router.replace("/")
+
+    // refresh token if access expired
+    
+
+    console.log('token on mount ' + this.access_token)
+
+    if(!this.access_token)
+      return;
+
+    for(let i = 0; i < 4; i++) {
+      this.styleStrings[i] = "width: 0%";
+    }
+
+    try {
+      const response = await Api().post('/getprofile', {token: this.access_token})
+      const pfp = await response.data.pfp;
+
+      this.profileStyle = "background-image: url('" + pfp + "');";
+    }
+    catch (error) {
+      console.log('something went wrong fetching profile picture');
+      console.log(error);
+    }
+
+    this.dataHasLoaded = true;
+    
+    window.history.replaceState({}, document.title, "/");
+
+    const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
+    const topResponse = await Api().post('gettopcovers', {token: this.access_token})
+
+    console.log("test_nick");
+    console.log(topResponse);
+    console.log(clusterResponse);
+
+    // retrieve data from server response
+    const clusterGroups = await clusterResponse.data.clusterGroups;
+    const songID = await clusterResponse.data.songIdList;
+    const songImage = await clusterResponse.data.idAndImage;
+    const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
+    const songIdToNameMap = await clusterResponse.data.songIdToName;
+
+    // retrieve data from top response
+    const topSongID = await topResponse.data.topTracksID
+
+    console.log("nick2");
+    console.log(topSongID);
+
+    console.log(songID);
+
+    // assign to class instance variables
+    this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
+    this.clusterImage = songImage;
+    this.ID = songID;
+    this.songIdToNameMap = songIdToNameMap;
+    this.clustersBestTwoSongIds = clustersBestTwoSongIds;
+    
+
+
+    const colorMap = ["#6CC9CF", "#EA8FCB",
+                  // "#F2E991", pastel yellow
+                  "#77dd77",
+                  "#C293FF"]
+    
+    let updatedStyleStrings = Array(4);
+    
+    setTimeout(() => {
+      this.titleRowStyles = "opacity: 100%;"
+      setTimeout(() => {
+        this.clusterRowStyles = "opacity: 100%;"
+
+        setTimeout(() => {
+          for(let i = 0; i < this.compositionRatios.length; i++) {
+            this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
+            updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
+          }
+
+          this.albumStyles = "opacity: 100%;"
+          this.styleStrings = updatedStyleStrings;
+
+        }, 20);
+      }, 500);
+    }, 10);
   }
+}
 
 
   function setCookie(cname, cvalue, exdays) {
@@ -846,15 +928,33 @@ li {
 }
 
 #second-img {
-  animation-delay: 1s;
+  animation-delay: -1s;
 }
 
 #third-img {
-  animation-delay: 2s;
+  animation-delay: -2s;
 }
 
 #fourth-img {
-  animation-delay: 3s;
+  animation-delay: -3s;
+}
+
+#profile-pic {
+  /* display: inline-block; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: white;
+  text-shadow: -1px 1px 8px white;
 }
 
 body {
