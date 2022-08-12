@@ -43,14 +43,31 @@ app.post('/getprofile', async (req, res) => {
 	try {
 	let response = {}
 	let profileURL = ''
+	let userID = ''
 
 	const data = await result.json()
 	
 
 	// console.log('nick6')
 	// console.log(data.images[0].url)
+
+
 	// if no profile pic exist, default to spotify logo as referenced from components
-	profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotifylogo.png'
+	profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotify-icon-2.png'
+	userID = data.id
+	const userPlaylist = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+		method: 'POST',
+		headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' }, 
+		data: {name: 'New Playlist', description:'Test Description', public:true}, 
+	})
+
+	const createPlaylist = await userPlaylist.json()
+	console.log('nick100')
+	console.log(createPlaylist)
+	console.log('nick6')
+	console.log(data.images[0].url)
+
+	
 
 	response['pfp'] = profileURL
 
@@ -60,6 +77,7 @@ app.post('/getprofile', async (req, res) => {
 		console.log(error)
 	}
 })
+
 
 app.post('/gettracks', async (req, res) => {
 	const token = req.body.token
