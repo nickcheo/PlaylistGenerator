@@ -47,13 +47,13 @@
       </li>
      <li class="nav-item">
 
-              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <!-- <button class="loginbutton2" v-if="show" key="on" @click="show = false">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
               <button class="loginbutton2" v-else key="off" @click="show = true">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
-          <!-- Dropdown Menu -->
+           Dropdown Menu -->
             <div class="dropdown__menu"  v-if="show">
                 <li class="dropdown__menu-item">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
@@ -63,7 +63,7 @@
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
                   
                 </li>
-            </div>
+            </div> -->
   
 
         
@@ -115,7 +115,7 @@
                     <br>
                     </div>
                     </div>
-  <a @click="goToRecommend" style="text-decoration: none; color:white">
+  <a @click = "toRecommend(0)" style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
                   <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h5>
@@ -177,7 +177,7 @@
           </a>
 
         
-         <a href="http://google.com" style="text-decoration: none; color:white">
+         <a @click = "toRecommend(1)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
               <div class="col-md-7" style = "text-align: left;">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h5>
@@ -236,7 +236,7 @@
           </div>
           </a>
     
-    <a href="http://google.com" style="text-decoration: none; color:white">
+    <a @click = "toRecommend(2)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-7" style = "text-align: left;">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h5>
@@ -296,7 +296,7 @@
           </div>
           </a>
 
-    <a href="http://google.com" style="text-decoration: none; color:white">
+    <a @click = "toRecommend(3)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
                         <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[3][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[3][1]]}}</h5>
@@ -396,13 +396,13 @@ import Api from '../services/Api';
         refresh_token: 'temp',
         username: getCookie('username') ? (', ' + getCookie('username'))  : '',
         dataHasLoaded: false,
-        clusterList: Array(4),
+        clusterList: [[1,1][1,1],[1,1],[1,1]],
         compositionRatios: Array(4),
         styleStrings: Array(4),
         clusterImage: {},
         ID: Array(50),
         songIdToNameMap: null,
-        clustersBestTwoSongIds: null,
+        clustersBestTwoSongIds: "",
         albumStyles: "opacity: 0%;",
         clusterRowStyles: "opacity: 0%;",
         titleRowStyles: "opacity: 0%;",
@@ -462,30 +462,38 @@ import Api from '../services/Api';
         }
         
       },
-<<<<<<< HEAD
-         goToRecommend: async () => {
 
-           window.location.href = "http://localhost:8080/recommend?test=pizza";
-          // router.replace('/recommend/chicken')
+       toRecommend : function (clusterIndex){
+          console.log('in to recommend')
+          
+          try {
+           
+            if( this.clustersBestTwoSongIds != null){
+              console.log('this better be null')
+              // split paramaters by |*|
+                let recommendParameterString = "";
+                recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][0] + "|*|");
+                recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][1] + "|*|");
+                recommendParameterString += (getRandomSongWithinCluster(this.clusterList, clusterIndex, this.songIdToNameMap)+ "|*|")
 
-      }
-  },
-    async mounted(){
-      /* eslint-disable */
-      const tokens = [getCookie("access_token"), getCookie("refresh_token")]
-      // refresh token if access expired
-      if(this.access_token === "" || !this.access_token || getCookie("access_token") === "")
-      {
-        refreshToken();
-        this.access_token = getCookie("access_token");
-=======
-      toRecommend: async () => {
-          router.replace('/recommend')
+                console.log(recommendParameterString)
+
+
+                router.replace('/recommend/' + recommendParameterString);
+            }
+            else
+            console.log('important homie wrong')
+          }
+          catch(error)
+          {
+            console.log(error)
+          }
+          
       },
+      
       logout: async() => {
         setCookie("access_token", "", 0);
         setCookie("refresh_token", "", 0);
->>>>>>> d3e372052817f8eea62f8995ef29b04d4112c5f1
 
         window.location.reload();
       },
@@ -654,6 +662,34 @@ import Api from '../services/Api';
               setCookie("access_token", data.access_token, 1)
 
         }
+  }
+
+  // TODO: Inefficient bruh
+  function getRandomSongWithinCluster(allTheClusters, clusterIndex, songIdToNameMap)
+  {
+      if(allTheClusters == null)
+        return "";
+
+      let thisCluster = allTheClusters[clusterIndex];
+      if(thisCluster != null && songIdToNameMap != null)
+      {
+        let randomIndex = Math.floor(Math.random() * thisCluster.length);
+        let randomSongName = thisCluster[randomIndex];
+        let randomId = "";
+
+        // inefficiency, iterate linearly to find corresponding id
+        for (const [key, value] of Object.entries(songIdToNameMap))
+          if(value == randomSongName)
+          {
+            randomId = key;
+          }
+
+        console.log('random song log ' + randomId);
+        return randomId;
+
+      }
+      else
+        return "";
   }
 
   

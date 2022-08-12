@@ -22,10 +22,18 @@
         <div class="container-fluid">
             <div class="row">
                     <div class="col-lg-20 text-center">
-                    <h2 class="display-1"><strong >Hello there</strong></h2>
+                    <h2 class="display-1"><strong >Generating your custom ~fresh~ playlist</strong></h2>
                         <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
                         
                     </div>
+            </div>
+            <div class = 'row'>
+                <div class="col-lg-20 text-center">
+                    <li v-for="songName in this.songNames">
+                            {{songName}}
+                    </li>
+                </div>
+                
             </div>
         </div>
       </div>
@@ -55,6 +63,8 @@ import Api from '../services/Api';
         username: getCookie('username') != "" ? (', ' + getCookie('username'))  : '',
         topSongID: "",
         topURLImage: "",
+        recommendationRawJsonResult: "",
+        songNames: [],
 
       }
     },
@@ -62,8 +72,7 @@ import Api from '../services/Api';
     {
       getAccessToken: async () => {
         /* eslint-disable */
-        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
-          || getCookie("username") === "" || getCookie("username") == undefined) {
+       if(getCookie("access_token") === "") {
           const params = new URLSearchParams(document.location.search);
           const authCode = params.get('code');
           const state = params.get('state');
@@ -87,8 +96,8 @@ import Api from '../services/Api';
             grant_type: "authorization_code",
             code: authCode,
             redirect_uri: 'http://localhost:8080/next',
-            })
-          });
+          })
+        });
 
 
           const data = await result.json();
@@ -100,8 +109,8 @@ import Api from '../services/Api';
           const access_token = data.access_token;
           const refresh_token = data.refresh_token;
 
-          setCookie("access_token", access_token, 1);
-          setCookie("refresh_token", refresh_token, 24 * 365);
+          setCookie("access_token", access_token);
+          setCookie("refresh_token", refresh_token);
 
           console.log('at: '+ access_token);
 
@@ -110,7 +119,6 @@ import Api from '../services/Api';
         } else {
           return [getCookie("access_token"), getCookie("refresh_token")];
         }
-        
       },
       refreshToken: async () => {
         console.log("attempting token refresh")
@@ -146,7 +154,8 @@ import Api from '../services/Api';
     },
     async mounted(){
       /* eslint-disable */
-       console.log(document.location.search);
+       
+       const params = new URLSearchParams(window.location.search);
       let tokens = await this.getAccessToken();
       console.log(tokens);
       // refresh token if access expired
@@ -179,8 +188,46 @@ import Api from '../services/Api';
 
       // really make sure username is visble after first login
 
-      console.log('token on mount ' + this.access_token)      
-      window.history.replaceState({}, document.title, "/");
+        // last ting will have nothing
+        // aray of seeds
+        const seeds = params.get('params').split("|*|").filter(el => el != "");
+        const seedString = seeds.join(',');
+
+
+        console.log(seedString)
+
+
+
+
+
+        const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?seed_tracks=' + seedString, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+					   'Content-Type' : 'application/json'}
+        });
+
+	      const recommendData  = await (recommendResult.json());
+          const songNames = []
+
+          console.log(recommendData);
+          for(let i  = 0; i < recommendData.tracks.length; i++)
+          {
+              let trackDict = recommendData.tracks[i];
+              let name = trackDict.name;
+              let artist = recommendData.tracks[i].artists[0].name;
+              songNames[i] = name + ' by ' + artist;
+          }
+
+          this.recommendationRawJsonResult = JSON.stringify(recommendData);
+          this.songNames  = songNames;
+
+
+
+
+
+
+        console.log('token on mount ' + this.access_token)      
+        window.history.replaceState({}, document.title, "/");
 
       
 

@@ -44,7 +44,7 @@ export default new Router({
     },
     {
       path: '/recommend/:myParam',
-      redirect: to => { return {path: '/recommend', query: {test: to.params.myParam} }}
+      redirect: to => { return {path: '/recommend', query: {params: to.params.myParam} }}
     }
   ],
   mode: "history"
