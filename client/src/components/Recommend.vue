@@ -53,6 +53,7 @@
 import { onBeforeMount } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
+const querystring = require('querystring');
 
   export default {
     name: 'Login',
@@ -197,9 +198,6 @@ import Api from '../services/Api';
         console.log(seedString)
 
 
-
-
-
         const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?seed_tracks=' + seedString, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
@@ -221,7 +219,31 @@ import Api from '../services/Api';
           this.recommendationRawJsonResult = JSON.stringify(recommendData);
           this.songNames  = songNames;
 
+        
+        const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+					   'Content-Type' : 'application/json'}
+        });
 
+	    const meData  = await (meResponse.json());
+        console.log(meData);
+        const userId = meData['id'];
+        console.log('user Id: ' + userId)
+
+        const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+            method: 'POST',
+            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+					   'Content-Type' : 'application/json'},
+            body: {
+                "name": "My New Variefy Mix"
+            }
+            
+        });
+
+	      const playlistData  = await (playlistGen.json());
+          console.log('created playlist???')
+          console.log(playlistData)
 
 
 

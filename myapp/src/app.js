@@ -65,7 +65,7 @@ app.post('/getprofile', async (req, res) => {
 	console.log('nick100')
 	console.log(createPlaylist)
 	console.log('nick6')
-	console.log(data.images[0].url)
+
 
 	
 
@@ -177,12 +177,14 @@ app.post('/getclusters', async (req, res) => {
 	})
 
 	const data = await result.json()
-	console.log('Hello Kathir')
-	// console.log(data.items[0].album.images[0].url);
+	console.log('Hello this where the tracks at')
+	console.log(data.items[0]);
 
 	let IDtoImageURL = {}
 	let userTopTrackIdList = []
 	let idToSongName = {}
+	let songIdToArtistId = {}
+	let artistIdToGenre = {}
 	// 2D Array of user song vectors, passable into SK.js libraries
 	let userAttributeMatrix = []
 
@@ -192,12 +194,47 @@ app.post('/getclusters', async (req, res) => {
 			userTopTrackIdList[i] = data.items[i].id
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + ' by ' + artist
 			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url
-			// console.log(userTopTrackIdList[i])
+			songIdToArtistId[userTopTrackIdList[i]] = data.items[i].artists[0].id
+			
 		}
 		console.log('testNick')
 		console.log(IDtoImageURL)
 
 		const idQueryString = userTopTrackIdList.join(',')
+		let artistIdQueryString = ""
+		for (const [key, value] of Object.entries(songIdToArtistId))
+			artistIdQueryString += value + ",";
+		artistIdQueryString = artistIdQueryString.slice(0, -1);
+
+		console.log(artistIdQueryString)
+		console.log('length: ' + artistIdQueryString.split(",").length)
+
+
+
+		 // ISSUE: when querying genres for a song, the "genres" object is an array of genre text fields,
+		 // but this usually returns an array of some obscure genres
+		 // there is no way to consistnetly choose the most 'normal genre', so
+		 // picking the first listed genre will result in obscure genre labellings
+		 // (e.g, Post Malone's first listed genre is DFW rap, Drake is candian hip hop. Few artists will have these genres 
+		 // listed, so tallied counts of genres within a cluster may not be helpful )
+		const genresResult = await fetch('https://api.spotify.com/v1/artists/?ids=' + artistIdQueryString, {
+			method: 'GET',
+			headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+		})
+
+		const genreData = await genresResult.json()
+		console.log(genreData.artists)
+
+		for(let i = 0; i < genreData.artists.length; i++)
+		{
+			let artist = genreData.artists[i]
+			console.log('genre for ' + artist.name)
+			console.log(artist.genres);
+		}
+
+
+
+
 		// console.log(idQueryString)
 
 		const audioFeaturesResult = await fetch('https://api.spotify.com/v1/audio-features?ids=' + idQueryString, {
@@ -296,10 +333,15 @@ function computeClosestSongsToCentroids(centroids, songIdToClusterLabelMap, idLi
 	let clustersTopTwoSongIds = []
 	for (let i = 0; i < centroids.length; i++) {
 		// get two songs with closest distance
+
 		const firstId = clusterDistances[i][0]['id']
 		const secondId = clusterDistances[i][1]['id']
-		clustersTopTwoSongIds[i] = [firstId, secondId]
+		const thirdId = clusterDistances[i].length >= 3 ? clusterDistances[i][2]['id'] : null
+		clustersTopTwoSongIds[i] =  thirdId == null ? [firstId, secondId] : [firstId, secondId, thirdId];
+		console.log('top closesies')
+		console.log(clustersTopTwoSongIds[i])
 	}
+
 
 	return clustersTopTwoSongIds
 }

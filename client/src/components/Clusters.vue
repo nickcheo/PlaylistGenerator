@@ -474,7 +474,41 @@ import Api from '../services/Api';
                 let recommendParameterString = "";
                 recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][0] + "|*|");
                 recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][1] + "|*|");
-                recommendParameterString += (getRandomSongWithinCluster(this.clusterList, clusterIndex, this.songIdToNameMap)+ "|*|")
+                recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][2] + "|*|");
+
+                let topIds = [
+                                     this.$data.clustersBestTwoSongIds[clusterIndex][0],
+                                     this.$data.clustersBestTwoSongIds[clusterIndex][1], 
+                                     this.$data.clustersBestTwoSongIds[clusterIndex][2]
+                                    ]
+                if(this.clusterList[clusterIndex].length > 3)
+                {
+                    let firstRandomId  = "";
+                    do
+                    {
+                      firstRandomId = getRandomSongWithinCluster(this.clusterList, clusterIndex, this.songIdToNameMap)
+                    }                  
+                    while (topIds.includes(firstRandomId));
+                    topIds.push(firstRandomId);
+                    console.log('FRI ' + firstRandomId);
+                    recommendParameterString += (firstRandomId+ "|*|")
+                }
+
+
+                if(this.clusterList[clusterIndex].length > 4)
+                {
+                    let secondRandomId  = "";
+                    do
+                    {
+                      secondRandomId = getRandomSongWithinCluster(this.clusterList, clusterIndex, this.songIdToNameMap)
+                    }                  
+                    while (topIds.includes(secondRandomId));
+                    topIds.push(secondRandomId);
+                    console.log('SRI' + secondRandomId);
+                    recommendParameterString += (secondRandomId+ "|*|");
+                }
+                                   
+
 
                 console.log(recommendParameterString)
 
@@ -563,6 +597,8 @@ import Api from '../services/Api';
     const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
     const songIdToNameMap = await clusterResponse.data.songIdToName;
 
+    console.log('toppies')
+   
     // retrieve data from top response
     const topSongID = await topResponse.data.topTracksID
 
