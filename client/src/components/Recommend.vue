@@ -234,10 +234,9 @@ const querystring = require('querystring');
         const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             method: 'POST',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-					   'Content-Type' : 'application/json'},
-            body: {
-                "name": "My New Variefy Mix"
-            }
+                        'Content-Type' : 'application/json'
+					},
+            body: JSON.stringify({name: "My Variefy Playlist", description: "Please work"})
             
         });
 
