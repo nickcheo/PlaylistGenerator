@@ -40,19 +40,25 @@ app.post('/getprofile', async (req, res) => {
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
 
+	try {
 	let response = {}
 	let profileURL = ''
 
 	const data = await result.json()
+	
 
-	console.log('nick6')
-	console.log(data.images[0].url)
-
-	profileURL = data.images[0].url
+	// console.log('nick6')
+	// console.log(data.images[0].url)
+	// if no profile pic exist, default to spotify logo as referenced from components
+	profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotifylogo.png'
 
 	response['pfp'] = profileURL
 
 	res.send(JSON.stringify(response))
+	}
+	catch(error) {
+		console.log(error)
+	}
 })
 
 app.post('/gettracks', async (req, res) => {
