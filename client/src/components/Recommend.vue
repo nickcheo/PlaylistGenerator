@@ -42,21 +42,38 @@
                 <div class = "container-fluid" v-if="dataHasLoaded">
 
                             <div class="row">
-                                <div class="col-lg-20 text-center">
-                                    <h1 class="display-4"><strong></strong></h1>
-                                    <h2>Let's try something new</h2>
+                                <div class="col-lg-12 text-center">
+                                  <br/>
+                                  <br/>
+                                    <h1 class="display-4"><strong>Here's your new mix{{username}}</strong></h1>
                                     <br/>
-                                    <iframe style="border-radius:12px" :src='this.playlistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                                     <br/>
-                                    
-                                    
-                                    
-                                </div>
-                             </div>
+                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                    <br/>
+                                    <br/>
+                                    <div class="container px-3">
+                                        <div class="row gx-5">
+                                                <div class="col text-end">
+                                                <a href="/" class="btn btn-dark btn-lg rounded-pill" id="icon3">
+                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Generate Another Playlist
+                                                </a>
+                                              </div>
+                                              <div class="col text-start">
+                                                  <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn btn-dark btn-lg rounded-pill">
+                                                    <img src="../assets/spotify-icon-2.png" id="icon"/> 
+                                                    View in Spotify
+                                                  </a>
+                                              </div>
+                                        
+                                        </div>
+                                    </div>
 
 
-                    </div>
+                            </div>
+                  </div>
                 </div>
+              </div>
         
     
 
@@ -88,8 +105,9 @@ const querystring = require('querystring');
         recommendationRawJsonResult: "",
         songNames: [],
         playlistId: "",
-        playlistUrl: "",
+        embedPlaylistUrl: "",
         dataHasLoaded: false,
+        externalPlaylistUrl: "/",
 
       }
     },
@@ -215,12 +233,20 @@ const querystring = require('querystring');
 
         // last ting will have nothing
         // aray of seeds
-        const seeds = params.get('params').split("|*|").filter(el => el != "");
+        const seeds = params.get('params') != null ? params.get('params').split("|*|").filter(el => el != "") : null;
+        console.log(seeds);
+        if(seeds == null || seeds.length == 0)
+          router.replace('/')
+        // remove last item from parameters, which is the list of top songs
+        console.log(seeds);
+        const topSongNames = seeds.pop().split(':')[1].split('|');
+        console.log(topSongNames)
         const seedString = seeds.join(',');
 
 
-        console.log(seedString)
 
+        console.log(seedString)
+        window.history.replaceState({}, document.title, "/");
 
         const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?max_popularity=85&limit=40&seed_tracks=' + seedString, {
             method: 'GET',
@@ -262,7 +288,12 @@ const querystring = require('querystring');
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
                         'Content-Type' : 'application/json'
 					},
-            body: JSON.stringify({name: "My Variefy Playlist", description: "Please work"})
+            body: JSON.stringify(
+              {
+                name: "My Variefy Mix", 
+                description: `A fresh playlist recommendation based on your music tastes. Composed with songs similar to ${topSongNames[0]} and ${topSongNames[1]}. Made with the Variefy app.`
+              }
+            )
             
         });
 
@@ -270,10 +301,12 @@ const querystring = require('querystring');
           const playlistId = playlistData.id;
           this.playlistId = playlistId;
           const playlistUrl = playlistData.external_urls.spotify;
-          this.playlistUrl = playlistUrl
+          this.externalPlaylistUrl = playlistUrl;
+          let playlistUrlParts = playlistUrl.split(".com/")
+          this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
           console.log('created playlist???')
           console.log(playlistId)
-          console.log(playlistUrl)
+          console.log(this.externalPlaylistUrl)
 
 
           const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
