@@ -14,7 +14,7 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-      <meta http-equiv="Content-Security-Policy" content="script-src unsafe-line"/>
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://localhost:* 'unsafe-inline' 'unsafe-eval'" />
     </head>
   
   
