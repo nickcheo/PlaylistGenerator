@@ -115,7 +115,7 @@ app.post('/gettopcovers', async (req, res) => {
 	}
 
 	console.log('nick4')
-	console.log(data.tracks.items[0].track.album.images)
+	// console.log(data.tracks.items[0].track.album.images)
 
 	// remove duplicates
 	uniqueImageURLs = [...new Set(ImageURLs)]
@@ -190,7 +190,7 @@ app.post('/getclusters', async (req, res) => {
 
 	if (data.items != null) {
 		for (let i = 0; i < data.items.length; i++) {
-			var artist = data.items[i].album.artists[0].name
+			var artist = data.items[i].artists[0].name
 			userTopTrackIdList[i] = data.items[i].id
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + ' by ' + artist
 			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url

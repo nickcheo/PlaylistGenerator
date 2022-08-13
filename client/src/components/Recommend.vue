@@ -18,28 +18,57 @@
   
   
   
-      <div class="hero">
-        <div class="container-fluid">
-            <div class="row">
-                    <div class="col-lg-20 text-center">
-                    <h2 class="display-1"><strong >Generating your custom ~fresh~ playlist</strong></h2>
-                        <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
-                        
+      
+                    <div class="hero container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
+                            <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-20 text-center">
+                                <h2 class="display-1"><strong>Hello there{{username}}.</strong></h2>
+                                    <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
+                                    <br>
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            </div>
                     </div>
-            </div>
-            <div class = 'row'>
-                <div class="col-lg-20 text-center">
-                    <li v-for="songName in this.songNames">
-                            {{songName}}
-                    </li>
-                </div>
-                
-            </div>
-            <div>
-                <a class = "btn-lg btn-primary" :href = "this.playlistUrl"> <h6>Check out my playlist!</h6></a>
-            </div>
-        </div>
-      </div>
+
+
+                <div class = "hero container-fluid" v-if="dataHasLoaded">
+
+                            <div class="row">
+                                <div class="col-lg-20 text-center">
+                                    <h1 class="display-4"><strong></strong></h1>
+                                    <p><lead>Let's try something new</lead></p>
+                                    <br>
+                                    <iframe style="border-radius:12px" :src='this.playlistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                    </br>
+                                    <br>
+                                    </br>
+                                    <div class="container px-3">
+                                        <div class="row gx-5">
+                                        <div class="col text-end">
+                                    <a href="/loading2" onclick="window.open('/login', 'popup', 'width=800, height=600')"; class="btn btn-dark btn-lg rounded-pill" id="icon3">
+                                        <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                        Generate Another
+                                    </a>
+                                    </div>
+                                    <div class="col text-start">
+                                    <a href="/loading2" onclick="window.open('/login', 'popup', 'width=800, height=600')"; class="btn btn-dark btn-lg rounded-pill">
+                                        <img src="/images/spotify-logo.png" id="icon"/> 
+                                        Add to Spotify Library
+                                    </a>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                             </div>
+
+
+                    </div>
+        
     
 
   
@@ -71,6 +100,7 @@ const querystring = require('querystring');
         songNames: [],
         playlistId: "",
         playlistUrl: "",
+        dataHasLoaded: false,
 
       }
     },
@@ -203,21 +233,21 @@ const querystring = require('querystring');
         console.log(seedString)
 
 
-        const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?seed_tracks=' + seedString, {
+        const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?max_popularity=85&limit=40&seed_tracks=' + seedString, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
 					   'Content-Type' : 'application/json'}
         });
 
 	      const recommendData  = await (recommendResult.json());
-          const reccomendedSongIds = [];
+          const reccomendedSongUris = [];
           const songNames = []
 
           console.log(recommendData);
           for(let i  = 0; i < recommendData.tracks.length; i++)
           {
               let trackDict = recommendData.tracks[i];
-              reccomendedSongIds[i] = trackDict.id;
+              reccomendedSongUris[i] = trackDict.uri;
               let name = trackDict.name;
               let artist = recommendData.tracks[i].artists[0].name;
               songNames[i] = name + ' by ' + artist;
@@ -250,7 +280,7 @@ const querystring = require('querystring');
 	      const playlistData  = await (playlistGen.json());
           const playlistId = playlistData.id;
           this.playlistId = playlistId;
-          const playlistUrl = playlistData.href;
+          const playlistUrl = playlistData.external_urls.spotify;
           this.playlistUrl = playlistUrl
           console.log('created playlist???')
           console.log(playlistId)
@@ -262,13 +292,13 @@ const querystring = require('querystring');
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
                         'Content-Type' : 'application/json'
 					},
-            body: JSON.stringify({uris: reccomendedSongIds})
+            body: JSON.stringify({uris: reccomendedSongUris})
             
         });
 
         const addToPlaylistData  = await (addToPlaylistRequest.json());
 
-
+        this.dataHasLoaded = true
 
         console.log('token on mount ' + this.access_token)      
         window.history.replaceState({}, document.title, "/");
