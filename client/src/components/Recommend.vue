@@ -14,12 +14,13 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <!-- Option 1: Include in HTML -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+      <meta http-equiv="Content-Security-Policy" content="script-src unsafe-line"/>
     </head>
   
   
   
-      
-                    <div class="hero container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
+                <div class = "hero">
+                    <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
                             <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-20 text-center">
@@ -34,40 +35,28 @@
                             </div>
                             </div>
                     </div>
+                </div>
 
 
-                <div class = "hero container-fluid" v-if="dataHasLoaded">
+            <div class = "hero">
+                <div class = "container-fluid" v-if="dataHasLoaded">
 
                             <div class="row">
                                 <div class="col-lg-20 text-center">
                                     <h1 class="display-4"><strong></strong></h1>
-                                    <p><lead>Let's try something new</lead></p>
-                                    <br>
+                                    <h2>Let's try something new</h2>
+                                    <br/>
                                     <iframe style="border-radius:12px" :src='this.playlistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                                    </br>
-                                    <br>
-                                    </br>
-                                    <div class="container px-3">
-                                        <div class="row gx-5">
-                                        <div class="col text-end">
-                                    <a href="/loading2" onclick="window.open('/login', 'popup', 'width=800, height=600')"; class="btn btn-dark btn-lg rounded-pill" id="icon3">
-                                        <span class="glyphicon glyphicon-refresh" id="icon2"></span>
-                                        Generate Another
-                                    </a>
-                                    </div>
-                                    <div class="col text-start">
-                                    <a href="/loading2" onclick="window.open('/login', 'popup', 'width=800, height=600')"; class="btn btn-dark btn-lg rounded-pill">
-                                        <img src="/images/spotify-logo.png" id="icon"/> 
-                                        Add to Spotify Library
-                                    </a>
-                                    </div>
-                                    </div>
-                                    </div>
+                                    <br/>
+                                    
+                                    
+                                    
                                 </div>
                              </div>
 
 
                     </div>
+                </div>
         
     
 
@@ -298,7 +287,7 @@ const querystring = require('querystring');
 
         const addToPlaylistData  = await (addToPlaylistRequest.json());
 
-        this.dataHasLoaded = true
+        this.dataHasLoaded = true;
 
         console.log('token on mount ' + this.access_token)      
         window.history.replaceState({}, document.title, "/");
