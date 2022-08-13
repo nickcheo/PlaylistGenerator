@@ -35,6 +35,9 @@
                 </div>
                 
             </div>
+            <div>
+                <a class = "btn-lg btn-primary" :href = "this.playlistUrl"> <h6>Check out my playlist!</h6></a>
+            </div>
         </div>
       </div>
     
@@ -66,6 +69,8 @@ const querystring = require('querystring');
         topURLImage: "",
         recommendationRawJsonResult: "",
         songNames: [],
+        playlistId: "",
+        playlistUrl: "",
 
       }
     },
@@ -205,12 +210,14 @@ const querystring = require('querystring');
         });
 
 	      const recommendData  = await (recommendResult.json());
+          const reccomendedSongIds = [];
           const songNames = []
 
           console.log(recommendData);
           for(let i  = 0; i < recommendData.tracks.length; i++)
           {
               let trackDict = recommendData.tracks[i];
+              reccomendedSongIds[i] = trackDict.id;
               let name = trackDict.name;
               let artist = recommendData.tracks[i].artists[0].name;
               songNames[i] = name + ' by ' + artist;
@@ -241,9 +248,25 @@ const querystring = require('querystring');
         });
 
 	      const playlistData  = await (playlistGen.json());
+          const playlistId = playlistData.id;
+          this.playlistId = playlistId;
+          const playlistUrl = playlistData.href;
+          this.playlistUrl = playlistUrl
           console.log('created playlist???')
-          console.log(playlistData)
+          console.log(playlistId)
+          console.log(playlistUrl)
 
+
+          const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+            method: 'POST',
+            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+                        'Content-Type' : 'application/json'
+					},
+            body: JSON.stringify({uris: reccomendedSongIds})
+            
+        });
+
+        const addToPlaylistData  = await (addToPlaylistRequest.json());
 
 
 
