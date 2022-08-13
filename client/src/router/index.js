@@ -4,6 +4,7 @@ import HelloWorld from "@/components/HelloWorld";
 import Home from "@/components/Home";
 import Login from "@/components/Login.vue";
 import Clusters from "@/components/Clusters"
+import Recommend from "@/components/Recommend"
 
 Vue.use(Router);
 /* eslint-disable */
@@ -39,7 +40,11 @@ export default new Router({
     {
       path: "/recommend",
       name: "Recommend",
-      component: HelloWorld
+      component: Recommend
+    },
+    {
+      path: '/recommend/:myParam',
+      redirect: to => { return {path: '/recommend', query: {params: to.params.myParam} }}
     }
   ],
   mode: "history"

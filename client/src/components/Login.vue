@@ -315,6 +315,11 @@ import Api from '../services/Api';
       this.username = await (", " + getCookie('username'))
 
       // really make sure username is visble after first login
+      try {
+        await getUsername();
+      }
+      catch (error) 
+      {console.log(error)}
       
       console.log('token on mount ' + this.access_token)      
       window.history.replaceState({}, document.title, "/");
@@ -346,10 +351,13 @@ import Api from '../services/Api';
       }
 
       try {
+        if(this.access_token != "" && this.access_token != "undefined")
+        {
         const response = await Api().post('/getprofile', {token: this.access_token})
         const pfp = await response.data.pfp;
 
         this.profileStyle = "background-image: url('" + pfp + "');";
+        }
       }
       catch (error) {
         console.log('something went wrong fetching profile picture');
@@ -395,9 +403,6 @@ import Api from '../services/Api';
         }
           
         
-
-
-
       }
   }
 

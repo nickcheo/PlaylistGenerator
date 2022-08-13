@@ -135,7 +135,7 @@ export default {
     getSpotifyLogin: async () => {
       /* eslint-disable */
       const querystring = require('querystring')
-      const scope = 'user-read-private user-read-email user-library-read user-top-read';
+      const scope = 'user-read-private user-read-email user-library-read user-top-read playlist-modify-public playlist-modify-private';
       console.log('login func heree')
 
       function generateRandomString(n)
