@@ -508,6 +508,8 @@ import Api from '../services/Api';
                     recommendParameterString += (secondRandomId+ "|*|");
                 }
                                    
+                if(this.clustersBestTwoSongIds != null && this.songIdToNameMap != null)
+                  recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]]
 
 
                 console.log(recommendParameterString)

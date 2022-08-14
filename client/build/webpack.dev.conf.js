@@ -28,6 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
       ],
     },
+    headers: {'Content-Security-Policy': 'frame-ancestors *;'},
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
@@ -55,7 +56,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true
+      inject: true,
+      policy: {
+        'frame-src': ["https://open.spotify.com/"],
+        'frame-ancestors': ["https://open.spotify.com/"],
+      }
+
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
