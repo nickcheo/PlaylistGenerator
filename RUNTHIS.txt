@@ -1,0 +1,3 @@
+USE THIS SCRIPT IN PLAYLIST GEN HOME DIR:
+node src/app.js & npm start --prefix ./client
+Sorry I tried putting this on Heroku and fucked some stuff up
