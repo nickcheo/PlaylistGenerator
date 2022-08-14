@@ -76,7 +76,7 @@
                                                 <div class="col text-end">
                                                 <a href="/" class="btn btn-dark btn-lg rounded-pill" id="icon3">
                                                   <span class="glyphicon glyphicon-refresh" id="icon2"></span>
-                                                  Generate Another Playlist
+                                                  Make Another Playlist
                                                 </a>
                                               </div>
                                               <div class="col text-start">
