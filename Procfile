@@ -1,1 +1,1 @@
-web: npm install & npm install webpack-dev-server -g & node src/app.js &  npm install --prefix ./client & npm start --prefix ./client
+web: npm install & npm install --save ansi-html babel-runtime/regenerator html-entities loglevel punycode querystring @/components/Login.vue @/components/HelloWorld @/components/Home @/components/Clusters @/components/Recommend @/assets/global.css & node src/app.js &  npm install --prefix ./client & npm start --prefix ./client
