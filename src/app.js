@@ -1,5 +1,6 @@
 // not to be confused with PlaylistGenerator/myapp/app.js
 // this is for following Vue + Node js setup
+// heroku build
 console.log('hello')
 console.log('hello2')
 const express = require('express')
