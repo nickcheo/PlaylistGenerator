@@ -68,7 +68,8 @@
                                     <h1 class="display-4"><strong>Here's your new mix{{username}}</strong></h1>
                                     <br/>
                                     <br/>
-                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                         as="style" rel="stylesheet preload prefetch" ></iframe>
                                     <br/>
                                     <br/>
                                     <div class="container px-3">
