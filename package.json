@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js --exec  \"npm run lint && node\"",
-    "lint": "pwd"
+    "lint": "pwd",
+    "preinstall": "cd $(pwd)"
   },
   "author": "",
   "license": "ISC",
