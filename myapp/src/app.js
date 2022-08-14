@@ -300,6 +300,7 @@ app.post('/getrecommendations', async (req, res) =>
 	const token = req.body.token;
 	// convert string to boolean
 	const isStrongFiltered = req.body.isStrongFiltered == "TRUE" ? true : false;
+	console.log("filter status " + isStrongFiltered);
 
 
 	 // get 50 top songs to filter out
@@ -332,13 +333,14 @@ app.post('/getrecommendations', async (req, res) =>
 		}
 	}
 
+	//TODO: configure constants to adjust popularity of reccomended songs
+	const popularityLimit = !isStrongFiltered ? "85" : "75"
 
-
-	const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?max_popularity=85&limit=50&seed_tracks=' + seedString, {
+	const recommendResult = await fetch(`https://api.spotify.com/v1/recommendations?max_popularity=${popularityLimit}&limit=50&seed_tracks=` + seedString, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token,
 					   'Content-Type' : 'application/json'}
-        });
+    });
 
 
 		const recommendData  = await (recommendResult.json());

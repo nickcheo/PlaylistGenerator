@@ -19,7 +19,7 @@
   
   
   
-                <div class = "hero">
+                
                     <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
                             <div class="container-fluid">
                             <div class="row">
@@ -27,18 +27,38 @@
                                 <h2 class="display-1"><strong>Hello there{{username}}.</strong></h2>
                                     <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
                                     <br>
-                                    <div class="spinner-border" role="status">
+                                    <div class="spinner-border" role="status" v-if="filterChoiceClicked && !dataHasLoaded">
                                         <span class="sr-only"></span>
                                     </div>
+
+
+                                     <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
+                                        <div class="row gx-5">
+                                                <div class="col text-end">
+                                                <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn btn-dark btn-lg rounded-pill" id="icon3"
+                                                  style = "background-color: #cb4cf5;">
+                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Fresh, but familiar
+                                                </a>
+                                              </div>
+                                              <div class="col text-start">
+                                                  <a type = "button"  @click="chooseFilterAndRecommend('TRUE')" class="btn btn-dark btn-lg rounded-pill"
+                                                  style = "background-color: #e3574d;">
+                                                  Spice it up!                                                  </a>
+                                              </div>
+                                        
+                                        </div>
+                                    </div>
+
                                     
                                 </div>
                             </div>
                             </div>
                     </div>
-                </div>
+              
 
 
-            <div class = "hero">
+      
                 <div class = "container-fluid" v-if="dataHasLoaded">
 
                             <div class="row">
@@ -61,7 +81,7 @@
                                               </div>
                                               <div class="col text-start">
                                                   <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn btn-dark btn-lg rounded-pill">
-                                                    <img src="../assets/spotify-icon-2.png" id="icon"/> 
+                                                    <img src="../assets/spotifylogo.png" id="icon"/> 
                                                     View in Spotify
                                                   </a>
                                               </div>
@@ -73,7 +93,7 @@
                             </div>
                   </div>
                 </div>
-              </div>
+             
         
     
 
@@ -108,6 +128,9 @@ const querystring = require('querystring');
         embedPlaylistUrl: "",
         dataHasLoaded: false,
         externalPlaylistUrl: "/",
+        filterChoiceClicked: false,
+        seedString: "",
+        topSongNames: [],
 
       }
     },
@@ -193,7 +216,89 @@ const querystring = require('querystring');
               setCookie("access_token", data.access_token, 1)
 
         }
-      }
+      },
+      handleRecommendations: async function (seedString, aToken, filterFlag)
+      {
+            const doWeFilter = filterFlag === "TRUE" ? true : false;
+
+
+            const recResult = await Api().post('/getrecommendations', 
+            {
+              seedString: seedString,
+              token: aToken,
+              isStrongFiltered: doWeFilter ? "TRUE" : "FALSE"
+            });
+
+            const recData = await recResult.data
+            const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
+            console.log('rec song uri list')
+            console.log(recSongUriList);
+          
+          // get user id
+            const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+                  method: 'GET',
+                  headers: { 'Authorization' : 'Bearer ' + aToken,
+                  'Content-Type' : 'application/json'}
+              });
+
+            const meData  = await (meResponse.json());
+              console.log(meData);
+              const userId = meData['id'];
+              console.log('user Id: ' + userId)
+
+              console.log("top song names for description " + this.topSongNames[0] + " " + this.topSongNames[1])
+            // generate playlist
+            const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+                  method: 'POST',
+                  headers: { 'Authorization' : 'Bearer ' + aToken,
+                              'Content-Type' : 'application/json'
+                },
+                  body: JSON.stringify(
+                    {
+                      name: `My Variefy Mix - ${!doWeFilter ? 'Fresh' : 'Spicy'} `, 
+                      description: `A ~${!doWeFilter ? 'fresh' : 'spicy'}~ playlist recommendation based on your music tastes. Composed with songs similar to ${this.topSongNames[0]} and ${this.topSongNames[1]}. Made with the Variefy app.`
+                    }
+                  )
+                  
+              });
+
+                const playlistData  = await (playlistGen.json());
+                const playlistId = playlistData.id;
+                this.playlistId = playlistId;
+                const playlistUrl = playlistData.external_urls.spotify;
+                this.externalPlaylistUrl = playlistUrl;
+                let playlistUrlParts = playlistUrl.split(".com/")
+                this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
+                console.log('created playlist???')
+                console.log(playlistId)
+                console.log(this.externalPlaylistUrl)
+
+              // add songs to playlist
+              const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                  method: 'POST',
+                  headers: { 'Authorization' : 'Bearer ' + aToken,
+                              'Content-Type' : 'application/json'
+                },
+                  body: JSON.stringify({uris: recSongUriList})
+                  
+              });
+
+              const addToPlaylistData  = await (addToPlaylistRequest.json());
+
+              this.dataHasLoaded = true;
+
+              console.log('token on mount ' + aToken)      
+              window.history.replaceState({}, document.title, "/");
+
+          return;
+      },
+      chooseFilterAndRecommend: async function(filterChoice)
+      {
+        // make sure reccomended data 
+        this.$data.filterChoiceClicked = true;
+        await this.handleRecommendations(this.seedString, getCookie('access_token'), filterChoice);
+        
+      },
     },
     async mounted(){
       /* eslint-disable */
@@ -241,8 +346,11 @@ const querystring = require('querystring');
         console.log(seeds);
         // last parameter is TOPSONGS:<topsong1name>|<topsong2name>
         const topSongNames = seeds.pop().split(':')[1].split('|');
+
         console.log(topSongNames)
+        this.topSongNames = topSongNames;
         const seedString = seeds.join(',');
+        this.seedString = seedString;
 
 
 
@@ -250,72 +358,72 @@ const querystring = require('querystring');
         window.history.replaceState({}, document.title, "/");
 
 
-      const recResult = await Api().post('/getrecommendations', 
-      {
-        seedString: seedString,
-        token: this.access_token,
-        isStrongFiltered: "TRUE"
-      });
+    //   const recResult = await Api().post('/getrecommendations', 
+    //   {
+    //     seedString: seedString,
+    //     token: this.access_token,
+    //     isStrongFiltered: "TRUE"
+    //   });
 
-      const recData = await recResult.data
-      const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
-      console.log('rec song uri list')
-      console.log(recSongUriList);
+    //   const recData = await recResult.data
+    //   const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
+    //   console.log('rec song uri list')
+    //   console.log(recSongUriList);
     
-    // get user id
-      const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-					   'Content-Type' : 'application/json'}
-        });
+    // // get user id
+    //   const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+    //         method: 'GET',
+    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+		// 			   'Content-Type' : 'application/json'}
+    //     });
 
-	    const meData  = await (meResponse.json());
-        console.log(meData);
-        const userId = meData['id'];
-        console.log('user Id: ' + userId)
+	  //   const meData  = await (meResponse.json());
+    //     console.log(meData);
+    //     const userId = meData['id'];
+    //     console.log('user Id: ' + userId)
 
-      // generate playlist
-      const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-            method: 'POST',
-            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-                        'Content-Type' : 'application/json'
-					},
-            body: JSON.stringify(
-              {
-                name: "My Variefy Mix", 
-                description: `A fresh playlist recommendation based on your music tastes. Composed with songs similar to ${topSongNames[0]} and ${topSongNames[1]}. Made with the Variefy app.`
-              }
-            )
+    //   // generate playlist
+    //   const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    //         method: 'POST',
+    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+    //                     'Content-Type' : 'application/json'
+		// 			},
+    //         body: JSON.stringify(
+    //           {
+    //             name: "My Variefy Mix", 
+    //             description: `A fresh playlist recommendation based on your music tastes. Composed with songs similar to ${topSongNames[0]} and ${topSongNames[1]}. Made with the Variefy app.`
+    //           }
+    //         )
             
-        });
+    //     });
 
-	        const playlistData  = await (playlistGen.json());
-          const playlistId = playlistData.id;
-          this.playlistId = playlistId;
-          const playlistUrl = playlistData.external_urls.spotify;
-          this.externalPlaylistUrl = playlistUrl;
-          let playlistUrlParts = playlistUrl.split(".com/")
-          this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
-          console.log('created playlist???')
-          console.log(playlistId)
-          console.log(this.externalPlaylistUrl)
+	  //       const playlistData  = await (playlistGen.json());
+    //       const playlistId = playlistData.id;
+    //       this.playlistId = playlistId;
+    //       const playlistUrl = playlistData.external_urls.spotify;
+    //       this.externalPlaylistUrl = playlistUrl;
+    //       let playlistUrlParts = playlistUrl.split(".com/")
+    //       this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
+    //       console.log('created playlist???')
+    //       console.log(playlistId)
+    //       console.log(this.externalPlaylistUrl)
 
-        // add songs to playlist
-        const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-            method: 'POST',
-            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-                        'Content-Type' : 'application/json'
-					},
-            body: JSON.stringify({uris: recSongUriList})
+    //     // add songs to playlist
+    //     const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    //         method: 'POST',
+    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
+    //                     'Content-Type' : 'application/json'
+		// 			},
+    //         body: JSON.stringify({uris: recSongUriList})
             
-        });
+    //     });
 
-        const addToPlaylistData  = await (addToPlaylistRequest.json());
+    //     const addToPlaylistData  = await (addToPlaylistRequest.json());
 
-        this.dataHasLoaded = true;
+    //     this.dataHasLoaded = true;
 
-        console.log('token on mount ' + this.access_token)      
-        window.history.replaceState({}, document.title, "/");
+    //     console.log('token on mount ' + this.access_token)      
+    //     window.history.replaceState({}, document.title, "/");
 
       
 
@@ -323,6 +431,9 @@ const querystring = require('querystring');
     },
 
 }
+
+
+
 
 
 
@@ -443,6 +554,10 @@ a, button {
 body {
   color: white;
 
+}
+
+html, body, template {
+  overflow-y: scroll !important;
 }
 
 </style>
