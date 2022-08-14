@@ -293,6 +293,102 @@ app.post('/getclusters', async (req, res) => {
 	}
 })
 
+
+app.post('/getrecommendations', async (req, res) =>
+{
+	const seedString = req.body.seedString;
+	const token = req.body.token;
+	// convert string to boolean
+	const isStrongFiltered = req.body.isStrongFiltered == "TRUE" ? true : false;
+
+
+	 // get 50 top songs to filter out
+	 const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+		method: 'GET',
+		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+	})
+
+
+
+	const data = await result.json()
+	console.log('Hello this where the tracks at')
+	console.log(data.items[0]);
+
+
+	let userTopTrackIdSet= new Set();
+	let idToSongName = {}
+	let artistSet = new Set();
+	
+
+	if (data.items != null) {
+		for (let i = 0; i < data.items.length; i++) {
+			var artist = data.items[i].artists[0].name
+			// add id to set
+			userTopTrackIdSet.add(data.items[i].id);
+			artistSet.add(artist);
+			idToSongName[data.items[i].id] = data.items[i].name + ' by ' + artist
+			// songIdToArtistId[data.items[i].id] = data.items[i].artists[0].id
+			
+		}
+	}
+
+
+
+	const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?max_popularity=85&limit=50&seed_tracks=' + seedString, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token,
+					   'Content-Type' : 'application/json'}
+        });
+
+
+		const recommendData  = await (recommendResult.json());
+		const reccomendedSongUris = [];
+		const songNames = []
+		const TARGET_PLAYLIST_SIZE = 30;
+		let currentPlaylistSize = 0;
+		
+		// compose list of song uris to return, filtering songs in process
+		// TODO: we could filter top 50 artists out as well if we really want variety --> if we do this make this an option
+		console.log(recommendData);
+		for(let i  = 0; i < recommendData.tracks.length; i++)
+		{
+			let trackDict = recommendData.tracks[i];
+			let trackId = trackDict.id;
+			let trackArtistName = trackDict.artists[0].name;
+
+			// skip over current song if it is in top 50 or the artist is seen withn top 50 songs
+			if(isStrongFiltered && (userTopTrackIdSet.has(trackId) || artistSet.has(trackArtistName)))
+				continue;
+			// still filter if the rec'd song is in top 50
+			else if(!isStrongFiltered && userTopTrackIdSet.has(trackId))
+				continue;
+
+			reccomendedSongUris[i] = trackDict.uri;
+			currentPlaylistSize++;
+
+			// if reach target amount of songs, stop adding
+			if(currentPlaylistSize == TARGET_PLAYLIST_SIZE)
+				break;
+
+			// let name = trackDict.name;
+			// let artist = recommendData.tracks[i].artists[0].name;
+			// songNames[i] = name + ' by ' + artist;
+		}
+
+		// output array of song uris
+		let recommendationResponse = {}
+
+		recommendationResponse['recommendedSongUris'] = reccomendedSongUris;
+
+		res.send(JSON.stringify(recommendationResponse));
+
+
+})
+
+
+
+
+
 function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k) {
 	let clusterGroups = []
 	for (let i = 0; i < k; i++) clusterGroups.push([])
