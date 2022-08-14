@@ -334,7 +334,7 @@ app.post('/getrecommendations', async (req, res) =>
 	}
 
 	//TODO: configure constants to adjust popularity of reccomended songs
-	const popularityLimit = !isStrongFiltered ? "85" : "75"
+	const popularityLimit = !isStrongFiltered ? "80" : "70"
 
 	const recommendResult = await fetch(`https://api.spotify.com/v1/recommendations?max_popularity=${popularityLimit}&limit=50&seed_tracks=` + seedString, {
             method: 'GET',

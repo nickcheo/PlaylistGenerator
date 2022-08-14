@@ -13,6 +13,7 @@
   "dependencies": {
     "@datastructures-js/priority-queue": "^6.1.1",
     "@tensorflow/tfjs": "^3.19.0",
+    "client": "file:../client",
     "cors": "^2.8.5",
     "cross-fetch": "^3.1.5",
     "eslint": "^8.20.0",
