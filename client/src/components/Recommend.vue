@@ -239,6 +239,7 @@ const querystring = require('querystring');
           router.replace('/')
         // remove last item from parameters, which is the list of top songs
         console.log(seeds);
+        // last parameter is TOPSONGS:<topsong1name>|<topsong2name>
         const topSongNames = seeds.pop().split(':')[1].split('|');
         console.log(topSongNames)
         const seedString = seeds.join(',');
@@ -248,31 +249,21 @@ const querystring = require('querystring');
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
 
-        const recommendResult = await fetch('https://api.spotify.com/v1/recommendations?max_popularity=85&limit=40&seed_tracks=' + seedString, {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-					   'Content-Type' : 'application/json'}
-        });
 
-	      const recommendData  = await (recommendResult.json());
-          const reccomendedSongUris = [];
-          const songNames = []
+      const recResult = await Api().post('/getrecommendations', 
+      {
+        seedString: seedString,
+        token: this.access_token,
+        isStrongFiltered: "TRUE"
+      });
 
-          console.log(recommendData);
-          for(let i  = 0; i < recommendData.tracks.length; i++)
-          {
-              let trackDict = recommendData.tracks[i];
-              reccomendedSongUris[i] = trackDict.uri;
-              let name = trackDict.name;
-              let artist = recommendData.tracks[i].artists[0].name;
-              songNames[i] = name + ' by ' + artist;
-          }
-
-          this.recommendationRawJsonResult = JSON.stringify(recommendData);
-          this.songNames  = songNames;
-
-        
-        const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+      const recData = await recResult.data
+      const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
+      console.log('rec song uri list')
+      console.log(recSongUriList);
+    
+    // get user id
+      const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
 					   'Content-Type' : 'application/json'}
@@ -283,7 +274,8 @@ const querystring = require('querystring');
         const userId = meData['id'];
         console.log('user Id: ' + userId)
 
-        const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+      // generate playlist
+      const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             method: 'POST',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
                         'Content-Type' : 'application/json'
@@ -297,7 +289,7 @@ const querystring = require('querystring');
             
         });
 
-	      const playlistData  = await (playlistGen.json());
+	        const playlistData  = await (playlistGen.json());
           const playlistId = playlistData.id;
           this.playlistId = playlistId;
           const playlistUrl = playlistData.external_urls.spotify;
@@ -308,13 +300,13 @@ const querystring = require('querystring');
           console.log(playlistId)
           console.log(this.externalPlaylistUrl)
 
-
-          const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+        // add songs to playlist
+        const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
             method: 'POST',
             headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
                         'Content-Type' : 'application/json'
 					},
-            body: JSON.stringify({uris: reccomendedSongUris})
+            body: JSON.stringify({uris: recSongUriList})
             
         });
 
@@ -388,6 +380,25 @@ function setCookie(cname, cvalue, exhours) {
         }
   }
 
+
+  function setPreviouslyRecommendedSongsInCookie(recSongUris)
+  {
+    if(getCookie("prev_rec_songs") === "")
+    {
+      let arr_string = JSON.stringify(recSongUris);
+      setCookie("prev_rec_songs", arr_string);
+      console.log('new stuff (first)  ' + JSON.stringify(recSongUris))
+    }
+    else
+    {
+      let oldPrev = JSON.parse(getCookie('prev_rec_songs'))
+      console.log("prev stuff " + getCookie('prev_rec_songs') )
+      const newList = oldPrev.concat(recSongUris);
+      console.log('new stuff ' + JSON.stringify(newList));
+      setCookie("prev_rec_songs", JSON.stringify(newList));
+
+    }
+  }
   
   
   

@@ -126,47 +126,7 @@
                         </div>
                         
                     </div>
-              </div>
-
-              <!-- <div class = "col-md-2">
-                  <br/>
-                  <br/>
-                  <br/>
-                  <div class = "row"></div>
-                  <div class = "row"></div>
-                  <br/>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #6CC9CF; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find similar music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #91382f; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find different music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                <!-- </div> -->
-
-
-              
+              </div>              
                <div class="col-md-5">
                 <div class="img-container">
                   <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
@@ -187,46 +147,6 @@
                         </div>
                     </div>
               </div>
-
-<!-- 
-            <div class = "col-md-2">
-                  <br/>
-                  <br/>
-                  <br/>
-                  <div class = "row"></div>
-                  <div class = "row"></div>
-                  <br/>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #EA8FCB; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find similar music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #117133; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find different music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                <!-- </div> -->
-
-
               <div class="col-md-5">
                 <div class="img-container">
                   <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
@@ -246,48 +166,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                 <!-- <div class = "col-md-2">
-                  <br/>
-                  <br/>
-                  <br/>
-                  <div class = "row"></div>
-                   <div class = "row"></div>
-                   <br/>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #77dd77; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find similar music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #872186; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find different music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                    
-                <!-- </div> -->
-
-
-
                 <div class="col-md-5">
                   <div class="img-container">
                     <img :style="this.albumStyles" id="third-img" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
@@ -305,46 +183,7 @@
                                 <div class="progress-value">{{this.compositionRatios[3]}}%</div>
                             </div>
                         </div>
-                    </div>
-
-
-                  <!-- <div class = "col-md-2">
-                  <br/>
-                  <br/>
-                  <br/>
-                  <div class = "row"></div>
-                  <div class = "row"></div>
-                  <br/>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #C293FF; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find similar music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                    <!-- <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class = "row" style = "padding-bottom: 2%; padding-top: 2%;"></div>
-                    <div class="progress button" style="height: 60px; width:100%; background-color: #3c6a00; color: white;">
-                          <br/>
-                          <div class="text-center container-fluid row" style = "text-align: center;">
-                                  <div>
-                                    <center>
-                                      <br/>
-                                    <h6>&nbsp; Find different music </h6>
-                                    <br>
-                                  </center>
-                                  </div>
-                          </div>
-                          <br/>
-                    </div> -->
-                <!-- </div> -->
-                
+                    </div>                
                 <div class="col-md-5">
                       <div class="img-container">
                         <img :style="this.albumStyles" id="fourth-img" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
@@ -354,24 +193,6 @@
 
           </div>
           </a>
-            <!-- <div class="row">
-              
-              <div class="col-md-6">
-              <img :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]" style= "height: auto; width: 50%;"/>
-              </div>
-              <div class="col-md-6">
-              <img :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]" style= "height: auto; width: 50%;"/>
-              </div>
-              <div class="col-md-6">
-              <img :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]" style= "height: auto; width: 50%;"/>
-              </div>
-              <div class="col-md-6">
-              <img :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]" style= "height: auto; width: 50%;"/>
-              </div>
-          </div> -->
-   
-      
-
   </div>  
 </div>
 
@@ -509,7 +330,7 @@ import Api from '../services/Api';
                 }
                                    
                 if(this.clustersBestTwoSongIds != null && this.songIdToNameMap != null)
-                  recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]]
+                recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]]
 
 
                 console.log(recommendParameterString)
