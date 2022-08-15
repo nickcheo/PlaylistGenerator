@@ -1,8 +1,8 @@
 # Variefy - a playlist generator daring music listeners
 
 <div>
-<h3>[Check it out!]((https://variefy.herokuapp.com/) </h3>
-<a><h3>[https://variefy.herokuapp.com/]((https://variefy.herokuapp.com/)</h3></a>
+<a href = 'https://variefy.herokuapp.com/'><h3>Check it out!</h3></a>
+<a href = 'https://variefy.herokuapp.com/'><h3>https://variefy.herokuapp.com/</h3></a>
 <h4> What is Variefy? </h4> 
 
 <p>
