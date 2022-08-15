@@ -3,19 +3,27 @@
 console.log('hello')
 console.log('hello2')
 const express = require('express')
-const port = process.env.PORT ||  2000;
+const port = 2000
 const client_id = 'a1c0d6debc2c49038fb8a43eb5df637a'
 const client_secret = '76669d3b28f94e8da7662d91cc39cc94'
 const cors = require('cors')
 const querystring = require('querystring')
 const bodyParser = require('body-parser')
-const Clusters = require('../clusters')
+const clusters = require('../clusters')
 const fetch = require('cross-fetch')
 // const { MinPriorityQueue} = require('@datastructures-js/priority-queue');
 
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
+
+const path = __dirname + '/../../client/dist'
+
+app.use(express.static(path))
+
+app.get('/', function (req, res) {
+	res.sendFile(path + 'index.html')
+})
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`)
@@ -41,43 +49,36 @@ app.post('/getprofile', async (req, res) => {
 	})
 
 	try {
-	let response = {}
-	let profileURL = ''
-	let userID = ''
+		let response = {}
+		let profileURL = ''
+		let userID = ''
 
-	const data = await result.json()
-	
+		const data = await result.json()
 
-	// console.log('nick6')
-	// console.log(data.images[0].url)
+		// console.log('nick6')
+		// console.log(data.images[0].url)
 
+		// if no profile pic exist, default to spotify logo as referenced from components
+		profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotify-icon-2.png'
+		userID = data.id
+		const userPlaylist = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+			method: 'POST',
+			headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' },
+			data: { name: 'New Playlist', description: 'Test Description', public: true },
+		})
 
-	// if no profile pic exist, default to spotify logo as referenced from components
-	profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotify-icon-2.png'
-	userID = data.id
-	const userPlaylist = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-		method: 'POST',
-		headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' }, 
-		data: {name: 'New Playlist', description:'Test Description', public:true}, 
-	})
+		const createPlaylist = await userPlaylist.json()
+		console.log('nick100')
+		console.log(createPlaylist)
+		console.log('nick6')
 
-	const createPlaylist = await userPlaylist.json()
-	console.log('nick100')
-	console.log(createPlaylist)
-	console.log('nick6')
+		response['pfp'] = profileURL
 
-
-	
-
-	response['pfp'] = profileURL
-
-	res.send(JSON.stringify(response))
-	}
-	catch(error) {
+		res.send(JSON.stringify(response))
+	} catch (error) {
 		console.log(error)
 	}
 })
-
 
 app.post('/gettracks', async (req, res) => {
 	const token = req.body.token
@@ -178,7 +179,7 @@ app.post('/getclusters', async (req, res) => {
 
 	const data = await result.json()
 	console.log('Hello this where the tracks at')
-	console.log(data.items[0]);
+	console.log(data.items[0])
 
 	let IDtoImageURL = {}
 	let userTopTrackIdList = []
@@ -195,28 +196,24 @@ app.post('/getclusters', async (req, res) => {
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + ' by ' + artist
 			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url
 			songIdToArtistId[userTopTrackIdList[i]] = data.items[i].artists[0].id
-			
 		}
 		console.log('testNick')
 		console.log(IDtoImageURL)
 
 		const idQueryString = userTopTrackIdList.join(',')
-		let artistIdQueryString = ""
-		for (const [key, value] of Object.entries(songIdToArtistId))
-			artistIdQueryString += value + ",";
-		artistIdQueryString = artistIdQueryString.slice(0, -1);
+		let artistIdQueryString = ''
+		for (const [key, value] of Object.entries(songIdToArtistId)) artistIdQueryString += value + ','
+		artistIdQueryString = artistIdQueryString.slice(0, -1)
 
 		console.log(artistIdQueryString)
-		console.log('length: ' + artistIdQueryString.split(",").length)
+		console.log('length: ' + artistIdQueryString.split(',').length)
 
-
-
-		 // ISSUE: when querying genres for a song, the "genres" object is an array of genre text fields,
-		 // but this usually returns an array of some obscure genres
-		 // there is no way to consistnetly choose the most 'normal genre', so
-		 // picking the first listed genre will result in obscure genre labellings
-		 // (e.g, Post Malone's first listed genre is DFW rap, Drake is candian hip hop. Few artists will have these genres 
-		 // listed, so tallied counts of genres within a cluster may not be helpful )
+		// ISSUE: when querying genres for a song, the "genres" object is an array of genre text fields,
+		// but this usually returns an array of some obscure genres
+		// there is no way to consistnetly choose the most 'normal genre', so
+		// picking the first listed genre will result in obscure genre labellings
+		// (e.g, Post Malone's first listed genre is DFW rap, Drake is candian hip hop. Few artists will have these genres
+		// listed, so tallied counts of genres within a cluster may not be helpful )
 		const genresResult = await fetch('https://api.spotify.com/v1/artists/?ids=' + artistIdQueryString, {
 			method: 'GET',
 			headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
@@ -225,15 +222,11 @@ app.post('/getclusters', async (req, res) => {
 		const genreData = await genresResult.json()
 		console.log(genreData.artists)
 
-		for(let i = 0; i < genreData.artists.length; i++)
-		{
+		for (let i = 0; i < genreData.artists.length; i++) {
 			let artist = genreData.artists[i]
 			console.log('genre for ' + artist.name)
-			console.log(artist.genres);
+			console.log(artist.genres)
 		}
-
-
-
 
 		// console.log(idQueryString)
 
@@ -270,10 +263,10 @@ app.post('/getclusters', async (req, res) => {
 		const K = 4
 
 		console.log('done')
-		// Clusters.printKMeansCentroids(K, use rAttributeMatrix);
-		const songIdToClusterLabelMap = await Clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K)
+		// clusters.printKMeansCentroids(K, use rAttributeMatrix);
+		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K)
 		const clusterGroups = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
-		const centroids = await Clusters.getCentroids(K, userAttributeMatrix)
+		const centroids = await clusters.getCentroids(K, userAttributeMatrix)
 		let response = {}
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap
 		response['clusterGroups'] = clusterGroups
@@ -293,103 +286,86 @@ app.post('/getclusters', async (req, res) => {
 	}
 })
 
-
-app.post('/getrecommendations', async (req, res) =>
-{
-	const seedString = req.body.seedString;
-	const token = req.body.token;
+app.post('/getrecommendations', async (req, res) => {
+	const seedString = req.body.seedString
+	const token = req.body.token
 	// convert string to boolean
-	const isStrongFiltered = req.body.isStrongFiltered == "TRUE" ? true : false;
-	console.log("filter status " + isStrongFiltered);
+	const isStrongFiltered = req.body.isStrongFiltered == 'TRUE' ? true : false
+	console.log('filter status ' + isStrongFiltered)
 
-
-	 // get 50 top songs to filter out
-	 const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+	// get 50 top songs to filter out
+	const result = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
 		method: 'GET',
 		headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 	})
 
-
-
 	const data = await result.json()
 	console.log('Hello this where the tracks at')
-	console.log(data.items[0]);
+	console.log(data.items[0])
 
-
-	let userTopTrackIdSet= new Set();
+	let userTopTrackIdSet = new Set()
 	let idToSongName = {}
-	let artistSet = new Set();
-	
+	let artistSet = new Set()
 
 	if (data.items != null) {
 		for (let i = 0; i < data.items.length; i++) {
 			var artist = data.items[i].artists[0].name
 			// add id to set
-			userTopTrackIdSet.add(data.items[i].id);
-			artistSet.add(artist);
+			userTopTrackIdSet.add(data.items[i].id)
+			artistSet.add(artist)
 			idToSongName[data.items[i].id] = data.items[i].name + ' by ' + artist
 			// songIdToArtistId[data.items[i].id] = data.items[i].artists[0].id
-			
 		}
 	}
 
 	//TODO: configure constants to adjust popularity of reccomended songs
-	const popularityLimit = !isStrongFiltered ? "80" : "70"
+	const popularityLimit = !isStrongFiltered ? '80' : '70'
 
-	const recommendResult = await fetch(`https://api.spotify.com/v1/recommendations?max_popularity=${popularityLimit}&limit=50&seed_tracks=` + seedString, {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token,
-					   'Content-Type' : 'application/json'}
-    });
-
-
-		const recommendData  = await (recommendResult.json());
-		const reccomendedSongUris = [];
-		const songNames = []
-		const TARGET_PLAYLIST_SIZE = 30;
-		let currentPlaylistSize = 0;
-		
-		// compose list of song uris to return, filtering songs in process
-		// TODO: we could filter top 50 artists out as well if we really want variety --> if we do this make this an option
-		console.log(recommendData);
-		for(let i  = 0; i < recommendData.tracks.length; i++)
+	const recommendResult = await fetch(
+		`https://api.spotify.com/v1/recommendations?max_popularity=${popularityLimit}&limit=50&seed_tracks=` + seedString,
 		{
-			let trackDict = recommendData.tracks[i];
-			let trackId = trackDict.id;
-			let trackArtistName = trackDict.artists[0].name;
-
-			// skip over current song if it is in top 50 or the artist is seen withn top 50 songs
-			if(isStrongFiltered && (userTopTrackIdSet.has(trackId) || artistSet.has(trackArtistName)))
-				continue;
-			// still filter if the rec'd song is in top 50
-			else if(!isStrongFiltered && userTopTrackIdSet.has(trackId))
-				continue;
-
-			reccomendedSongUris[i] = trackDict.uri;
-			currentPlaylistSize++;
-
-			// if reach target amount of songs, stop adding
-			if(currentPlaylistSize == TARGET_PLAYLIST_SIZE)
-				break;
-
-			// let name = trackDict.name;
-			// let artist = recommendData.tracks[i].artists[0].name;
-			// songNames[i] = name + ' by ' + artist;
+			method: 'GET',
+			headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
 		}
+	)
 
-		// output array of song uris
-		let recommendationResponse = {}
+	const recommendData = await recommendResult.json()
+	const reccomendedSongUris = []
+	const songNames = []
+	const TARGET_PLAYLIST_SIZE = 30
+	let currentPlaylistSize = 0
 
-		recommendationResponse['recommendedSongUris'] = reccomendedSongUris;
+	// compose list of song uris to return, filtering songs in process
+	// TODO: we could filter top 50 artists out as well if we really want variety --> if we do this make this an option
+	console.log(recommendData)
+	for (let i = 0; i < recommendData.tracks.length; i++) {
+		let trackDict = recommendData.tracks[i]
+		let trackId = trackDict.id
+		let trackArtistName = trackDict.artists[0].name
 
-		res.send(JSON.stringify(recommendationResponse));
+		// skip over current song if it is in top 50 or the artist is seen withn top 50 songs
+		if (isStrongFiltered && (userTopTrackIdSet.has(trackId) || artistSet.has(trackArtistName))) continue
+		// still filter if the rec'd song is in top 50
+		else if (!isStrongFiltered && userTopTrackIdSet.has(trackId)) continue
 
+		reccomendedSongUris[i] = trackDict.uri
+		currentPlaylistSize++
 
+		// if reach target amount of songs, stop adding
+		if (currentPlaylistSize == TARGET_PLAYLIST_SIZE) break
+
+		// let name = trackDict.name;
+		// let artist = recommendData.tracks[i].artists[0].name;
+		// songNames[i] = name + ' by ' + artist;
+	}
+
+	// output array of song uris
+	let recommendationResponse = {}
+
+	recommendationResponse['recommendedSongUris'] = reccomendedSongUris
+
+	res.send(JSON.stringify(recommendationResponse))
 })
-
-
-
-
 
 function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k) {
 	let clusterGroups = []
@@ -435,11 +411,10 @@ function computeClosestSongsToCentroids(centroids, songIdToClusterLabelMap, idLi
 		const firstId = clusterDistances[i][0]['id']
 		const secondId = clusterDistances[i][1]['id']
 		const thirdId = clusterDistances[i].length >= 3 ? clusterDistances[i][2]['id'] : null
-		clustersTopTwoSongIds[i] =  thirdId == null ? [firstId, secondId] : [firstId, secondId, thirdId];
+		clustersTopTwoSongIds[i] = thirdId == null ? [firstId, secondId] : [firstId, secondId, thirdId]
 		console.log('top closesies')
 		console.log(clustersTopTwoSongIds[i])
 	}
-
 
 	return clustersTopTwoSongIds
 }
