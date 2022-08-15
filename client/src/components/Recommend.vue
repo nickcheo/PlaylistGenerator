@@ -144,8 +144,8 @@ const querystring = require('querystring');
           const state = params.get('state');
           const querystring = require('querystring')
 
-          const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-            const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+          const client_id=process.env.VUE_APP_CLIENT_ID
+            const client_secret=process.env.VUE_APP_CLIENT_SECRET
 
           if(state == null)
             return null;
@@ -161,7 +161,7 @@ const querystring = require('querystring');
           body: querystring.stringify({
             grant_type: "authorization_code",
             code: authCode,
-            redirect_uri: 'http://localhost:8080/next',
+            redirect_uri: process.env.VUE_APP_REDIRECT_URI,
           })
         });
 
@@ -190,8 +190,8 @@ const querystring = require('querystring');
         console.log("attempting token refresh")
         if(getCookie("access_token") === "" )
         {
-              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const client_id=process.env.VUE_APP_CLIENT_ID
+              const client_secret=process.env.VUE_APP_CLIENT_SECRET
               const querystring = require('querystring')
           
           

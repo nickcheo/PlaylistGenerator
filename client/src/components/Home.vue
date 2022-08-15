@@ -150,12 +150,12 @@ export default {
       try {
         // let response = await fetch('http://localhost:2000/login')
 
-        const clientId="a1c0d6debc2c49038fb8a43eb5df637a"
-        const clientSecret="76669d3b28f94e8da7662d91cc39cc94"
-        const redir = 'http://localhost:8080/next'
+        const clientId=process.env.VUE_APP_CLIENT_ID
+        const clientSecret=process.env.VUE_APP_CLIENT_SECRET
+        const redir = process.env.VUE_APP_REDIRECT_URI
         console.log(redir)
 
-        
+        console.log(process.env.VUE_APP_CLIENT_ID)
         
        var authUrl = 'https://accounts.spotify.com/authorize?' +
 		    querystring.stringify({
@@ -185,8 +185,9 @@ export default {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       } else {
-          const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-          const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+          console.log(process.env.VUE_APP_CLIENT_ID)
+          const client_id=process.env.VUE_APP_CLIENT_ID
+          const client_secret=process.env.VUE_APP_CLIENT_SECRET
           const querystring = require('querystring')
           
           const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
