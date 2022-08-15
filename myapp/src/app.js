@@ -3,7 +3,7 @@
 console.log('hello')
 console.log('hello2')
 const express = require('express')
-const port = 2000
+const port = process.env.PORT || 2000
 const client_id = 'a1c0d6debc2c49038fb8a43eb5df637a'
 const client_secret = '76669d3b28f94e8da7662d91cc39cc94'
 const cors = require('cors')
