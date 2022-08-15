@@ -46,6 +46,25 @@
                                                   style = "background-color: #e3574d;">
                                                   Spice it up!                                                  </a>
                                               </div>
+
+                                              
+      <div class="row main-row justify-content-between align-items-center">
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+        </div>
+         <div class="col-sm" v-if="this.coverData.tracks.length >= 4">
+            <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm" v-if="this.coverData.tracks.length >= 5">
+            <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+      </div>
                                         
                                         </div>
                                     </div>
@@ -132,6 +151,7 @@ const querystring = require('querystring');
         filterChoiceClicked: false,
         seedString: "",
         topSongNames: [],
+        coverData: []
 
       }
     },
@@ -236,7 +256,7 @@ const querystring = require('querystring');
             console.log(recSongUriList);
           
           // get user id
-            const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+            const meResponse = await fetch('https://api.spotify.com/v1/me', {
                   method: 'GET',
                   headers: { 'Authorization' : 'Bearer ' + aToken,
                   'Content-Type' : 'application/json'}
@@ -352,6 +372,26 @@ const querystring = require('querystring');
         this.topSongNames = topSongNames;
         const seedString = seeds.join(',');
         this.seedString = seedString;
+
+
+        // add songs to playlist
+              const albumCovers = await fetch(`https://api.spotify.com/v1/tracks/?ids=${seedString}`, {
+                  method: 'GET',
+                  headers: { 'Authorization' : 'Bearer ' + this.access_token,
+                              'Content-Type' : 'application/json'
+                },
+                
+              });
+
+              const coverData = await albumCovers.json();
+              console.log(coverData)
+
+              console.log(coverData.tracks[0].album.images[0].url);
+
+              this.coverData = coverData;
+
+
+
 
 
 

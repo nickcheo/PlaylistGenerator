@@ -200,7 +200,7 @@ import Api from '../services/Api';
           body: querystring.stringify({
             grant_type: "authorization_code",
             code: authCode,
-            redirect_uri: (process.env.URL || 'http://localhost:8080/') + 'next',
+            redirect_uri: (process.env.NODE_ENV == 'production' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next',
             })
           });
 

@@ -264,10 +264,11 @@ app.post('/getclusters', async (req, res) => {
 		const K = 4
 
 		console.log('done')
+		const randomClusterSeed = Math.floor(Math.random() * 1000000000);
 		// clusters.printKMeansCentroids(K, use rAttributeMatrix);
-		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K)
+		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K, randomClusterSeed)
 		const clusterGroups = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
-		const centroids = await clusters.getCentroids(K, userAttributeMatrix)
+		const centroids = await clusters.getCentroids(K, userAttributeMatrix, randomClusterSeed)
 		let response = {}
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap
 		response['clusterGroups'] = clusterGroups
