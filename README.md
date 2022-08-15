@@ -1,4 +1,8 @@
-# Variefy - a playlist generator daring music listeners
+# [Variefy](https://variefy.herokuapp.com) - a playlist generator daring music listeners
+
+
+# Check it out! URL: https://variefy.herokuapp.com
+
 
 <div>
 <h4> What is Variefy? </h4> 
