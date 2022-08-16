@@ -10,7 +10,6 @@ import Recommend from "@/components/Recommend"
 Vue.use(Router);
 /* eslint-disable */
 export default new Router({
-  history: createWebHistory(),
   routes: [
     // uncomment and remove other '/' path to get this back
     // {
