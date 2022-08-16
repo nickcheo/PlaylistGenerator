@@ -47,22 +47,30 @@
                                                   Spice it up!                                                  </a>
                                               </div>
 
-                                              
+            <br/>
+            <br/>         
       <div class="row main-row justify-content-between align-items-center">
-        <div class="col-sm">
-            <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+        <div class = 'row'>
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+            </div>
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+            </div>
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+            </div>
         </div>
-        <div class="col-sm">
-            <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
-        </div>
-        <div class="col-sm">
-            <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
-        </div>
-         <div class="col-sm" v-if="this.coverData.tracks.length >= 4">
-            <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
-        </div>
-        <div class="col-sm" v-if="this.coverData.tracks.length >= 5">
-            <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+        <div class = 'row'>
+          <div class ='col-sm-2'></div>
+            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
+                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+            </div>
+           
+            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
+                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+            </div>
+             <div class ='col-sm-2'></div>
         </div>
       </div>
                                         
