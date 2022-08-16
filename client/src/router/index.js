@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import createWebHistory from "vue-router";
 import HelloWorld from "@/components/HelloWorld";
 import Home from "@/components/Home";
 import Login from "@/components/Login.vue";
@@ -9,6 +10,7 @@ import Recommend from "@/components/Recommend"
 Vue.use(Router);
 /* eslint-disable */
 export default new Router({
+  history: createWebHistory(),
   routes: [
     // uncomment and remove other '/' path to get this back
     // {
