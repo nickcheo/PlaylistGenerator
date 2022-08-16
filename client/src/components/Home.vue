@@ -185,7 +185,7 @@ export default {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       } else {
-          console.log(process.env.VUE_APP_CLIENT_ID)
+                                      console.log(process.env.VUE_APP_CLIENT_ID)
           const client_id=process.env.VUE_APP_CLIENT_ID
           const client_secret=process.env.VUE_APP_CLIENT_SECRET
           const querystring = require('querystring')

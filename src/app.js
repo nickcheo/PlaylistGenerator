@@ -1,7 +1,8 @@
 // not to be confused with PlaylistGenerator/myapp/app.js
 // this is for following Vue + Node js setup
+// heroku build
 console.log('hello')
-console.log('hello2')
+const path = require('path')
 const express = require('express')
 const port = process.env.PORT || 2000
 const client_id = 'a1c0d6debc2c49038fb8a43eb5df637a'
@@ -17,12 +18,12 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const path = __dirname + '/../../client/dist'
+const pathy = __dirname + '/../../client/dist'
 
-app.use(express.static(path))
+// app.use(express.static(pathy))
 
 app.get('/', function (req, res) {
-	res.sendFile(path + 'index.html')
+	res.sendFile(pathy + 'index.html')
 })
 
 app.listen(port, () => {
@@ -263,10 +264,11 @@ app.post('/getclusters', async (req, res) => {
 		const K = 4
 
 		console.log('done')
+		const randomClusterSeed = Math.floor(Math.random() * 1000000000);
 		// clusters.printKMeansCentroids(K, use rAttributeMatrix);
-		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K)
+		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K, randomClusterSeed)
 		const clusterGroups = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
-		const centroids = await clusters.getCentroids(K, userAttributeMatrix)
+		const centroids = await clusters.getCentroids(K, userAttributeMatrix, randomClusterSeed)
 		let response = {}
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap
 		response['clusterGroups'] = clusterGroups
