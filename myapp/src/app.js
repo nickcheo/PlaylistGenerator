@@ -20,10 +20,6 @@ app.use(cors())
 
 const path = __dirname + '/../../client/dist'
 
-app.use(history({
-    index: path +'/index.html'
-}));
-
 
 app.use(express.static(path))
 
