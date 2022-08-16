@@ -17,6 +17,7 @@ const history = require('connect-history-api-fallback');
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
+app.use(history({verbose: true}))
 
 const path = __dirname + '/../../client/dist'
 

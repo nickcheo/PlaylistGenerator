@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import { Router, createWebHistory }from "vue-router";
 import HelloWorld from "@/components/HelloWorld";
 import Home from "@/components/Home";
 import Login from "@/components/Login.vue";
@@ -9,6 +9,7 @@ import Recommend from "@/components/Recommend"
 Vue.use(Router);
 /* eslint-disable */
 export default new Router({
+  history: createWebHistory(),
   routes: [
     // uncomment and remove other '/' path to get this back
     // {
@@ -47,5 +48,5 @@ export default new Router({
       redirect: to => { return {path: '/recommend', query: {params: to.params.myParam} }}
     }
   ],
-  // mode: "history"
+  mode: "history"
 });
