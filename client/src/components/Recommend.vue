@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pulls
+Issues
+Marketplace
+Explore
+ 
+@nickcheo 
+nickcheo
+/
+PlaylistGenerator
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+More
+PlaylistGenerator/client/src/components/Recommend.vue
+@akelch11
+akelch11 allow concurrent running of scripts
+Latest commit 3886844 yesterday
+ History
+ 2 contributors
+@akelch11@yashpatel21
+563 lines (438 sloc)  20 KB
+
 <template>
   <!-- <div class="hello">
     <h2>WORK PLEASE</h2>
@@ -21,12 +50,20 @@
   
                 
                     <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
+                    <div class="hero gradient">
+      <div class="container-fluid">
+          <div class="row" id="title-row" :style="this.titleRowStyles">
+                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
+                      <h1 class="display-4" align = 'left'><strong>What type of playlist do you want{{username}}?</strong></h1>     
+                        <p class="lead"><strong>You chose to create a playlist based off of {{this.topSongNames[0]}} and {{this.topSongNames[1]}}</strong></p>
+                    </div>
+          </div>
+      </div>
+    </div>
                             <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-20 text-center">
-                                <h2 class="display-1"><strong>Hello there{{username}}.</strong></h2>
-                                    <p class="lead">Variefy analyzes data of your top songs and performs calculations to recommend you fresh songs.</p>
-                                    <br>
+     
                                     <div class="spinner-border" role="status" v-if="filterChoiceClicked && !dataHasLoaded">
                                         <span class="sr-only"></span>
                                     </div>
@@ -107,12 +144,10 @@
 
 
 <script>
-
 import { onBeforeMount } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
 const querystring = require('querystring');
-
   export default {
     name: 'Login',
     data () {
@@ -131,7 +166,8 @@ const querystring = require('querystring');
         filterChoiceClicked: false,
         seedString: "",
         topSongNames: [],
-
+        clusterImage: {},
+        clustersBestTwoSongIDs:""
       }
     },
     methods:
@@ -143,10 +179,8 @@ const querystring = require('querystring');
           const authCode = params.get('code');
           const state = params.get('state');
           const querystring = require('querystring')
-
           const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
             const client_secret="76669d3b28f94e8da7662d91cc39cc94"
-
           if(state == null)
             return null;
           
@@ -164,23 +198,16 @@ const querystring = require('querystring');
             redirect_uri: 'http://localhost:8080/next',
           })
         });
-
-
           const data = await result.json();
           console.log("AT: " + data.access_token);
           console.log("SCOPE " + data.scope);
           console.log("EXPIRES_IN: " + data.expires_in)
           console.log("REFRESH TOKEN" + data.refresh_token)
-
           const access_token = data.access_token;
           const refresh_token = data.refresh_token;
-
           setCookie("access_token", access_token);
           setCookie("refresh_token", refresh_token);
-
           console.log('at: '+ access_token);
-
-
           return [access_token, refresh_token];
         } else {
           return [getCookie("access_token"), getCookie("refresh_token")];
@@ -208,27 +235,22 @@ const querystring = require('querystring');
                 refresh_token: getCookie("refresh_token"),
                 })
               });
-
               const data = await result.json();
               // store new access token
               console.log("NEW AT:  " + data.access_token)
               this.access_token = data.access_token;
               setCookie("access_token", data.access_token, 1)
-
         }
       },
       handleRecommendations: async function (seedString, aToken, filterFlag)
       {
             const doWeFilter = filterFlag === "TRUE" ? true : false;
-
-
             const recResult = await Api().post('/getrecommendations', 
             {
               seedString: seedString,
               token: aToken,
               isStrongFiltered: doWeFilter ? "TRUE" : "FALSE"
             });
-
             const recData = await recResult.data
             const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
             console.log('rec song uri list')
@@ -240,12 +262,10 @@ const querystring = require('querystring');
                   headers: { 'Authorization' : 'Bearer ' + aToken,
                   'Content-Type' : 'application/json'}
               });
-
             const meData  = await (meResponse.json());
               console.log(meData);
               const userId = meData['id'];
               console.log('user Id: ' + userId)
-
               console.log("top song names for description " + this.topSongNames[0] + " " + this.topSongNames[1])
             // generate playlist
             const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
@@ -261,7 +281,6 @@ const querystring = require('querystring');
                   )
                   
               });
-
                 const playlistData  = await (playlistGen.json());
                 const playlistId = playlistData.id;
                 this.playlistId = playlistId;
@@ -272,7 +291,6 @@ const querystring = require('querystring');
                 console.log('created playlist???')
                 console.log(playlistId)
                 console.log(this.externalPlaylistUrl)
-
               // add songs to playlist
               const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
                   method: 'POST',
@@ -282,14 +300,10 @@ const querystring = require('querystring');
                   body: JSON.stringify({uris: recSongUriList})
                   
               });
-
               const addToPlaylistData  = await (addToPlaylistRequest.json());
-
               this.dataHasLoaded = true;
-
               console.log('token on mount ' + aToken)      
               window.history.replaceState({}, document.title, "/");
-
           return;
       },
       chooseFilterAndRecommend: async function(filterChoice)
@@ -316,10 +330,8 @@ const querystring = require('querystring');
         this.access_token = tokens[0];
         this.refresh_token = tokens[1];
         getUsername();
-
       }
       else  {
-
           // need to go back to login
           if(getCookie("refresh_token") == "" || getCookie("refresh_token") == "undefined")
             {
@@ -333,9 +345,7 @@ const querystring = require('querystring');
           this.refresh_token = getCookie("refresh_token")         
       }
     //   this.username = await (", " + getCookie('username'))
-
       // really make sure username is visble after first login
-
         // last ting will have nothing
         // aray of seeds
         const seeds = params.get('params') != null ? params.get('params').split("|*|").filter(el => el != "") : null;
@@ -346,25 +356,18 @@ const querystring = require('querystring');
         console.log(seeds);
         // last parameter is TOPSONGS:<topsong1name>|<topsong2name>
         const topSongNames = seeds.pop().split(':')[1].split('|');
-
         console.log(topSongNames)
         this.topSongNames = topSongNames;
         const seedString = seeds.join(',');
         this.seedString = seedString;
-
-
-
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
-
-
     //   const recResult = await Api().post('/getrecommendations', 
     //   {
     //     seedString: seedString,
     //     token: this.access_token,
     //     isStrongFiltered: "TRUE"
     //   });
-
     //   const recData = await recResult.data
     //   const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
     //   console.log('rec song uri list')
@@ -376,12 +379,10 @@ const querystring = require('querystring');
     //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
 		// 			   'Content-Type' : 'application/json'}
     //     });
-
 	  //   const meData  = await (meResponse.json());
     //     console.log(meData);
     //     const userId = meData['id'];
     //     console.log('user Id: ' + userId)
-
     //   // generate playlist
     //   const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
     //         method: 'POST',
@@ -396,7 +397,6 @@ const querystring = require('querystring');
     //         )
             
     //     });
-
 	  //       const playlistData  = await (playlistGen.json());
     //       const playlistId = playlistData.id;
     //       this.playlistId = playlistId;
@@ -407,7 +407,6 @@ const querystring = require('querystring');
     //       console.log('created playlist???')
     //       console.log(playlistId)
     //       console.log(this.externalPlaylistUrl)
-
     //     // add songs to playlist
     //     const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     //         method: 'POST',
@@ -417,24 +416,38 @@ const querystring = require('querystring');
     //         body: JSON.stringify({uris: recSongUriList})
             
     //     });
-
     //     const addToPlaylistData  = await (addToPlaylistRequest.json());
-
     //     this.dataHasLoaded = true;
-
     //     console.log('token on mount ' + this.access_token)      
     //     window.history.replaceState({}, document.title, "/");
-
       
+      try {
+        const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
+        console.log(topResponse)
+        // const topSongID = await topResponse.data.topTracksID
+        const topURLImages = await topResponse.data.ImageURLs
 
+        // ensure page waits for image to be loaded
+        // this.topSongID = await topSongID;
+        this.topURLImages = await shuffle(topURLImages);
+
+        this.dataHasLoaded = true;
+
+        setInterval(() => {
+          let currentImages = this.topURLImages.slice(0, 6);
+          let shuffledImages = shuffle(this.topURLImages.slice(6));
+          shuffledImages = shuffledImages.concat(currentImages);
+          
+          this.topURLImages = shuffledImages;
+        }, 10000);
+      }
+      catch (error){
+        console.log('something went wrong fetching top album pics');
+        console.log(error);
+      }
     
     },
-
 }
-
-
-
-
 
 
 function setCookie(cname, cvalue, exhours) {
@@ -443,7 +456,6 @@ function setCookie(cname, cvalue, exhours) {
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
-
   function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -459,7 +471,6 @@ function setCookie(cname, cvalue, exhours) {
     }
     return "";
   }
-
   async function refreshToken () {
         if(getCookie("access_token") === "" )
         {
@@ -481,17 +492,13 @@ function setCookie(cname, cvalue, exhours) {
                 refresh_token: getCookie("refresh_token"),
                 })
               });
-
               const data = await result.json();
               // store new access token
               console.log("NEW AT:  " + data.access_token)
               
               setCookie("access_token", data.access_token, 1)
-
         }
   }
-
-
   function setPreviouslyRecommendedSongsInCookie(recSongUris)
   {
     if(getCookie("prev_rec_songs") === "")
@@ -507,14 +514,11 @@ function setCookie(cname, cvalue, exhours) {
       const newList = oldPrev.concat(recSongUris);
       console.log('new stuff ' + JSON.stringify(newList));
       setCookie("prev_rec_songs", JSON.stringify(newList));
-
     }
   }
   
   
   
-
-
 </script>
 
 
@@ -529,8 +533,6 @@ function setCookie(cname, cvalue, exhours) {
       }
       .btn:hover{ 
         border: 3.5px white solid; 
-
-
       }
       .btn:hover + .display-1  {
         box-shadow: -2px 6px 8pxgba(59, 50, 50,  r0.4)
@@ -550,14 +552,25 @@ li {
 a, button {
   color: white;
 }
-
 body {
   color: white;
-
 }
-
 html, body, template {
   overflow-y: scroll !important;
 }
-
 </style>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+You have no unread notifications

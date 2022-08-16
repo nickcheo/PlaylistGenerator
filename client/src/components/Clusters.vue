@@ -63,7 +63,7 @@
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
                   
                 </li>
-            </div> -->
+            </div> 
   
 
         
@@ -193,6 +193,26 @@
 
           </div>
           </a>
+
+          <a href="/" style="text-decoration: none; color: white">
+          <div class="row cluster-result" :style="this.clusterRowStyles">
+                    <div class="col-md-7" style = "text-align: left;">
+                        <h1 class="progress-title"><strong>&lt;</strong></h1>
+                    </div>                
+               
+
+          </div>
+          </a>
+
+      <!-- <a href="/" class="btn btn-primary">
+      <div class="row cluster-result" :style="this.clusterRowStyles">
+                    <div class="col-md-7" style = "text-align: left;">
+      <span class="glyphicon glyphicon-chevron-left" id="icon2"></span>
+      test
+                    </div>
+      </div>
+      </a> -->
+     
   </div>  
 </div>
 
@@ -910,6 +930,10 @@ body {
         border-radius: 100%;
         width: 25px;
         height: auto;
+      }
+      #icon2 {
+        border-radius: 0%;
+        color:black
       }
     </style>
 
