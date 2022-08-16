@@ -150,15 +150,9 @@ export default {
       try {
         // let response = await fetch('http://localhost:2000/login')
 
-<<<<<<< HEAD
         const clientId="a1c0d6debc2c49038fb8a43eb5df637a"
         const clientSecret="76669d3b28f94e8da7662d91cc39cc94"
         const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next'
-=======
-        const clientId=process.env.VUE_APP_CLIENT_ID
-        const clientSecret=process.env.VUE_APP_CLIENT_SECRET
-        const redir = process.env.VUE_APP_REDIRECT_URI
->>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
         console.log(redir)
 
         console.log(process.env.VUE_APP_CLIENT_ID)

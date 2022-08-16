@@ -190,7 +190,7 @@ import Api from '../services/Api';
             return null;
           
           const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
-          const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next';
+          const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/#/next" : 'http://localhost:8080/next');
           console.log('redir ' + redir);
           const result = await fetch(tokenBaseUrl, {
           method: 'POST',
@@ -208,6 +208,9 @@ import Api from '../services/Api';
 >>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
             })
           });
+
+          if(process.env.NODE_ENV != 'development')
+          window.href.url = "https://variefy.herokuapp.com/?code="+authCode+'&state='+state+'/#/next';
 
 
           const data = await result.json();
