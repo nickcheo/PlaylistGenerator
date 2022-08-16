@@ -11,13 +11,16 @@ const querystring = require('querystring')
 const bodyParser = require('body-parser')
 const clusters = require('../clusters')
 const fetch = require('cross-fetch')
+const history = require('connect-history-api-fallback');
 // const { MinPriorityQueue} = require('@datastructures-js/priority-queue');
 
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
+app.use(history({verbose: true}))
 
 const path = __dirname + '/../../client/dist'
+
 
 app.use(express.static(path))
 
