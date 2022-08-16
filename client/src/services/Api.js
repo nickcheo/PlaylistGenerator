@@ -4,6 +4,6 @@ import axios from 'axios';
 export default () =>
 {
     return axios.create({
-        baseURL: process.env.NODE_ENV != 'development' ? 'https://variefy.herokuapp.com/' : 'http://localhost:2000/'
+        baseURL: 'http://localhost:2000/'
     })
 }
