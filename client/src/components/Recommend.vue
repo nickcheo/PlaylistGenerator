@@ -1,31 +1,3 @@
-Skip to content
-Search or jump to…
-Pulls
-Issues
-Marketplace
-Explore
- 
-@nickcheo 
-nickcheo
-/
-PlaylistGenerator
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-More
-PlaylistGenerator/client/src/components/Recommend.vue
-@akelch11
-akelch11 allow concurrent running of scripts
-Latest commit 3886844 yesterday
- History
- 2 contributors
-@akelch11@yashpatel21
-563 lines (438 sloc)  20 KB
 
 <template>
   <!-- <div class="hello">
@@ -604,18 +576,3 @@ html, body, template {
   overflow-y: scroll !important;
 }
 </style>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-You have no unread notifications
