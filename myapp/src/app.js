@@ -3,7 +3,7 @@
 console.log('hello')
 console.log('hello2')
 const express = require('express')
-const port = 2000
+const port = process.env.PORT || 2000
 const client_id = 'a1c0d6debc2c49038fb8a43eb5df637a'
 const client_secret = '76669d3b28f94e8da7662d91cc39cc94'
 const cors = require('cors')
@@ -263,10 +263,11 @@ app.post('/getclusters', async (req, res) => {
 		const K = 4
 
 		console.log('done')
+		const randomClusterSeed = Math.floor(Math.random() * 1000000000);
 		// clusters.printKMeansCentroids(K, use rAttributeMatrix);
-		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K)
+		const songIdToClusterLabelMap = await clusters.songsToClusters(idToSongName, userTopTrackIdList, userAttributeMatrix, K, randomClusterSeed)
 		const clusterGroups = parseClusterGroups(songIdToClusterLabelMap, idToSongName, K)
-		const centroids = await clusters.getCentroids(K, userAttributeMatrix)
+		const centroids = await clusters.getCentroids(K, userAttributeMatrix, randomClusterSeed)
 		let response = {}
 		response['songIdToClusterLabelMap'] = songIdToClusterLabelMap
 		response['clusterGroups'] = clusterGroups

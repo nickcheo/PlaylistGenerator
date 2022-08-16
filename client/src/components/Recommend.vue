@@ -83,6 +83,25 @@ Latest commit 3886844 yesterday
                                                   style = "background-color: #e3574d;">
                                                   Spice it up!                                                  </a>
                                               </div>
+
+                                              
+      <div class="row main-row justify-content-between align-items-center">
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+        <div class="col-sm">
+            <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+        </div>
+         <div class="col-sm" v-if="this.coverData.tracks.length >= 4">
+            <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+        </div>
+        <div class="col-sm" v-if="this.coverData.tracks.length >= 5">
+            <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+        </div>
+      </div>
                                         
                                         </div>
                                     </div>
@@ -105,7 +124,8 @@ Latest commit 3886844 yesterday
                                     <h1 class="display-4"><strong>Here's your new mix{{username}}</strong></h1>
                                     <br/>
                                     <br/>
-                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                         as="style" rel="stylesheet preload prefetch" ></iframe>
                                     <br/>
                                     <br/>
                                     <div class="container px-3">
@@ -166,8 +186,13 @@ const querystring = require('querystring');
         filterChoiceClicked: false,
         seedString: "",
         topSongNames: [],
+<<<<<<< HEAD
         clusterImage: {},
         clustersBestTwoSongIDs:""
+=======
+        coverData: []
+
+>>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
       }
     },
     methods:
@@ -179,8 +204,15 @@ const querystring = require('querystring');
           const authCode = params.get('code');
           const state = params.get('state');
           const querystring = require('querystring')
+<<<<<<< HEAD
           const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
             const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+=======
+
+          const client_id=process.env.VUE_APP_CLIENT_ID
+            const client_secret=process.env.VUE_APP_CLIENT_SECRET
+
+>>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
           if(state == null)
             return null;
           
@@ -195,7 +227,7 @@ const querystring = require('querystring');
           body: querystring.stringify({
             grant_type: "authorization_code",
             code: authCode,
-            redirect_uri: 'http://localhost:8080/next',
+            redirect_uri: process.env.VUE_APP_REDIRECT_URI,
           })
         });
           const data = await result.json();
@@ -217,8 +249,8 @@ const querystring = require('querystring');
         console.log("attempting token refresh")
         if(getCookie("access_token") === "" )
         {
-              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+              const client_id=process.env.VUE_APP_CLIENT_ID
+              const client_secret=process.env.VUE_APP_CLIENT_SECRET
               const querystring = require('querystring')
           
           
@@ -257,7 +289,7 @@ const querystring = require('querystring');
             console.log(recSongUriList);
           
           // get user id
-            const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
+            const meResponse = await fetch('https://api.spotify.com/v1/me', {
                   method: 'GET',
                   headers: { 'Authorization' : 'Bearer ' + aToken,
                   'Content-Type' : 'application/json'}
@@ -360,6 +392,32 @@ const querystring = require('querystring');
         this.topSongNames = topSongNames;
         const seedString = seeds.join(',');
         this.seedString = seedString;
+<<<<<<< HEAD
+=======
+
+
+        // add songs to playlist
+              const albumCovers = await fetch(`https://api.spotify.com/v1/tracks/?ids=${seedString}`, {
+                  method: 'GET',
+                  headers: { 'Authorization' : 'Bearer ' + this.access_token,
+                              'Content-Type' : 'application/json'
+                },
+                
+              });
+
+              const coverData = await albumCovers.json();
+              console.log(coverData)
+
+              console.log(coverData.tracks[0].album.images[0].url);
+
+              this.coverData = coverData;
+
+
+
+
+
+
+>>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
     //   const recResult = await Api().post('/getrecommendations', 

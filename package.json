@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js --exec  \"npm run lint && node\"",
     "lint": "pwd",
-    "preinstall": "cd $(pwd)",
-    "heroku-prebuild": "npm install --dev --prefix ./client"
+    "heroku-prebuild": "npm install --dev --save-dev [--save-prod] --prefix ./client"
   },
   "author": "",
   "license": "ISC",
