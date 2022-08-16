@@ -1,7 +1,8 @@
 // not to be confused with PlaylistGenerator/myapp/app.js
 // this is for following Vue + Node js setup
+// heroku build
 console.log('hello')
-console.log('hello2')
+const path = require('path')
 const express = require('express')
 const port = process.env.PORT || 2000
 const client_id = 'a1c0d6debc2c49038fb8a43eb5df637a'
@@ -17,12 +18,12 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const path = __dirname + '/../../client/dist'
+const pathy = __dirname + '/../../client/dist'
 
-app.use(express.static(path))
+// app.use(express.static(pathy))
 
 app.get('/', function (req, res) {
-	res.sendFile(path + 'index.html')
+	res.sendFile(pathy + 'index.html')
 })
 
 app.listen(port, () => {

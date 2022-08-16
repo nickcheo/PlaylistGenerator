@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js --exec  \"npm run lint && node\"",
-    "lint": "pwd"
+    "lint": "pwd",
+    "heroku-prebuild": "npm install --dev --save-dev [--save-prod] --prefix ./client"
   },
   "author": "",
   "license": "ISC",
