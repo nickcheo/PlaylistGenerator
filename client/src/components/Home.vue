@@ -150,9 +150,9 @@ export default {
       try {
         // let response = await fetch('http://localhost:2000/login')
 
-        const clientId=process.env.VUE_APP_CLIENT_ID
-        const clientSecret=process.env.VUE_APP_CLIENT_SECRET
-        const redir = process.env.VUE_APP_REDIRECT_URI
+        const clientId="a1c0d6debc2c49038fb8a43eb5df637a"
+        const clientSecret="76669d3b28f94e8da7662d91cc39cc94"
+        const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next'
         console.log(redir)
 
         console.log(process.env.VUE_APP_CLIENT_ID)
@@ -185,9 +185,9 @@ export default {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       } else {
-                                      console.log(process.env.VUE_APP_CLIENT_ID)
-          const client_id=process.env.VUE_APP_CLIENT_ID
-          const client_secret=process.env.VUE_APP_CLIENT_SECRET
+          console.log(process.env.VUE_APP_CLIENT_ID)
+         const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+        const client_secret="76669d3b28f94e8da7662d91cc39cc94"
           const querystring = require('querystring')
           
           const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
