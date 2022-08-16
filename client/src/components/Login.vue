@@ -190,7 +190,7 @@ import Api from '../services/Api';
             return null;
           
           const tokenBaseUrl = 'https://accounts.spotify.com/api/token?';
-          const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next';
+          const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/#/next" : 'http://localhost:8080/next');
           console.log('redir ' + redir);
           const result = await fetch(tokenBaseUrl, {
           method: 'POST',

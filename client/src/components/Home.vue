@@ -152,7 +152,7 @@ export default {
 
         const clientId="a1c0d6debc2c49038fb8a43eb5df637a"
         const clientSecret="76669d3b28f94e8da7662d91cc39cc94"
-        const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next'
+        const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/#/next" : 'http://localhost:8080/next')
         console.log(redir)
 
         
