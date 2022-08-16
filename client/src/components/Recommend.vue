@@ -186,13 +186,8 @@ const querystring = require('querystring');
         filterChoiceClicked: false,
         seedString: "",
         topSongNames: [],
-<<<<<<< HEAD
-        clusterImage: {},
-        clustersBestTwoSongIDs:""
-=======
         coverData: []
 
->>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
       }
     },
     methods:
@@ -204,15 +199,10 @@ const querystring = require('querystring');
           const authCode = params.get('code');
           const state = params.get('state');
           const querystring = require('querystring')
-<<<<<<< HEAD
-          const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-            const client_secret="76669d3b28f94e8da7662d91cc39cc94"
-=======
 
           const client_id=process.env.VUE_APP_CLIENT_ID
             const client_secret=process.env.VUE_APP_CLIENT_SECRET
 
->>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
           if(state == null)
             return null;
           
@@ -392,8 +382,6 @@ const querystring = require('querystring');
         this.topSongNames = topSongNames;
         const seedString = seeds.join(',');
         this.seedString = seedString;
-<<<<<<< HEAD
-=======
 
 
         // add songs to playlist
@@ -417,7 +405,6 @@ const querystring = require('querystring');
 
 
 
->>>>>>> 9c6fea10cfd0c928cc022471e7bdaa10994c474a
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
     //   const recResult = await Api().post('/getrecommendations', 
