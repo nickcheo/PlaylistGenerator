@@ -209,13 +209,13 @@
                                     <div class="container px-3">
                                         <div class="row gx-5">
                                                 <div class="col text-end">
-                                                <a href="/" class="btn btn-dark btn-lg rounded-pill" id="icon3">
+                                                <a href="/" class="btn" id="icon3">
                                                   <span class="glyphicon glyphicon-refresh" id="icon2"></span>
                                                   Make Another Playlist
                                                 </a>
                                               </div>
                                               <div class="col text-start">
-                                                  <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn btn-dark btn-lg rounded-pill">
+                                                  <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn">
                                                     <img src="../assets/spotifylogo.png" id="icon"/> 
                                                     View in Spotify
                                                   </a>

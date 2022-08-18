@@ -51,18 +51,19 @@
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
       </li>
       <li class="nav-item">
-      <div class="dropdown"> <button class="btn-primary dropdown-toggle" data-toggle="dropdown" aria-pressed="false" autocomplete="off"><img id="profile-pic" :style="this.profileStyle"/></button>
+      <div class="dropdown"><a type = "button" @click="dropDown()"><img id="profile-pic" :style="this.profileStyle"/></a>
              
           <!-- Dropdown Menu -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li class="dropdown__menu-item">
+            <div v-if="dropped">
+            <p>hello</p>
+              
+                <!-- <li>
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
                 </li>
                 <hr>
-                <li class="dropdown__menu-item" @click="logout">
+                <li @click="logout">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
-                  
-                </li>
+                </li> -->
             </div>
        </div>
        </li>
@@ -158,7 +159,8 @@ import Api from '../services/Api';
         username: getCookie('username') != "" ? (', ' + getCookie('username'))  : '',
         dataHasLoaded: false,
         topURLImages: [],
-        profileStyle: ""
+        profileStyle: "",
+        dropped: false
         // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
       }
     },
@@ -173,6 +175,19 @@ import Api from '../services/Api';
     methods:
     {
    
+      dropDown: async function()
+      {
+        console.log(this.$data.dropped);
+        if (this.$data.dropped = true) {
+          this.$data.dropped = false;
+        } else {
+          this.$data.dropped = true;
+        }
+
+        return this.$data.dropped;
+        
+        
+      },
     
       getAccessToken: async () => {
         /* eslint-disable */
