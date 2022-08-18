@@ -21,13 +21,16 @@
   
   
                 
-                    <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded">
+                    <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded && !arrowClicked">
                     <div class="hero gradient">
-      <div class="container-fluid">
+      <div class="container-fluid" v-if="!filterChoiceClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
-                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 100px;">
-                      <h1 class="display-4" align = 'left'><strong>You chose your favorite category!</strong></h1>     
-                        <p class="lead"><strong>{{this.compositionRatios[clusterIndex]}}% of your most listened to music is similar to {{this.topSongNames[0]}} and {{this.topSongNames[1]}}.</strong></p>
+                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 150px;">
+                      <h1 class="display-4" align = 'left'><strong>You chose your {{this.categoryType[clusterIndex]}} category!</strong></h1>     
+                        <p class="lead"><strong>{{this.compositionRatios[clusterIndex]}}% of your favorite music is similar to {{this.topSongNames[0]}} and {{this.topSongNames[1]}}.
+                        <br>
+                        <br>Other songs in this category include {{this.topSongNames[2]}}, {{this.coverData.tracks[3].name}} by {{this.coverData.tracks[3].artists[0].name}}, 
+                        <br>and {{this.coverData.tracks[4].name}} by {{this.coverData.tracks[4].artists[0].name}}.</strong></p>
                         <div class="progress">
                     
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[clusterIndex]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
@@ -45,6 +48,11 @@
         <br>
             <br>
                 <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                             <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-20 text-center">
@@ -55,28 +63,7 @@
 
 
                                      <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
-                                        <div class="row gx-5">
-                                                <div class="col text-end">
-                                                <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn btn-dark btn-lg rounded-pill" id="icon3"
-                                                  style = "background-color: #cb4cf5;">
-                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
-                                                  Fresh, but familiar
-                                                </a>
-                                              </div>
-                                              <div class="col text-start">
-                                                  <a type = "button"  @click="chooseFilterAndRecommend('TRUE')" class="btn btn-dark btn-lg rounded-pill"
-                                                  style = "background-color: #e3574d;">
-                                                  Spice it up!                                                  </a>
-                                              </div>
-
-            <br/>
-            <br/>         
-            <div class = 'row' style = 'padding-bottom: 50px;'></div>
-            
-            
-             
-          </div>
-      <div class="row main-row justify-content-between align-items-center">
+                                     <div class="row main-row justify-content-between align-items-center">
         <div class = 'row'>
             <div class="col-sm-4">
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
@@ -99,8 +86,19 @@
                 <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
             </div>
              <div class ='col-sm-2'></div>
+             <div class="col text-end">
+                                                <a type = "button" @click="moveToPlaylistPage" class="btn" id="icon3"
+                                                  style = "background-color: transparent">
+                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Generate a similar playlist >
+                                                </a>
+             </div>
         </div>
       </div>
+
+
+      
+      
                                         
                                         </div>
                                     </div>
@@ -109,7 +107,88 @@
                                 </div>
                             </div>
                             </div>
-               
+               <div class="container-fluid" style="padding:10px;" id="loading-row" >
+                            <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-20 text-center">
+     
+                                    <div class="spinner-border" role="status" v-if="filterChoiceClicked && !dataHasLoaded">
+                                        <span class="sr-only"></span>
+                                    </div>
+
+
+                                     <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded && arrowClicked">
+                                     <div class="row main-row justify-content-between align-items-center">
+        <div class = 'row' v-if="!dataHasLoaded" style="padding-top: 25px">
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+            </div>
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+            </div>
+            <div class="col-sm-4">
+                <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+            </div>
+        </div>
+        <div class = 'row' style = 'padding-bottom: 10px;' v-if="!dataHasLoaded"></div>
+        <div class = 'row'>
+          <div class ='col-sm-2'></div>
+            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
+                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+            </div>
+           
+            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
+                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+            </div>
+        </div>
+      </div>
+      <div class="hero gradient" v-if="arrowClicked">
+      <div class="container-fluid" v-if="!filterChoiceClicked && arrowClicked">
+          <div class="row" id="title-row" :style="this.titleRowStyles">
+                    <div class="col-lg-12" style = "text-align: left; padding-top: 0px;">
+                      <h1 class="display-4" align = 'left'><strong>What type of playlist would you like to generate?</strong></h1>     
+                        <p class="lead"><strong>Fresh, but familiar does this and Spice it up does that.</strong></p>
+
+                    </div>
+                    
+          </div>
+          
+      </div>
+    </div>
+    
+
+
+      
+                                        <div class="row gx-5">
+                                                <div class="col text-end">
+                                                <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn" id="icon3"
+                                                  style = "background-color: #6CC9CF;">
+                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Fresh, but familiar
+                                                </a>
+                                              </div>
+                                              <div class="col text-start">
+                                                  <a type = "button"  @click="chooseFilterAndRecommend('TRUE')" class="btn"
+                                                  style = "background-color: #EA8FCB;">
+                                                  Spice it up!                                                  </a>
+                                              </div>
+
+            <br/>
+            <br/>         
+            <div class = 'row' style = 'padding-bottom: 50px;'></div>
+            
+            
+             
+          </div>
+      
+                                        
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                            </div>
               
 
 
@@ -183,11 +262,13 @@ const querystring = require('querystring');
         dataHasLoaded: false,
         externalPlaylistUrl: "/",
         filterChoiceClicked: false,
+        arrowClicked: false,
         seedString: "",
         topSongNames: [],
         coverData: [],
         styleStrings: Array(4),
         compositionRatios: Array(4),
+        categoryType: Array(4),
         titleRowStyles: "opacity: 0%;",
         clusterRowStyles: "opacity: 0%;",
         albumStyles: "opacity: 0%;",
@@ -269,6 +350,9 @@ const querystring = require('querystring');
               setCookie("access_token", data.access_token, 1)
         }
       },
+
+      
+
       handleRecommendations: async function (seedString, aToken, filterFlag)
       {
             const doWeFilter = filterFlag === "TRUE" ? true : false;
@@ -340,6 +424,11 @@ const querystring = require('querystring');
         await this.handleRecommendations(this.seedString, getCookie('access_token'), filterChoice);
         
       },
+
+      moveToPlaylistPage: async function()
+      {
+        this.$data.arrowClicked = true;
+      }
     },
     async mounted(){
       /* eslint-disable */
@@ -375,6 +464,11 @@ const querystring = require('querystring');
       for(let i = 0; i < 4; i++) {
       this.styleStrings[i] = "width: 0%";
     }
+
+    this.categoryType[0] = "most popular";
+    this.categoryType[1] = "second most popular";
+    this.categoryType[2] = "third most popular";
+    this.categoryType[3] = "least popular";
     //   this.username = await (", " + getCookie('username'))
       // really make sure username is visble after first login
         // last ting will have nothing
@@ -388,7 +482,8 @@ const querystring = require('querystring');
         console.log(seeds);
         // last parameter is TOPSONGS:<topsong1name>|<topsong2name>
         const topSongNames = seeds.pop().split(':')[1].split('|');
-        console.log(topSongNames)
+        console.log(topSongNames);
+
         this.topSongNames = topSongNames;
         const clusterIndex = seeds.pop();
         console.log(clusterIndex);
@@ -409,7 +504,7 @@ const querystring = require('querystring');
               const coverData = await albumCovers.json();
               console.log(coverData)
 
-              console.log(coverData.tracks[0].album.images[0].url);
+              console.log(coverData.tracks[3].name);
 
               this.coverData = coverData;
 
@@ -621,9 +716,11 @@ function setCookie(cname, cvalue, exhours) {
 
 <style scoped>
       .btn{
-      font-size: 20px;
-      cursor: pointer;
-      border-radius: 12px; 
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 12px; 
+        box-shadow: -4px 20px 30px rgba(2, 2, 2, 0.2);
+        transition: all 0.2s ease-in-out;
     
       }
       .btn:hover{ 
@@ -659,9 +756,32 @@ html, body, template {
   transition: opacity 500ms;
 
 }
+
+.album-covers {
+  border: 5px white solid;
+  border-radius: 15px; 
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 500ms;
+  transition: width 250ms ease-in-out;
+  animation: float 6s ease infinite;
+
+
+}
+
+.album-covers:hover{
+    box-shadow: 0px 6px 8px rgba(34, 25, 25, 0.4);
+    height: auto;
+    width: 275px;
+} 
+
+.album-covers:not(:hover){
+    box-shadow: -2px 4px 4px rgba(34, 25, 25, 0.4);
+    height: auto;
+    width: 250px;
+} 
 .progress {
   height: 100px; 
-  width:50%;
+  width:83%;
   border-radius: 15px;
   transition: box-shadow 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;

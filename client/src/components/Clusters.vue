@@ -317,10 +317,12 @@ import Api from '../services/Api';
                 recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][1] + "|*|");
                 recommendParameterString += (this.$data.clustersBestTwoSongIds[clusterIndex][2] + "|*|");
 
+
                 let topIds = [
                                      this.$data.clustersBestTwoSongIds[clusterIndex][0],
                                      this.$data.clustersBestTwoSongIds[clusterIndex][1], 
-                                     this.$data.clustersBestTwoSongIds[clusterIndex][2]
+                                     this.$data.clustersBestTwoSongIds[clusterIndex][2],
+                   
                                     ]
                 if(this.clusterList[clusterIndex].length > 3)
                 {
@@ -351,7 +353,7 @@ import Api from '../services/Api';
                 }
                                    
                 if(this.clustersBestTwoSongIds != null && this.songIdToNameMap != null)
-                recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]]
+                recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]] + "|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][2]]
                 // recommendParameterString += "|*|" + clusterIndex;
 
                 console.log(recommendParameterString)

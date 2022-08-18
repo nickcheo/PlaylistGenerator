@@ -80,7 +80,7 @@
                         </div> 
                         <div id = 'check-box'></div> -->
                         
-                        <button  class="loginbutton" @click = "getSpotifyLogin">
+                        <button  class="btn" @click = "getSpotifyLogin">
                   Connect with Spotify
                   <img src="../assets/spotify-icon-2.png" id="icon"/>
                 </button>
@@ -298,6 +298,24 @@ function getCookie(cname) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
+.btn{
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 12px; 
+        box-shadow: -4px 20px 30px rgba(2, 2, 2, 0.2);
+        transition: all 0.2s ease-in-out;
+    
+      }
+      .btn:hover{ 
+        border: 3.5px white solid; 
+
+
+      }
+      .btn:hover + .display-1  {
+        box-shadow: -2px 6px 8pxgba(59, 50, 50,  r0.4)
+        
+      }
 h1, h2 {
   font-weight: normal;
 }
