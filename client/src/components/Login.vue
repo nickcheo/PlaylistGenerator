@@ -176,12 +176,25 @@ import Api from '../services/Api';
     
       getAccessToken: async () => {
         /* eslint-disable */
-        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
+
+        console.log("in gAT, AT: " + getCookie('access_token') + " , RT: " + getCookie('refresh_token'))
+
+        if(getCookie('access_token') === 'undefined' || getCookie('access_token').trim() === ''  && getCookie('refresh_token') !== "")
+        {
+          console.log('AT was undefined')
+          refreshToken();
+          return [getCookie("access_token"), getCookie("refresh_token")];
+        }
+        else if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
           || getCookie("username") === "" || getCookie("username") == undefined) {
+            console.log('middle')
           const params = new URLSearchParams(document.location.search);
           const authCode = params.get('code');
           const state = params.get('state');
           const querystring = require('querystring')
+
+          console.log('authCode: '+authCode)
+          console.log('state: ' + state)
 
           const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
         const client_secret="76669d3b28f94e8da7662d91cc39cc94"
@@ -225,9 +238,13 @@ import Api from '../services/Api';
 
 
           return [access_token, refresh_token];
-        } else {
+        } 
+        else {
+          console.log("returned: " + getCookie("access_token") +  " " + getCookie("refresh_token"));
           return [getCookie("access_token"), getCookie("refresh_token")];
         }
+
+        console.log('whats going on')
         
       },
 
@@ -247,10 +264,10 @@ import Api from '../services/Api';
       },
       refreshToken: async () => {
         console.log("attempting token refresh")
-        if(getCookie("access_token") === "" )
+        if(getCookie("access_token") === "" || getCookie("access_token") === "undefined" )
         {
-              const client_id=process.env.VUE_APP_CLIENT_ID
-              const client_secret=process.env.VUE_APP_CLIENT_SECRET
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
               const querystring = require('querystring')
           
           
@@ -286,6 +303,8 @@ import Api from '../services/Api';
       /* eslint-disable */
 
       let tokens = await this.getAccessToken();
+       if(getCookie('access_token') === 'undefined')
+        console.log('undefined AT');
       console.log(tokens);
       // refresh token if access expired
       if( (this.access_token === "" || !this.access_token || getCookie("access_token") === "") && getCookie("refresh_token") != "")
@@ -454,10 +473,9 @@ import Api from '../services/Api';
   }
 
   async function refreshToken () {
-        if(getCookie("access_token") === "" )
-        {
-              const client_id=process.env.VUE_APP_CLIENT_ID
-              const client_secret=process.env.VUE_APP_CLIENT_SECRET
+        
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
               const querystring = require('querystring')
           
           
@@ -481,7 +499,7 @@ import Api from '../services/Api';
               
               setCookie("access_token", data.access_token, 1)
 
-        }
+    
   }
 
   

@@ -181,6 +181,10 @@ export default {
       /* eslint-disable */
       // directs to /next route in router after access token is registered
       // enough information to either query songs or refresh the access token upon login
+
+      if(getCookie('access_token') === 'undefined')
+        console.log('undefined AT');
+
       if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
