@@ -179,13 +179,16 @@ import Api from '../services/Api';
 
         console.log("in gAT, AT: " + getCookie('access_token') + " , RT: " + getCookie('refresh_token'))
 
-        if(getCookie('access_token') === 'undefined' || getCookie('access_token').trim() === ''  && getCookie('refresh_token') !== "undefined" && getCookie('refresh_token').trim() !== "")
-        {
-          console.log('AT was undefined')
-          refreshToken();
-          return [getCookie("access_token"), getCookie("refresh_token")];
-        }
-        else if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
+        // if(getCookie('access_token') === 'undefined' || getCookie('access_token').trim() === ''  && getCookie('refresh_token') !== "undefined" && getCookie('refresh_token').trim() !== "")
+        // {
+        //   console.log('AT was undefined')
+        //   refreshToken();
+        //   return [getCookie("access_token"), getCookie("refresh_token")];
+        // }
+        // else
+        
+        
+        if(getCookie("access_token") === "" || getCookie("refresh_token") === "" || getCookie("access_token") === undefined
           || getCookie("username") === "" || getCookie("username") == undefined) {
             console.log('middle')
           const params = new URLSearchParams(document.location.search);
