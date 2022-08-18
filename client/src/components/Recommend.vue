@@ -25,13 +25,26 @@
                     <div class="hero gradient">
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
-                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
-                      <h1 class="display-4" align = 'left'><strong>What type of playlist do you want{{username}}?</strong></h1>     
-                        <p class="lead"><strong>You chose to create a playlist based off of {{this.topSongNames[0]}} and {{this.topSongNames[1]}}</strong></p>
+                    <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 100px;">
+                      <h1 class="display-4" align = 'left'><strong>You chose your favorite category!</strong></h1>     
+                        <p class="lead"><strong>{{this.compositionRatios[clusterIndex]}}% of your most listened to music is similar to {{this.topSongNames[0]}} and {{this.topSongNames[1]}}.</strong></p>
+                        <div class="progress">
+                    
+                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[clusterIndex]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
+                              <div class="progress-value">{{this.compositionRatios[clusterIndex]}}%</div>
+                        </div>
+                        
                     </div>
+                    </div>
+                    
           </div>
+          
       </div>
     </div>
+    <br>
+        <br>
+            <br>
+                <br>
                             <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-20 text-center">
@@ -60,25 +73,10 @@
             <br/>         
             <div class = 'row' style = 'padding-bottom: 50px;'></div>
             
-            <div class="row cluster-result ">
-              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
-                  <h5 class="progress-title">{{this.topSongNames[0]}} <br/> {{this.topSongNames[1]}}</h5>
-                    <div class="progress">
-                    
-                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
-                              <div class="progress-value">{{this.compositionRatios[0]}}%</div>
-                        </div>
-                        
-                    </div>
-              </div>              
-               <!-- <div class="col-md-5">
-                <div class="img-container">
-                  <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
-                </div> -->
-              </div>
+            
              
           </div>
-      <!-- <div class="row main-row justify-content-between align-items-center">
+      <div class="row main-row justify-content-between align-items-center">
         <div class = 'row'>
             <div class="col-sm-4">
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
@@ -102,7 +100,7 @@
             </div>
              <div class ='col-sm-2'></div>
         </div>
-      </div> -->
+      </div>
                                         
                                         </div>
                                     </div>
@@ -381,6 +379,7 @@ const querystring = require('querystring');
       // really make sure username is visble after first login
         // last ting will have nothing
         // aray of seeds
+        
         const seeds = params.get('params') != null ? params.get('params').split("|*|").filter(el => el != "") : null;
         console.log(seeds);
         if(seeds == null || seeds.length == 0)
@@ -391,6 +390,9 @@ const querystring = require('querystring');
         const topSongNames = seeds.pop().split(':')[1].split('|');
         console.log(topSongNames)
         this.topSongNames = topSongNames;
+        const clusterIndex = seeds.pop();
+        console.log(clusterIndex);
+        this.clusterIndex = clusterIndex;
         const seedString = seeds.join(',');
         this.seedString = seedString;
 
@@ -652,13 +654,18 @@ html, body, template {
   overflow-y: scroll !important;
 }
 
+
+#title-row {
+  transition: opacity 500ms;
+
+}
 .progress {
   height: 100px; 
-  width:100%;
+  width:50%;
   border-radius: 15px;
   transition: box-shadow 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
-  margin-top: 20px;
+  margin-top:20px;
 
 }
 

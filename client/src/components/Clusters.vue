@@ -101,8 +101,8 @@
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
-                      <h1 class="display-4" align = 'left'><strong>Here are your favorite categories{{username}}.</strong></h1>     
-                        <p class="lead"><strong>Click each row to generate similar playlists!</strong></p>
+                      <h1 class="display-4" align = 'left'><strong>Here's how we categorized your favorite music!</strong></h1>     
+                        <p class="lead"><strong>Click each row for more information and to generate similar playlists.</strong></p>
                     </div>
           </div>
       </div>
@@ -346,12 +346,13 @@ import Api from '../services/Api';
                     while (topIds.includes(secondRandomId));
                     topIds.push(secondRandomId);
                     console.log('SRI' + secondRandomId);
-                    recommendParameterString += (secondRandomId+ "|*|");
+                    recommendParameterString += (secondRandomId+ "|*|" + clusterIndex + "|*|");
+
                 }
                                    
                 if(this.clustersBestTwoSongIds != null && this.songIdToNameMap != null)
                 recommendParameterString += "TOPSONGS:" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][0]]+"|" + this.songIdToNameMap[this.clustersBestTwoSongIds[clusterIndex][1]]
-
+                // recommendParameterString += "|*|" + clusterIndex;
 
                 console.log(recommendParameterString)
 
