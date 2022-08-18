@@ -155,7 +155,7 @@ export default {
         const redir = (process.env.NODE_ENV != 'development' ? "https://variefy.herokuapp.com/" : 'http://localhost:8080/') + 'next'
         console.log(redir)
 
-        console.log(process.env.VUE_APP_CLIENT_ID)
+        
         
        var authUrl = 'https://accounts.spotify.com/authorize?' +
 		    querystring.stringify({
@@ -189,9 +189,9 @@ export default {
         console.log(getCookie("access_token"))
         this.$router.replace("next")
       } else {
-          console.log(process.env.VUE_APP_CLIENT_ID)
+          
          const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-        const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+          const client_secret="76669d3b28f94e8da7662d91cc39cc94"
           const querystring = require('querystring')
           
           const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
@@ -209,6 +209,8 @@ export default {
 
 
           const data = await result.json();
+          console.log('data for inital tokens')
+          console.log(data);
           this.access_token = data.access_token;
 
           try {
