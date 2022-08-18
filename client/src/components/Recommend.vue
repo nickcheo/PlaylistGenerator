@@ -60,7 +60,25 @@
             <br/>         
             <div class = 'row' style = 'padding-bottom: 50px;'></div>
             
-      <div class="row main-row justify-content-between align-items-center">
+            <div class="row cluster-result ">
+              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
+                  <h5 class="progress-title">{{this.topSongNames[0]}} <br/> {{this.topSongNames[1]}}</h5>
+                    <div class="progress">
+                    
+                        <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[0]" aria-valuenow="25" aria-valuemin="0" aria-valuem  ="100">
+                              <div class="progress-value">{{this.compositionRatios[0]}}%</div>
+                        </div>
+                        
+                    </div>
+              </div>              
+               <!-- <div class="col-md-5">
+                <div class="img-container">
+                  <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
+                </div> -->
+              </div>
+             
+          </div>
+      <!-- <div class="row main-row justify-content-between align-items-center">
         <div class = 'row'>
             <div class="col-sm-4">
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
@@ -84,7 +102,7 @@
             </div>
              <div class ='col-sm-2'></div>
         </div>
-      </div>
+      </div> -->
                                         
                                         </div>
                                     </div>
@@ -93,7 +111,7 @@
                                 </div>
                             </div>
                             </div>
-                    </div>
+               
               
 
 
@@ -169,7 +187,13 @@ const querystring = require('querystring');
         filterChoiceClicked: false,
         seedString: "",
         topSongNames: [],
-        coverData: []
+        coverData: [],
+        styleStrings: Array(4),
+        compositionRatios: Array(4),
+        titleRowStyles: "opacity: 0%;",
+        clusterRowStyles: "opacity: 0%;",
+        albumStyles: "opacity: 0%;",
+        clusterList: [[1,1][1,1],[1,1],[1,1]]
 
       }
     },
@@ -349,6 +373,10 @@ const querystring = require('querystring');
           this.access_token = getCookie("access_token")
           this.refresh_token = getCookie("refresh_token")         
       }
+
+      for(let i = 0; i < 4; i++) {
+      this.styleStrings[i] = "width: 0%";
+    }
     //   this.username = await (", " + getCookie('username'))
       // really make sure username is visble after first login
         // last ting will have nothing
@@ -448,7 +476,43 @@ const querystring = require('querystring');
     //     this.dataHasLoaded = true;
     //     console.log('token on mount ' + this.access_token)      
     //     window.history.replaceState({}, document.title, "/");
-      
+    
+    const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
+    const topResponse = await Api().post('gettopcovers', {token: this.access_token})
+
+    console.log("test_nick");
+    console.log(topResponse);
+    console.log(clusterResponse);
+
+    // retrieve data from server response
+    const clusterGroups = await clusterResponse.data.clusterGroups;
+
+    this.clusterList = clusterGroups.sort((a,b) => {return b.length- a.length;});
+
+     const colorMap = ["#6CC9CF", "#EA8FCB",
+                  // "#F2E991", pastel yellow
+                  "#77dd77",
+                  "#C293FF"]
+    
+    let updatedStyleStrings = Array(4);
+
+      setTimeout(() => {
+      this.titleRowStyles = "opacity: 100%;"
+      setTimeout(() => {
+        this.clusterRowStyles = "opacity: 100%;"
+
+        setTimeout(() => {
+          for(let i = 0; i < this.compositionRatios.length; i++) {
+            this.compositionRatios[i] = String(Math.floor(((this.clusterList[i].length / 50) * 100)));
+            updatedStyleStrings[i] = "width: " + this.compositionRatios[i] + "%; " + ("background: " + colorMap[i] + ";");
+          }
+
+          this.albumStyles = "opacity: 100%;"
+          this.styleStrings = updatedStyleStrings;
+
+        }, 20);
+      }, 500);
+    }, 10);
       try {
         const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
         console.log(topResponse)
@@ -475,6 +539,7 @@ const querystring = require('querystring');
       }
     
     },
+    
 }
 
 
@@ -586,4 +651,24 @@ body {
 html, body, template {
   overflow-y: scroll !important;
 }
+
+.progress {
+  height: 100px; 
+  width:100%;
+  border-radius: 15px;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  margin-top: 20px;
+
+}
+
+.progress-bar {
+    -webkit-transition: width 2.5s ease;
+    transition: width 2.5s ease;
+    
+}
+.progress-value {
+  font-size: 18px;
+}
+
 </style>
