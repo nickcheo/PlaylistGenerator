@@ -179,7 +179,7 @@ import Api from '../services/Api';
 
         console.log("in gAT, AT: " + getCookie('access_token') + " , RT: " + getCookie('refresh_token'))
 
-        if(getCookie('access_token') === 'undefined' || getCookie('access_token').trim() === ''  && getCookie('refresh_token') !== "")
+        if(getCookie('access_token') === 'undefined' || getCookie('access_token').trim() === ''  && getCookie('refresh_token') !== "undefined")
         {
           console.log('AT was undefined')
           refreshToken();
