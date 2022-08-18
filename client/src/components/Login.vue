@@ -218,11 +218,12 @@ import Api from '../services/Api';
             })
           });
 
-          if(process.env.NODE_ENV != 'development')
-          window.href.url = "https://variefy.herokuapp.com/?code="+authCode+'&state='+state+'/#/next';
+          console.log('fetch done')
 
 
           const data = await result.json();
+          console.log('get full access token data');
+          console.log(data)
           console.log("AT: " + data.access_token);
           console.log("SCOPE " + data.scope);
           console.log("EXPIRES_IN: " + data.expires_in)
