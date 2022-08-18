@@ -58,6 +58,8 @@
 
             <br/>
             <br/>         
+            <div class = 'row' style = 'padding-bottom: 50px;'></div>
+            
       <div class="row main-row justify-content-between align-items-center">
         <div class = 'row'>
             <div class="col-sm-4">
@@ -70,6 +72,7 @@
                 <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
             </div>
         </div>
+        <div class = 'row' style = 'padding-bottom: 10px;'></div>
         <div class = 'row'>
           <div class ='col-sm-2'></div>
             <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
@@ -219,8 +222,8 @@ const querystring = require('querystring');
         console.log("attempting token refresh")
         if(getCookie("access_token") === "" )
         {
-              const client_id=process.env.VUE_APP_CLIENT_ID
-              const client_secret=process.env.VUE_APP_CLIENT_SECRET
+              const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+              const client_secret="76669d3b28f94e8da7662d91cc39cc94"
               const querystring = require('querystring')
           
           
