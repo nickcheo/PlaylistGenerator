@@ -6,18 +6,12 @@ import Home from "@/components/Home";
 import Login from "@/components/Login.vue";
 import Clusters from "@/components/Clusters"
 import Recommend from "@/components/Recommend"
+import About from '@/components/About'
 
 Vue.use(Router);
 /* eslint-disable */
 export default new Router({
   routes: [
-    // uncomment and remove other '/' path to get this back
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
-
     {
       path: "/",
       name: "Home",
@@ -42,6 +36,11 @@ export default new Router({
       path: "/recommend",
       name: "Recommend",
       component: Recommend
+    },
+    {
+      path: '/about',
+      name: "About",
+      component: About
     },
     {
       path: '/recommend/:myParam',

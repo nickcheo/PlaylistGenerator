@@ -34,10 +34,7 @@
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
       </li>
       <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about" @click="goAbout()">About</a></div>
-      </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
       </li>
       <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
     <li class="nav-item">
@@ -64,49 +61,79 @@
         <div class="col-sm">
             <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
-      </div>
+</div>
 
-      <div class="row main-row align-items-center">
+    <div class="row main-row align-items-center">
         <div class="container">
               <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
               <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
                 <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-lg-20 text-center">
-                      <h2 id="display1"><strong >Variefy</strong></h2>
-                        <p class="lead">A playlist generator for daring music listeners</p>
-                        <br>
-                        <!-- <div id = 'spin-box'>
-                        </div> 
-                        <div id = 'check-box'></div> -->
-                        
-                        <button  class="btn" @click = "getSpotifyLogin">
-                  Connect with Spotify
-                  <img src="../assets/spotify-icon-2.png" id="icon"/>
-                </button>
-
-                      
-
-                        
-                        <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
-                          <!--Button-->
-                    </div>
-                  </div>
+                    <div class="row">
+                        <div class="col-lg-20 text-center">
+                        <h2 id="display1"><strong >About Variefy</strong></h2>
+                            <p class="lead">A playlist generator for daring music listeners</p>
+                        </div>
+                     </div>
                 </div>
-            </div>
+                <div class="container-fluid" id="developers">
+		<h2>Our Team </h2>
+		<div class="row">
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/yash.png"  class="rounded-circle about_img">
+				<p>Yash Patel<br>
+                <a href = 'https://linkedin.com/in/yash-patel-0389921a2'><i class="bi bi-linkedin"></i></a>
+                <a href = 'https://github.com/yashpatel21'><i class="bi bi-github"></i></a>
+                </p>				
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/adam.png"   class="rounded-circle about_img">
+				<p>Adam Kelch<br>
+                <a href = 'https://linkedin.com/in/adam-kelch'><i class="bi bi-linkedin"></i></a>
+                <a href = 'https://github.com/akelch11'><i class="bi bi-github"></i></a>
+                </p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/nick.png"  class="rounded-circle about_img">
+				<p>Nicholas Cheong<br>
+                <a href = 'https://linkedin.com/in/nickcheo'><i class="bi bi-linkedin"></i></a>
+                <a href = 'https://github.com/nickcheo'><i class="bi bi-github"></i></a></p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/rahul.png" class="rounded-circle about_img">
+				<p>Rahul Nalam<br><a href = 'https://linkedin.com/in/rahulnalam'><i class="bi bi-linkedin"></i></a>
+                <a href = 'https://github.com/rahulnalam'><i class="bi bi-github"></i></a>
+                </p>
+			</div>
+		</div>
+	</div>
+
+        </div>
       </div>
+
+      <!-- <div class="container-fluid" id="developers">
+		<h2>Our Team </h2>
+		<div class="row">
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/rajiv.png"  class="rounded-circle about_img">
+				<p>Yash Patel<br>rswamy@princeton.edu</p>				
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/adam.png"   class="rounded-circle about_img">
+				<p>Adam Kelch<br><a href = 'https://linkedin.com/in/adam-kelch'><i class="bi bi-linkedin"></i></a></p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/ameya.png"  class="rounded-circle about_img">
+				<p>Nicholas Cheong<br>avaidya@princeton.edu</p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/jeremy.png" class="rounded-circle about_img">
+				<p>Rahul Nalam<br>jdapaah@princeton.edu</p>
+			</div>
+		</div>
+	</div> -->
 
 
       <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
-        <div class="col-sm">
-            <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
-        </div>
-        <div class="col-sm">
-            <img :src="this.topURLImages[4]" alt="bg image" class="album-covers" id="fifth-img"/>
-        </div>
-        <div class="col-sm">
-            <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
-        </div>
       </div>
     </div>
     </body>
@@ -132,9 +159,6 @@ export default {
     }
   },
   methods: {
-    goAbout: function() {
-      router.replace('/about');
-    },
     getSpotifyLogin: async () => {
       /* eslint-disable */
       const querystring = require('querystring')
@@ -185,64 +209,64 @@ export default {
       // directs to /next route in router after access token is registered
       // enough information to either query songs or refresh the access token upon login
 
-      if(getCookie('access_token') === 'undefined')
-        console.log('undefined AT');
+    //   if(getCookie('access_token') === 'undefined')
+    //     console.log('undefined AT');
 
-      if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
-        console.log(getCookie("access_token"))
-        this.$router.replace("next")
-      } else {
+    //   if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
+    //     console.log(getCookie("access_token"))
+    //     this.$router.replace("next")
+    //   } else {
           
-         const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-          const client_secret="76669d3b28f94e8da7662d91cc39cc94"
-          const querystring = require('querystring')
+    //      const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+    //       const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+    //       const querystring = require('querystring')
           
-          const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
+    //       const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
         
-          const result = await fetch(tokenBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type' : "application/x-www-form-urlencoded",
-            'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
-          },
-          body: querystring.stringify({
-            grant_type: "client_credentials"
-            })
-          });
+    //       const result = await fetch(tokenBaseUrl, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type' : "application/x-www-form-urlencoded",
+    //         'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+    //       },
+    //       body: querystring.stringify({
+    //         grant_type: "client_credentials"
+    //         })
+    //       });
 
 
-          const data = await result.json();
-          console.log('data for inital tokens')
-          console.log(data);
-          this.access_token = data.access_token;
+    //       const data = await result.json();
+    //       console.log('data for inital tokens')
+    //       console.log(data);
+    //       this.access_token = data.access_token;
 
-          try {
-            const topResponse = await Api().post('/gettopartists', {token: this.access_token})
-            console.log(topResponse)
-            // const topSongID = await topResponse.data.topTracksID
-            const topURLImages = await topResponse.data.ImageURLs
+    //       try {
+    //         const topResponse = await Api().post('/gettopartists', {token: this.access_token})
+    //         console.log(topResponse)
+    //         // const topSongID = await topResponse.data.topTracksID
+    //         const topURLImages = await topResponse.data.ImageURLs
 
-            // ensure page waits for image to be loaded
-            // this.topSongID = await topSongID;
-            this.topURLImages = await shuffle(topURLImages);
+    //         // ensure page waits for image to be loaded
+    //         // this.topSongID = await topSongID;
+    //         this.topURLImages = await shuffle(topURLImages);
 
-            this.dataHasLoaded = true;
+    //         this.dataHasLoaded = true;
 
-            setInterval(() => {
-              let currentImages = this.topURLImages.slice(0, 6);
-              let shuffledImages = shuffle(this.topURLImages.slice(6));
-              shuffledImages = shuffledImages.concat(currentImages);
+    //         setInterval(() => {
+    //           let currentImages = this.topURLImages.slice(0, 6);
+    //           let shuffledImages = shuffle(this.topURLImages.slice(6));
+    //           shuffledImages = shuffledImages.concat(currentImages);
               
-              this.topURLImages = shuffledImages;
-            }, 10000);
-          }
-          catch (error){
-            console.log('something went wrong fetching top album pics');
-            console.log(error);
-          }
+    //           this.topURLImages = shuffledImages;
+    //         }, 10000);
+    //       }
+    //       catch (error){
+    //         console.log('something went wrong fetching top album pics');
+    //         console.log(error);
+    //       }
           
 
-      }
+    //   }
   }
     
 }
@@ -372,6 +396,12 @@ a {
     width: 250px;
 } 
 
+.about_img{
+		height: 200px;
+		border: 1px;
+		border-radius: 10px;
+	}
+
 @keyframes float {
 	0% {
 		transform: translate(0px, 0px) rotate(0deg);
@@ -393,6 +423,7 @@ a {
 #second-img {
   animation-delay: -1s;
 }
+
 
 #third-img {
   animation-delay: -2s;
@@ -548,6 +579,10 @@ a {
 
       .myDiv {
         height:100px;
+      }
+
+      i.bi {
+          color: white;
       }
     </style>
 
