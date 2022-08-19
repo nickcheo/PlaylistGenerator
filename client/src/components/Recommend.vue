@@ -7,7 +7,7 @@
    -->
 
 
-<body onbeforeunload = "router.replace('localhost:8080/next')">
+<body onbeforeunload = "router.replace('/')">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
