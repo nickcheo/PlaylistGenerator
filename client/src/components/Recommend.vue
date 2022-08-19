@@ -7,7 +7,7 @@
    -->
 
 
-<body>
+<body onbeforeunload = "router.replace('localhost:8080/next')">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,8 +62,20 @@
                                     </div>
 
 
-                                     <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
-                                     <div class="row main-row justify-content-between align-items-center">
+    <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
+      <div class="row main-row justify-content-between align-items-center">
+          <div class="row text-end" style = 'padding-top: 5px; padding-bottom: 25px'>
+                                <div class = 'col-sm-3'></div>
+                                <div class = 'col-sm-6' align = 'center'>
+                                  <a type = "button" @click="moveToPlaylistPage" class="btn" id="icon3"
+                                    style = "background-color: transparent">
+                                            <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Generate a similar playlist →
+                                            <span class="glyphicon glyphicon-arrow-right" id="icon2"></span>
+                                  </a>
+                                  </div>
+                                  <div class = 'col-sm-3'></div>
+             </div>
         <div class = 'row'>
             <div class="col-sm-4">
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
@@ -86,13 +98,6 @@
                 <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
             </div>
              <div class ='col-sm-2'></div>
-             <div class="col text-end">
-                                                <a type = "button" @click="moveToPlaylistPage" class="btn" id="icon3"
-                                                  style = "background-color: transparent">
-                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
-                                                  Generate a similar playlist >
-                                                </a>
-             </div>
         </div>
       </div>
 
@@ -515,65 +520,7 @@ const querystring = require('querystring');
 
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
-    //   const recResult = await Api().post('/getrecommendations', 
-    //   {
-    //     seedString: seedString,
-    //     token: this.access_token,
-    //     isStrongFiltered: "TRUE"
-    //   });
-    //   const recData = await recResult.data
-    //   const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
-    //   console.log('rec song uri list')
-    //   console.log(recSongUriList);
-    
-    // // get user id
-    //   const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
-    //         method: 'GET',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-		// 			   'Content-Type' : 'application/json'}
-    //     });
-	  //   const meData  = await (meResponse.json());
-    //     console.log(meData);
-    //     const userId = meData['id'];
-    //     console.log('user Id: ' + userId)
-    //   // generate playlist
-    //   const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-    //         method: 'POST',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-    //                     'Content-Type' : 'application/json'
-		// 			},
-    //         body: JSON.stringify(
-    //           {
-    //             name: "My Variefy Mix", 
-    //             description: `A fresh playlist recommendation based on your music tastes. Composed with songs similar to ${topSongNames[0]} and ${topSongNames[1]}. Made with the Variefy app.`
-    //           }
-    //         )
-            
-    //     });
-	  //       const playlistData  = await (playlistGen.json());
-    //       const playlistId = playlistData.id;
-    //       this.playlistId = playlistId;
-    //       const playlistUrl = playlistData.external_urls.spotify;
-    //       this.externalPlaylistUrl = playlistUrl;
-    //       let playlistUrlParts = playlistUrl.split(".com/")
-    //       this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
-    //       console.log('created playlist???')
-    //       console.log(playlistId)
-    //       console.log(this.externalPlaylistUrl)
-    //     // add songs to playlist
-    //     const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-    //         method: 'POST',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-    //                     'Content-Type' : 'application/json'
-		// 			},
-    //         body: JSON.stringify({uris: recSongUriList})
-            
-    //     });
-    //     const addToPlaylistData  = await (addToPlaylistRequest.json());
-    //     this.dataHasLoaded = true;
-    //     console.log('token on mount ' + this.access_token)      
-    //     window.history.replaceState({}, document.title, "/");
-    
+  
     const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
     const topResponse = await Api().post('gettopcovers', {token: this.access_token})
 
@@ -607,9 +554,9 @@ const querystring = require('querystring');
           this.albumStyles = "opacity: 100%;"
           this.styleStrings = updatedStyleStrings;
 
-        }, 20);
-      }, 500);
-    }, 10);
+        }, 2);
+      }, 5);
+    }, 1);
       try {
         const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
         console.log(topResponse)
@@ -628,7 +575,7 @@ const querystring = require('querystring');
           shuffledImages = shuffledImages.concat(currentImages);
           
           this.topURLImages = shuffledImages;
-        }, 10000);
+        }, 1000);
       }
       catch (error){
         console.log('something went wrong fetching top album pics');
