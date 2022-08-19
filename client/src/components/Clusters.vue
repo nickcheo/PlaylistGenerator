@@ -42,8 +42,8 @@
       <li class="nav-item">
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
       </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+       <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" @click = "logOut()">Logout</a></div>
       </li>
      <li class="nav-item">
 
@@ -303,7 +303,11 @@ import Api from '../services/Api';
         }
         
       },
-
+      logOut: function () {
+          setCookie('access_token', "")
+          setCookie('refresh_token', "")
+          router.replace('/')
+      },
        toRecommend : function (clusterIndex){
           console.log('in to recommend')
           

@@ -48,7 +48,7 @@
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
       </li>
       <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" @click = "logOut()">Logout</a></div>
       </li>
       <li class="nav-item">
       <div class="dropdown"><a type = "button" @click="dropDown()"><img id="profile-pic" :style="this.profileStyle"/></a>
@@ -187,6 +187,11 @@ import Api from '../services/Api';
         return this.$data.dropped;
         
         
+      },
+      logOut: function () {
+          setCookie('access_token', "")
+          setCookie('refresh_token', "")
+          router.replace('/')
       },
     
       getAccessToken: async () => {
