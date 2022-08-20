@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<!-- <nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
   <div class="container">
 <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
 <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
@@ -47,13 +47,13 @@
       </li>
      <li class="nav-item">
 
-              <!-- <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
               <button class="loginbutton2" v-else key="off" @click="show = true">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
-           Dropdown Menu -->
+           Dropdown Menu 
             <div class="dropdown__menu"  v-if="show">
                 <li class="dropdown__menu-item">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
@@ -75,7 +75,9 @@
   </div>
   </div>
   
-</nav>
+</nav> -->
+
+<Header></Header>
 
 
       <div class="hero" id="loading-row" v-if="!dataHasLoaded">
@@ -197,7 +199,7 @@
           <a href="/" style="text-decoration: none; color: white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
-                        <h1 class="progress-title"><strong>&lt;</strong></h1>
+                        <h1 class="progress-title"><strong>←</strong></h1>
                     </div>                
                
 
@@ -227,7 +229,8 @@
 
 <script>
   import router from '../router';
-import Api from '../services/Api';
+  import Api from '../services/Api';
+  import Header from './Header.vue';
 
   export default {
     name: 'Login',
@@ -250,6 +253,7 @@ import Api from '../services/Api';
         profileStyle: ""
       }
     },
+    components: {Header},
     methods:
     {
       getAccessToken: async () => {

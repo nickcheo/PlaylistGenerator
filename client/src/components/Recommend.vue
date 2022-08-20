@@ -7,7 +7,7 @@
    -->
 
 
-<body onbeforeunload = "router.replace('/')">
+<body>
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +18,8 @@
       <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://localhost:* 'unsafe-inline' 'unsafe-eval'" />
     </head>
   
-  
-  
+
+<Header></Header>  
                 
                     <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded && !arrowClicked">
                     <div class="hero gradient">
@@ -250,6 +250,7 @@
 import { onBeforeMount } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
+import Header from './Header.vue';
 const querystring = require('querystring');
   export default {
     name: 'Login',
@@ -281,6 +282,7 @@ const querystring = require('querystring');
 
       }
     },
+    components: {Header},
     methods:
     {
       getAccessToken: async () => {
@@ -433,6 +435,10 @@ const querystring = require('querystring');
       moveToPlaylistPage: async function()
       {
         this.$data.arrowClicked = true;
+      },
+      handleBack: function()
+      {
+        router.replace('/')
       }
     },
     async mounted(){

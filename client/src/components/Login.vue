@@ -20,8 +20,9 @@
       
     </head>
 
+<Header></Header>
     
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<!-- <nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
 <div class="container">
 <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
 <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
@@ -53,17 +54,17 @@
       <li class="nav-item">
       <div class="dropdown"><a type = "button" @click="dropDown()"><img id="profile-pic" :style="this.profileStyle"/></a>
              
-          <!-- Dropdown Menu -->
+          
             <div v-if="dropped">
             <p>hello</p>
               
-                <!-- <li>
+                <li>
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
                 </li>
                 <hr>
                 <li @click="logout">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
-                </li> -->
+                </li> 
             </div>
        </div>
        </li>
@@ -73,7 +74,7 @@
   
   </div>
   
-</nav>
+</nav> -->
 
 
     <div id="login-container">
@@ -146,8 +147,9 @@
 
 
   import Vue, { onBeforeMount, ref } from 'vue';
-import router from '../router';
-import Api from '../services/Api';
+  import router from '../router';
+  import Api from '../services/Api';
+  import Header from './Header.vue';
 
 
   export default {
@@ -164,14 +166,9 @@ import Api from '../services/Api';
         // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
       }
     },
-    // name: "App",
-    // data() {
-    //   return {
-    //     // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
-    //   }
-    // },
-
-
+    components: {
+        Header,
+    },
     methods:
     {
    

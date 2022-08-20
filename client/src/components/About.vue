@@ -10,7 +10,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-<nav class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<!-- <nav class="fixed-top navbar-transparent navbar navbar-expand-lg">
 <div class="container">
 <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
 <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
@@ -46,7 +46,9 @@
     </ul>
   </div>
   </div>
-</nav>
+</nav> -->
+<Header></Header>
+
 
 
 
@@ -162,6 +164,7 @@
 
 import router from '../router';
 import Api from '../services/Api';
+import Header from './Header.vue';
 
 
 export default {
@@ -173,6 +176,10 @@ export default {
       dataHasLoaded: false,
       topURLImages: [],
     }
+  },
+  components:
+  {
+    Header,
   },
   methods: {
     getSpotifyLogin: async () => {
@@ -395,7 +402,7 @@ a {
   transition: opacity 500ms;
   transition: width 250ms ease-in-out, height 250ms ease-in-out;
   animation: float 6s ease infinite;
-  overflow: hidden;
+
 
 
 }
