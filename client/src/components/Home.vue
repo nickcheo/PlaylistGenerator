@@ -382,6 +382,9 @@ a {
   text-shadow: -1px 1px 8px white;
 }
 
+body {
+        overflow-y: auto;
+      }
 
 </style>
 <style>

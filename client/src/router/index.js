@@ -47,5 +47,5 @@ export default new Router({
       redirect: to => { return {path: '/recommend', query: {params: to.params.myParam} }}
     }
   ],
-  mode: "history"
+  mode: "history",
 });
