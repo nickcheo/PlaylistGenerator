@@ -371,6 +371,10 @@ app.post('/getrecommendations', async (req, res) => {
 	res.send(JSON.stringify(recommendationResponse))
 })
 
+app.get('/.well-known/acme-challenge/:content', function(req, res) {
+	res.send('Osx10G6jUQd9qS_ZipAQrzL7XW8HEajrJnPK9bFfs-A.qagbMepL8kuRI1Qi34f44VjrOKy9uFV64Ct-YgsgrKU')
+  })
+
 function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k) {
 	let clusterGroups = []
 	for (let i = 0; i < k; i++) clusterGroups.push([])
