@@ -10,47 +10,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-<!-- <nav class="fixed-top navbar-transparent navbar navbar-expand-lg">
-<div class="container">
-<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
-<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
-<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
-</button>
-</div>
-
-  <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
-    <div class="navbar-collapse-header">
-      <div class="row">
-        <div class="collapse-brand col-6">
-          <a href="#pablo">
-            <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
-          </a>
-        </div>
-        <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
-      </div>
-    </div>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
-      </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
-      </li>
-      <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
-    <li class="nav-item">
-    <button  class="loginbutton2" @click="getSpotifyLogin" >
-
-                  <img src="../assets/spotify-icon-2.png" id="icon"/>
-                </button></li></div> 
-             
-    </ul>
-  </div>
-  </div>
-</nav> -->
 <Header></Header>
-
-
-
 
  <div id="login-container">
       <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
@@ -69,16 +29,41 @@
         <div class="container">
               <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
               <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
+
+
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-20 text-center">
                         <h2 id="display1"><strong >About Variefy</strong></h2>
-                            <p class="lead">A playlist generator for daring music listeners</p>
                         </div>
                      </div>
                 </div>
+
+
+                <div class="container-fluid" id="developers">
+                   
+                      <ul>
+                        <li>
+                          <p class="lead">
+                              Variefy is an app that generates playlists on Spotify with unfamiliar / fresh music that is similar to a user's current music taste.
+                          </p>
+                        </li>
+                        <li>
+                          <p class="lead">
+                             Using the K-Means clustering machine learning algorithm, Variefy breaks down a user's top 50 songs into 4 categories <br/> that are representative of types of songs they listen to.
+                          </p>
+                        </li>
+                        <li>
+                          <p class="lead">
+                             A user chooses to generate a playlist based off one of these 4 categories, receiving a customized music recommendation.
+                          </p>
+                        </li>
+
+                      </ul>
+	              </div>
         
                 <div class="container-fluid" id="developers">
+                  <hr/>
                     <h2>Our Team </h2>
                         <div class="row">
                             <div class = "col-sm-3 text-center align-middle">
@@ -123,7 +108,12 @@
                         </svg>
                     </a>
 
-	            </div>
+	              </div>
+
+                <div class="container-fluid" id="developers">
+                    <hr>
+                    <p class="lead"> Variefy uses the Spotify API to retrieve user song data, audio feature data, and generate recommendations. Variefy is not affiliated with Spotify or its partners in any way.</p></div>
+	              </div>
 
         </div>
       </div>

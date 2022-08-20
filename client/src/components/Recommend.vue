@@ -221,7 +221,7 @@
                                               </div>
                                               <div class="col text-start">
                                                   <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn">
-                                                    <img src="../assets/spotifylogo.png" id="icon"/> 
+                                                    <img src="../assets/spotify-icon-2.png" id="icon"/> 
                                                     View in Spotify
                                                   </a>
                                               </div>

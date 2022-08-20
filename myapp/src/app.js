@@ -62,7 +62,7 @@ app.post('/getprofile', async (req, res) => {
 		// console.log(data.images[0].url)
 
 		// if no profile pic exist, default to spotify logo as referenced from components
-		profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotify-icon-2.png'
+		profileURL = data.images[0] != null ? data.images[0].url : '';
 		userID = data.id
 		const userPlaylist = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
 			method: 'POST',

@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light jumbotron orange-moon">
 	<div class="container-fluid">
-		<a class="navbar-brand forceMaven" id="HomeButton" href="/" align = 'right'>Variefy</a>
+		<a class="navbar-brand forceMaven" id="HomeButton" href="/">Variefy</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#content">
 			<span class="navbar-toggler-icon"></span>
 		</button>
