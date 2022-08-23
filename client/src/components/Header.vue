@@ -11,6 +11,9 @@
 				
 				<li class="nav-item"><a class="nav-link NB-Button" href="/">Home</a></li>
 				<li class="nav-item"><a class="nav-link NB-Button" href="/about">About</a></li>
+         <li class = 'nav-item'  v-if="this.access_token != ''">	
+                    <a class="nav-link" @click = "logOut()">Logout</a>
+            </li>
 				<li class="" v-if="getCookie('access_token') != '' && getCookie('access_token') !== 'undefined'">
                     <div class="dropdown">
                         <a type = "button"><img id="profile-pic" :style="this.profileStyle"/></a>
@@ -21,9 +24,9 @@
 				
 				<li class="nav-item"><a class="nav-link NB-Button" href="/">Home</a></li>
 				<li class="nav-item"><a class="nav-link NB-Button" href="/about">About</a></li>
-			    <li class = 'nav-item'>	
+			    <li class = 'nav-item' v-if="this.access_loaded">	
                     <a class="nav-link" @click = "logOut()">Logout</a>
-                </li>
+            </li>
                 <li class="" id = "profliePic">
                     <div class="dropdown">
                         <a type = "button"><img id="profile-pic" :style="this.profileStyle"/></a>
@@ -49,6 +52,7 @@ export default {
       dataHasLoaded: false,
       topURLImages: [],
       profileStyle: "",
+      access_loaded: false
     }
   },
   methods: {
@@ -120,6 +124,8 @@ export default {
   },
   async mounted() {
       
+      this.access_token = getCookie('access_token');
+
       try {
         if(getCookie('access_token') != "" && getCookie('access_token') != "undefined")
         {
@@ -134,6 +140,9 @@ export default {
         console.log('something went wrong fetching profile picture');
         console.log(error);
       }
+
+      this.access_token = getCookie('access_token');
+      this.access_loaded = true;
   }
     
 }
