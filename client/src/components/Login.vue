@@ -545,7 +545,7 @@ body {
 
 .album-covers {
   border: 5px white solid;
-  border-radius: 0px; 
+  border-radius: 15px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;

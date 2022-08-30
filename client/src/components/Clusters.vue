@@ -117,9 +117,9 @@
                     <br>
                     </div>
                     </div>
-  <a @click = "toRecommend(0)" style="text-decoration: none; color:white">
+  <div style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
-              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
+              <div class="col-md-7" style = "text-align: left; padding-right: 10px;" @click = "toRecommend(0)">
                   <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h5>
                     <div class="progress">
                     
@@ -130,19 +130,21 @@
                     </div>
               </div>              
                <div class="col-md-5">
+                 <a :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[0][0]]' target="_blank">
                 <div class="img-container">
                   <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
                 </div>
+                </a>
               </div>
              
           </div>
-          </a>
+  </div>
           <br/>
           <br/>
         
-         <a @click = "toRecommend(1)" style="text-decoration: none; color:white">
+         <div  style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-              <div class="col-md-7" style = "text-align: left;">
+              <div class="col-md-7" style = "text-align: left;"  @click = "toRecommend(1)">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h5>
                     <div class="progress">                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -151,19 +153,23 @@
                     </div>
               </div>
               <div class="col-md-5">
-                <div class="img-container">
-                  <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
-                </div>
-              </div>
+                  <a :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[1][0]]' target="_blank">
+                    <div class="img-container">
+                      <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                    </div>
+                  </a>
+             </div>
+              
             
           </div>
-          </a>
+          </div>
     
       <br/>
       <br/>
-    <a @click = "toRecommend(2)" style="text-decoration: none; color:white">
+    <div  style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-                <div class="col-md-7" style = "text-align: left;">
+                
+                <div class="col-md-7" style = "text-align: left;" @click = "toRecommend(2)">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h5>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -171,13 +177,16 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-5">
+                  <a  :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[2][0]]' target="_blank">
                   <div class="img-container">
                     <img :style="this.albumStyles" id="third-img" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
                   </div>
+                  </a>
                 </div>
           </div>
-          </a>
+          </div>
     <br/>
     <br/>
     <a @click = "toRecommend(3)" style="text-decoration: none; color:white">
@@ -191,10 +200,12 @@
                         </div>
                     </div>                
                 <div class="col-md-5">
+                      <a  :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[3][0]]' target="_blank">
                       <div class="img-container">
                         <img :style="this.albumStyles" id="fourth-img" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
   
                       </div>
+                      </a>
                 </div>
 
           </div>
@@ -254,7 +265,8 @@
         albumStyles: "opacity: 0%;",
         clusterRowStyles: "opacity: 0%;",
         titleRowStyles: "opacity: 0%;",
-        profileStyle: ""
+        profileStyle: "",
+        idToAlbumImageUrls: [],
       }
     },
     components: {Header},
@@ -456,6 +468,7 @@
     const songImage = await clusterResponse.data.idAndImage;
     const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
     const songIdToNameMap = await clusterResponse.data.songIdToName;
+    const idToAlbumImageUrls = await clusterResponse.data.idToAlbumImageUrls;
 
     console.log('toppies')
    
@@ -473,7 +486,8 @@
     this.ID = songID;
     this.songIdToNameMap = songIdToNameMap;
     this.clustersBestTwoSongIds = clustersBestTwoSongIds;
-
+    this.idToAlbumImageUrls = idToAlbumImageUrls;
+    
     this.dataHasLoaded = true;
     
     }

@@ -78,24 +78,34 @@
              </div>
         <div class = 'row'>
             <div class="col-sm-4">
+                <a :href = 'this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+                </a>
             </div>
             <div class="col-sm-4">
+              <a :href = 'this.coverData.tracks[1].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
             <div class="col-sm-4">
+              <a :href = 'this.coverData.tracks[2].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+              </a>
             </div>
         </div>
         <div class = 'row' style = 'padding-bottom: 10px;'></div>
         <div class = 'row'>
           <div class ='col-sm-2'></div>
             <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
+              <a :href = 'this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+              </a>
             </div>
            
             <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
+              <a :href = 'this.coverData.tracks[4].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
              <div class ='col-sm-2'></div>
         </div>
@@ -125,25 +135,37 @@
                                      <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded && arrowClicked">
                                      <div class="row main-row justify-content-between align-items-center">
         <div class = 'row' v-if="!dataHasLoaded" style="padding-top: 25px">
+            
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+              </a>
             </div>
+            
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[1].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
+
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[2].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+              </a>
             </div>
         </div>
         <div class = 'row' style = 'padding-bottom: 10px;' v-if="!dataHasLoaded"></div>
         <div class = 'row'>
           <div class ='col-sm-2'></div>
-            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
-                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+           <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[3].external_urls.spotify' target = '_blank'>
+                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="fourth-img"/>
+              </a>
             </div>
-           
-            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
-                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+           <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[4].external_urls.spotify' target = '_blank'>
+                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="fifth-img"/>
+              </a>
             </div>
         </div>
       </div>

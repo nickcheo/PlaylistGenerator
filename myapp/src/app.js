@@ -191,6 +191,7 @@ app.post('/getclusters', async (req, res) => {
 	let artistIdToGenre = {}
 	// 2D Array of user song vectors, passable into SK.js libraries
 	let userAttributeMatrix = []
+	let idToAlbumImageUrls = {}
 
 	if (data.items != null) {
 		for (let i = 0; i < data.items.length; i++) {
@@ -199,6 +200,7 @@ app.post('/getclusters', async (req, res) => {
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + ' by ' + artist
 			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url
 			songIdToArtistId[userTopTrackIdList[i]] = data.items[i].artists[0].id
+			idToAlbumImageUrls[userTopTrackIdList[i]] = data.items[i].external_urls.spotify;
 		}
 		console.log('testNick')
 		console.log(IDtoImageURL)
@@ -278,6 +280,7 @@ app.post('/getclusters', async (req, res) => {
 		response['songIdToName'] = idToSongName
 		response['idAndImage'] = IDtoImageURL
 		response['centroids'] = centroids
+		response['idToAlbumImageUrls'] = idToAlbumImageUrls
 
 		response['clustersBestTwoSongs'] = computeClosestSongsToCentroids(
 			centroids,
