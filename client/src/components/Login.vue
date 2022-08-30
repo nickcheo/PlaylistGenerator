@@ -62,6 +62,24 @@
                 </div>
             </div>
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          Variefy uses the Spotify API to retrieve metadata including user song data and audio feature data, and to generate recommendations. 
+                       </p>
+                      </li>
+                      <br/>
+                      <li>
+                        <p class = 'lead'>Variefy is not affiliated with Spotify or its partners in any way.</p>
+                      </li>
+                    </ul>
+                  </div>
 
       <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">

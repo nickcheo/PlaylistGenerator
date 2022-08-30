@@ -221,6 +221,20 @@
           </div>
           </a>
 
+          <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          All data is provided by &nbsp;
+                          <a href = 'https://open.spotify.com/' target = '_blank'>
+                          <img height = "75px" width = 'auto' src = '../assets/Spotify_Logo_CMYK_White.png'>
+                          </a> 
+                       </p>
+                      </li>
+                    </ul>
+          </div>
+
       <!-- <a href="/" class="btn btn-primary">
       <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
@@ -679,7 +693,8 @@ li {
 }
 
 .img-container img {
-  border: 5px white solid;
+  /* put back after extension */
+  /* border: 5px white solid; */
   border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;

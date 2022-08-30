@@ -244,20 +244,35 @@
                                               </div>
                                               <div class="col text-start">
                                                   <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn">
-                                                    <img src="../assets/spotify-icon-2.png" id="icon"/> 
-                                                    View in Spotify
+                                                    <img src="../assets/Spotify_Icon_RGB_White.png" id="icon"/> 
+                                                    Listen on Spotify
                                                   </a>
                                               </div>
                                         
                                         </div>
                                     </div>
+                                    
 
 
                             </div>
                   </div>
+
+                  
                 </div>
              
-        
+        <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          All data is provided by &nbsp;
+                          <a href = 'https://open.spotify.com/' target = '_blank'>
+                          <img height = "75px" width = 'auto' src = '../assets/Spotify_Logo_CMYK_White.png'>
+                          </a> 
+                       </p>
+                      </li>
+                    </ul>
+        </div>
     
 
   
@@ -700,7 +715,7 @@ function setCookie(cname, cvalue, exhours) {
     
       }
       .btn:hover{ 
-        border: 3.5px white solid; 
+        /* border: 3.5px white solid;  */
       }
       .btn:hover + .display-1  {
         box-shadow: -2px 6px 8pxgba(59, 50, 50,  r0.4)
@@ -734,7 +749,8 @@ html, body, template {
 }
 
 .album-covers {
-  border: 5px white solid;
+  /* put back after extension */
+  border: 0px white solid;
   border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;

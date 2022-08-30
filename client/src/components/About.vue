@@ -115,7 +115,7 @@
                     <ul>
                       <li>
                         <p class="lead">
-                          Variefy uses the Spotify API to retrieve user song data, audio feature data, and generate recommendations. 
+                          Variefy uses the Spotify API to retrieve metadata including user song data and audio feature data, and to generate recommendations. 
                        </p>
                       </li>
                       <br/>
