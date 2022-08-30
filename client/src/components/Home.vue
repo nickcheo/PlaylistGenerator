@@ -42,7 +42,7 @@
                         
                         <button  class="btn" @click = "getSpotifyLogin">
                   Connect with Spotify
-                  <img src="../assets/spotify-icon-2.png" id="icon"/>
+                  <img src="../assets/Spotify_Icon_RGB_White.png" id="icon"/>
                 </button>
 
                       
@@ -101,7 +101,7 @@ export default {
     getSpotifyLogin: async () => {
       /* eslint-disable */
       const querystring = require('querystring')
-      const scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
+      const scope = 'user-read-private user-top-read playlist-modify-public';
       console.log('login func heree')
 
       function generateRandomString(n)
