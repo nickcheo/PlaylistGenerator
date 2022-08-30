@@ -433,9 +433,11 @@
       console.log(error);
     }
 
-    this.dataHasLoaded = true;
+    
     
     window.history.replaceState({}, document.title, "/");
+
+    try {
 
     const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
     const topResponse = await Api().post('gettopcovers', {token: this.access_token})
@@ -467,8 +469,11 @@
     this.ID = songID;
     this.songIdToNameMap = songIdToNameMap;
     this.clustersBestTwoSongIds = clustersBestTwoSongIds;
-    
 
+    this.dataHasLoaded = true;
+    
+    }
+    catch (error) {console.log(error);}
 
     const colorMap = ["#6CC9CF", "#EA8FCB",
                   // "#F2E991", pastel yellow
@@ -656,7 +661,7 @@ li {
 
 .img-container img {
   border: 5px white solid;
-  border-radius: 15px; 
+  border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;

@@ -14,7 +14,7 @@
 
 
  <div id="login-container">
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
             <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
         </div>
@@ -24,7 +24,7 @@
         <div class="col-sm">
             <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
-      </div>
+      </div> -->
 
       <div class="row main-row align-items-center">
         <div class="container">
@@ -57,7 +57,7 @@
       </div>
 
 
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
             <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
         </div>
@@ -67,7 +67,7 @@
         <div class="col-sm">
             <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
         </div>
-      </div>
+      </div> -->
     </div>
     </body>
 

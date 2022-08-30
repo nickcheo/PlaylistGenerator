@@ -150,7 +150,8 @@
       <div class="hero gradient" v-if="arrowClicked">
       <div class="container-fluid" v-if="!filterChoiceClicked && arrowClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
-                    <div class="col-lg-12" style = "text-align: left; padding-top: 0px;">
+                    <div class="col-lg-12" style = "text-align: left; padding-top: 10px;">
+                    <br/>
                       <h1 class="display-4" align = 'left'><strong>What type of playlist would you like to generate?</strong></h1>     
                         <p class="lead"><strong>Fresh, but familiar does this and Spice it up does that.</strong></p>
 
@@ -164,7 +165,7 @@
 
 
       
-                                        <div class="row gx-5">
+                                        <div class="row gx-5" style = "padding-top: 30px;">
                                                 <div class="col text-end">
                                                 <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn" id="icon3"
                                                   style = "background-color: #6CC9CF;">
@@ -712,7 +713,7 @@ html, body, template {
 
 .album-covers {
   border: 5px white solid;
-  border-radius: 15px; 
+  border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;
