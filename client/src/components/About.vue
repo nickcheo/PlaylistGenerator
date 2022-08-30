@@ -350,6 +350,10 @@ function getCookie(cname) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+    body {
+        overflow-y: scroll;
+      }
+
 .btn{
         font-size: 20px;
         cursor: pointer;
@@ -609,9 +613,6 @@ a {
           color: white;
       }
 
-      body {
-        overflow-y: auto;
-      }
     </style>
 
 

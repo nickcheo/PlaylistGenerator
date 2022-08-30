@@ -137,7 +137,8 @@
              
           </div>
           </a>
-
+          <br/>
+          <br/>
         
          <a @click = "toRecommend(1)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
@@ -158,6 +159,8 @@
           </div>
           </a>
     
+      <br/>
+      <br/>
     <a @click = "toRecommend(2)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                 <div class="col-md-7" style = "text-align: left;">
@@ -175,7 +178,8 @@
                 </div>
           </div>
           </a>
-
+    <br/>
+    <br/>
     <a @click = "toRecommend(3)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
@@ -630,6 +634,7 @@ li {
   transition: opacity 500ms;
   transition: height 0.25s;
   position: relative;
+  margin-top: 30px;
 }
 
 .cluster-result:hover {
@@ -694,7 +699,7 @@ li {
     animation: float 6s ease-in-out infinite;
   }
 
-  #third-img {
+  /* #third-img {
     position: relative;
     left: 100px;
   }
@@ -702,7 +707,30 @@ li {
   #first-img {
     position: relative;
     left: 100px;
+  } */
+
+/* remove this after extension */
+
+#second-img {
+    position: relative;
+    left: 0px;
   }
+
+  #fourth-img {
+    position: relative;
+    left: 0px;
+  } 
+  
+
+  #third-img {
+    position: relative;
+    left: 0px;
+  }
+
+  #first-img {
+    position: relative;
+    left: 0px;
+  } 
 
   .cluster-result {
     height: 200px;
@@ -736,7 +764,8 @@ li {
     width: 215px;
   }
 
-  #second-img {
+  /* after extension is granted, change left of second and fourth images back to 45px */
+  /* #second-img {
     position: relative;
     left: 45px;
   }
@@ -754,7 +783,10 @@ li {
   #first-img {
     position: relative;
     left: 130px;
-  }
+  } */
+
+
+  
 
   .cluster-result:hover .img-container img{
     height: auto;
