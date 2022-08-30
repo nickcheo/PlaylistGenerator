@@ -40,7 +40,7 @@
                         </div> 
                         <div id = 'check-box'></div> -->
                         
-                        <button  class="btn" @click = "getSpotifyLogin">
+                        <button  class="btn" @click = "getSpotifyLogin" style = 'color: white !important'>
                   Connect with Spotify
                   <img src="../assets/Spotify_Icon_RGB_White.png" id="icon"/>
                 </button>
