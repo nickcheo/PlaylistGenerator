@@ -165,7 +165,7 @@
 
 
       
-                                        <div class="row gx-5" style = "padding-top: 30px;">
+                                        <div class="row gx-5" style = "padding-top: 20px;">
                                                 <div class="col text-end">
                                                 <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn" id="icon3"
                                                   style = "background-color: #6CC9CF;">
