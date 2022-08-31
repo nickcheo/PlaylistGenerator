@@ -99,7 +99,7 @@
 
 <div id = 'cluster-page' v-if="dataHasLoaded">
 
-    <div class="hero gradient">
+    <div class="gradient">
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">

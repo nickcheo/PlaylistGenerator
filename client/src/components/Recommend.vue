@@ -22,7 +22,7 @@
 <Header></Header>  
                 
                     <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded && !arrowClicked">
-                    <div class="hero gradient">
+                    <div class="gradient">
       <div class="container-fluid" v-if="!filterChoiceClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 150px;">
@@ -169,7 +169,7 @@
             </div>
         </div>
       </div>
-      <div class="hero gradient" v-if="arrowClicked">
+      <div class="gradient" v-if="arrowClicked">
       <div class="container-fluid" v-if="!filterChoiceClicked && arrowClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12" style = "text-align: left; padding-top: 10px;">
