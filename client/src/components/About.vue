@@ -12,9 +12,8 @@
   
 <Header></Header>
 
-
  <div id="login-container">
-      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
             <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
         </div>
@@ -24,51 +23,138 @@
         <div class="col-sm">
             <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
-      </div> -->
+</div>
 
-      <div class="row main-row align-items-center">
+    <div class="row main-row align-items-center">
         <div class="container">
               <!-- id="App" :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px'}"> -->
               <!-- :style="{'background-image': `url(${require(image)})`, width: '100px', height: '100px',}"> -->
+
+
                 <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-lg-20 text-center">
-                      <h2 id="display1"><strong >Variefy</strong></h2>
-                        <p class="lead">A playlist generator for daring music listeners</p>
-                        <br>
-                        <!-- <div id = 'spin-box'>
-                        </div> 
-                        <div id = 'check-box'></div> -->
-                        
-                        <button  class="btn" @click = "getSpotifyLogin" style = 'color: white !important'>
-                  Connect with Spotify
-                  <img src="../assets/Spotify_Icon_RGB_White.png" id="icon"/>
-                </button>
-
-                      
-
-                        
-                        <!-- <button type:"button" class="btn btn-primary">Connect with Spotify</button> -->
-                          <!--Button-->
-                    </div>
-                  </div>
+                    <div class="row">
+                        <div class="col-lg-20 text-center">
+                        <h2 id="display1"><strong >About Variefy</strong></h2>
+                        </div>
+                     </div>
                 </div>
-            </div>
+
+
+                <div class="container-fluid" id="developers">
+                   
+                      <ul>
+                        <li>
+                          <p class="lead">
+                              Variefy is an app that generates playlists on Spotify with unfamiliar / fresh music that is similar to a user's current music taste.
+                          </p>
+                        </li>
+                        <li>
+                          <p class="lead">
+                             Using the K-Means clustering machine learning algorithm, Variefy breaks down a user's top 50 songs into 4 categories <br/> that are representative of types of songs they listen to.
+                          </p>
+                        </li>
+                        <li>
+                          <p class="lead">
+                             A user chooses to generate a playlist based off one of these 4 categories, receiving a customized music recommendation.
+                          </p>
+                        </li>
+
+                      </ul>
+	              </div>
+        
+                <div class="container-fluid" id="developers">
+                  <hr/>
+                    <h2>Our Team </h2>
+                        <div class="row">
+                            <div class = "col-sm-3 text-center align-middle">
+                                <img src = "../assets/yash.png"  class="rounded-circle about_img">
+                                <p>Yash Patel<br>
+                                <a href = 'https://linkedin.com/in/yash-patel-0389921a2'><i class="bi bi-linkedin"></i></a>
+                                <a href = 'https://github.com/yashpatel21'><i class="bi bi-github"></i></a>
+                                </p>				
+                            </div>
+                            <div class = "col-sm-3 text-center align-middle">
+                                <img src = "../assets/adam.png"   class="rounded-circle about_img">
+                                <p>Adam Kelch<br>
+                                <a href = 'https://linkedin.com/in/adam-kelch'><i class="bi bi-linkedin"></i></a>
+                                <a href = 'https://github.com/akelch11'><i class="bi bi-github"></i></a>
+                                </p>
+                            </div>
+                            <div class = "col-sm-3 text-center align-middle">
+                                <img src = "../assets/nick.png"  class="rounded-circle about_img">
+                                <p>Nicholas Cheong<br>
+                                <a href = 'https://linkedin.com/in/nickcheo'><i class="bi bi-linkedin"></i></a>
+                                <a href = 'https://github.com/nickcheo'><i class="bi bi-github"></i></a></p>
+                            </div>
+                            <div class = "col-sm-3 text-center align-middle">
+                                <img src = "../assets/rahul.png" class="rounded-circle about_img">
+                                <p>Rahul Nalam<br><a href = 'https://linkedin.com/in/rahulnalam'><i class="bi bi-linkedin"></i></a>
+                                <a href = 'https://github.com/rahulnalam'><i class="bi bi-github"></i></a>
+                                </p>
+                            </div>
+                        </div>
+	                </div>
+
+
+                
+                <div class="container-fluid" id="developers">
+                    <hr>
+                    <h2>Github Repo</h2>
+                    <p class="lead">Want to see how we built Variefy? Check it out here!</p>
+                    <br/>
+                    <a href = "https://github.com/nickcheo/PlaylistGenerator" target = "_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16" style= "color: white;">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                    </a>
+
+	              </div>
+
+                <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          Variefy uses the Spotify API to retrieve metadata including user song data and audio feature data, and to generate recommendations. 
+                       </p>
+                      </li>
+                      <br/>
+                      <li>
+                        <p class = 'lead'>Variefy is not affiliated with Spotify or its partners in any way.</p>
+                      </li>
+                    </ul>
+                  </div>
+	          </div>
+
+        </div>
       </div>
 
+      <!-- <div class="container-fluid" id="developers">
+		<h2>Our Team </h2>
+		<div class="row">
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/rajiv.png"  class="rounded-circle about_img">
+				<p>Yash Patel<br>rswamy@princeton.edu</p>				
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "../assets/adam.png"   class="rounded-circle about_img">
+				<p>Adam Kelch<br><a href = 'https://linkedin.com/in/adam-kelch'><i class="bi bi-linkedin"></i></a></p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/ameya.png"  class="rounded-circle about_img">
+				<p>Nicholas Cheong<br>avaidya@princeton.edu</p>
+			</div>
+			<div class = "col-sm-3 text-center align-middle">
+				<img src = "/static/photos/jeremy.png" class="rounded-circle about_img">
+				<p>Rahul Nalam<br>jdapaah@princeton.edu</p>
+			</div>
+		</div>
+	</div> -->
 
-      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
-        <div class="col-sm">
-            <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
-        </div>
-        <div class="col-sm">
-            <img :src="this.topURLImages[4]" alt="bg image" class="album-covers" id="fifth-img"/>
-        </div>
-        <div class="col-sm">
-            <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
-        </div>
-      </div> -->
-    </div>
+
+      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      </div>
+
     </body>
 
 
@@ -90,18 +176,17 @@ export default {
       access_token: "",
       dataHasLoaded: false,
       topURLImages: [],
-      profileStyle: "",
     }
   },
-  components: {Header},
+  components:
+  {
+    Header,
+  },
   methods: {
-    goAbout: function() {
-      router.replace('/about');
-    },
     getSpotifyLogin: async () => {
       /* eslint-disable */
       const querystring = require('querystring')
-      const scope = 'user-read-private user-top-read playlist-modify-public';
+      const scope = 'user-read-private user-library-read user-top-read playlist-modify-public playlist-modify-private';
       console.log('login func heree')
 
       function generateRandomString(n)
@@ -148,64 +233,64 @@ export default {
       // directs to /next route in router after access token is registered
       // enough information to either query songs or refresh the access token upon login
 
-      if(getCookie('access_token') === 'undefined')
-        console.log('undefined AT');
+    //   if(getCookie('access_token') === 'undefined')
+    //     console.log('undefined AT');
 
-      if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
-        console.log(getCookie("access_token"))
-        this.$router.replace("next")
-      } else {
+    //   if((getCookie("access_token") != "" && getCookie("access_token") != "undefined")|| (getCookie("refresh_token") != "" && getCookie("refresh_token") != "undefined" )) {
+    //     console.log(getCookie("access_token"))
+    //     this.$router.replace("next")
+    //   } else {
           
-         const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
-          const client_secret="76669d3b28f94e8da7662d91cc39cc94"
-          const querystring = require('querystring')
+    //      const client_id="a1c0d6debc2c49038fb8a43eb5df637a"
+    //       const client_secret="76669d3b28f94e8da7662d91cc39cc94"
+    //       const querystring = require('querystring')
           
-          const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
+    //       const tokenBaseUrl = 'https://accounts.spotify.com/api/token';
         
-          const result = await fetch(tokenBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type' : "application/x-www-form-urlencoded",
-            'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
-          },
-          body: querystring.stringify({
-            grant_type: "client_credentials"
-            })
-          });
+    //       const result = await fetch(tokenBaseUrl, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type' : "application/x-www-form-urlencoded",
+    //         'Authorization' : 'Basic ' + btoa(client_id + ":" + client_secret)
+    //       },
+    //       body: querystring.stringify({
+    //         grant_type: "client_credentials"
+    //         })
+    //       });
 
 
-          const data = await result.json();
-          console.log('data for inital tokens')
-          console.log(data);
-          this.access_token = data.access_token;
+    //       const data = await result.json();
+    //       console.log('data for inital tokens')
+    //       console.log(data);
+    //       this.access_token = data.access_token;
 
-          try {
-            const topResponse = await Api().post('/gettopartists', {token: this.access_token})
-            console.log(topResponse)
-            // const topSongID = await topResponse.data.topTracksID
-            const topURLImages = await topResponse.data.ImageURLs
+    //       try {
+    //         const topResponse = await Api().post('/gettopartists', {token: this.access_token})
+    //         console.log(topResponse)
+    //         // const topSongID = await topResponse.data.topTracksID
+    //         const topURLImages = await topResponse.data.ImageURLs
 
-            // ensure page waits for image to be loaded
-            // this.topSongID = await topSongID;
-            this.topURLImages = await shuffle(topURLImages);
+    //         // ensure page waits for image to be loaded
+    //         // this.topSongID = await topSongID;
+    //         this.topURLImages = await shuffle(topURLImages);
 
-            this.dataHasLoaded = true;
+    //         this.dataHasLoaded = true;
 
-            setInterval(() => {
-              let currentImages = this.topURLImages.slice(0, 6);
-              let shuffledImages = shuffle(this.topURLImages.slice(6));
-              shuffledImages = shuffledImages.concat(currentImages);
+    //         setInterval(() => {
+    //           let currentImages = this.topURLImages.slice(0, 6);
+    //           let shuffledImages = shuffle(this.topURLImages.slice(6));
+    //           shuffledImages = shuffledImages.concat(currentImages);
               
-              this.topURLImages = shuffledImages;
-            }, 10000);
-          }
-          catch (error){
-            console.log('something went wrong fetching top album pics');
-            console.log(error);
-          }
+    //           this.topURLImages = shuffledImages;
+    //         }, 10000);
+    //       }
+    //       catch (error){
+    //         console.log('something went wrong fetching top album pics');
+    //         console.log(error);
+    //       }
           
 
-      }
+    //   }
   }
     
 }
@@ -265,6 +350,10 @@ function getCookie(cname) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+    body {
+        overflow-y: scroll;
+      }
+
 .btn{
         font-size: 20px;
         cursor: pointer;
@@ -318,7 +407,7 @@ a {
   transition: opacity 500ms;
   transition: width 250ms ease-in-out, height 250ms ease-in-out;
   animation: float 6s ease infinite;
-  overflow: hidden;
+
 
 
 }
@@ -334,6 +423,12 @@ a {
     height: 250px;
     width: 250px;
 } 
+
+.about_img{
+		height: 200px;
+		border: 1px;
+		border-radius: 10px;
+	}
 
 @keyframes float {
 	0% {
@@ -356,6 +451,7 @@ a {
 #second-img {
   animation-delay: -1s;
 }
+
 
 #third-img {
   animation-delay: -2s;
@@ -382,9 +478,6 @@ a {
   text-shadow: -1px 1px 8px white;
 }
 
-body {
-        overflow-y: auto;
-      }
 
 </style>
 <style>
@@ -515,6 +608,11 @@ body {
       .myDiv {
         height:100px;
       }
+
+      i.bi {
+          color: white;
+      }
+
     </style>
 
 

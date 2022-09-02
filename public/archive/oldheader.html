@@ -1,0 +1,59 @@
+<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+    <div class="container">
+  <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
+  <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
+  <button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
+  </button>
+  </div>
+    <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="collapse-brand col-6">
+            <a href="#pablo">
+              <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
+            </a>
+          </div>
+          <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
+        </div>
+      </div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
+        </li>
+        <li class="nav-item">
+          <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
+        </li>
+         <li class="nav-item">
+          <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" @click = "logOut()">Logout</a></div>
+        </li>
+       <li class="nav-item">
+  
+                <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+                <img id="profile-pic" :style="this.profileStyle"/>
+                </button>
+                <button class="loginbutton2" v-else key="off" @click="show = true">
+                <img id="profile-pic" :style="this.profileStyle"/>
+                </button>
+             Dropdown Menu 
+              <div class="dropdown__menu"  v-if="show">
+                  <li class="dropdown__menu-item">
+                      <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
+                  </li>
+                  <hr>
+                  <li class="dropdown__menu-item" @click="logout">
+                      <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
+                    
+                  </li>
+              </div> 
+    
+  
+          
+          
+          
+          
+          </li>
+      </ul>
+    </div>
+    </div>
+    
+  </nav>

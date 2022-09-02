@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
   
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
+<!-- <nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
   <div class="container">
 <div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
 <a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
@@ -42,18 +42,18 @@
       <li class="nav-item">
         <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
       </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
+       <li class="nav-item">
+        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" @click = "logOut()">Logout</a></div>
       </li>
      <li class="nav-item">
 
-              <!-- <button class="loginbutton2" v-if="show" key="on" @click="show = false">
+              <button class="loginbutton2" v-if="show" key="on" @click="show = false">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
               <button class="loginbutton2" v-else key="off" @click="show = true">
               <img id="profile-pic" :style="this.profileStyle"/>
               </button>
-           Dropdown Menu -->
+           Dropdown Menu 
             <div class="dropdown__menu"  v-if="show">
                 <li class="dropdown__menu-item">
                     <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
@@ -75,7 +75,9 @@
   </div>
   </div>
   
-</nav>
+</nav> -->
+
+<Header></Header>
 
 
       <div class="hero" id="loading-row" v-if="!dataHasLoaded">
@@ -97,7 +99,7 @@
 
 <div id = 'cluster-page' v-if="dataHasLoaded">
 
-    <div class="hero gradient">
+    <div class="gradient">
       <div class="container-fluid">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 5px;">
@@ -115,9 +117,9 @@
                     <br>
                     </div>
                     </div>
-  <a @click = "toRecommend(0)" style="text-decoration: none; color:white">
+  <div style="text-decoration: none; color:white">
           <div class="row cluster-result " :style="this.clusterRowStyles">
-              <div class="col-md-7" style = "text-align: left; padding-right: 10px;">
+              <div class="col-md-7" style = "text-align: left; padding-right: 10px;" @click = "toRecommend(0)">
                   <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[0][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[0][1]]}}</h5>
                     <div class="progress">
                     
@@ -128,18 +130,21 @@
                     </div>
               </div>              
                <div class="col-md-5">
+                 <a :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[0][0]]' target="_blank">
                 <div class="img-container">
                   <img :style="this.albumStyles" id="first-img" :src="this.clusterImage[this.clustersBestTwoSongIds[0][0]]"/>
                 </div>
+                </a>
               </div>
              
           </div>
-          </a>
-
+  </div>
+          <br/>
+          <br/>
         
-         <a @click = "toRecommend(1)" style="text-decoration: none; color:white">
+         <div  style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-              <div class="col-md-7" style = "text-align: left;">
+              <div class="col-md-7" style = "text-align: left;"  @click = "toRecommend(1)">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[1][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[1][1]]}}</h5>
                     <div class="progress">                    
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[1]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -148,17 +153,23 @@
                     </div>
               </div>
               <div class="col-md-5">
-                <div class="img-container">
-                  <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
-                </div>
-              </div>
+                  <a :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[1][0]]' target="_blank">
+                    <div class="img-container">
+                      <img :style="this.albumStyles" id="second-img" :src="this.clusterImage[this.clustersBestTwoSongIds[1][0]]"/>
+                    </div>
+                  </a>
+             </div>
+              
             
           </div>
-          </a>
+          </div>
     
-    <a @click = "toRecommend(2)" style="text-decoration: none; color:white">
+      <br/>
+      <br/>
+    <div  style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
-                <div class="col-md-7" style = "text-align: left;">
+                
+                <div class="col-md-7" style = "text-align: left;" @click = "toRecommend(2)">
                     <h5 class="progress-title">{{this.songIdToNameMap[this.clustersBestTwoSongIds[2][0]]}} <br/> {{this.songIdToNameMap[this.clustersBestTwoSongIds[2][1]]}}</h5>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" v-bind:style="styleStrings[2]" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -166,14 +177,18 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-5">
+                  <a  :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[2][0]]' target="_blank">
                   <div class="img-container">
                     <img :style="this.albumStyles" id="third-img" :src="this.clusterImage[this.clustersBestTwoSongIds[2][0]]"/>
                   </div>
+                  </a>
                 </div>
           </div>
-          </a>
-
+          </div>
+    <br/>
+    <br/>
     <a @click = "toRecommend(3)" style="text-decoration: none; color:white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
@@ -185,10 +200,12 @@
                         </div>
                     </div>                
                 <div class="col-md-5">
+                      <a  :href = 'this.idToAlbumImageUrls[this.clustersBestTwoSongIds[3][0]]' target="_blank">
                       <div class="img-container">
                         <img :style="this.albumStyles" id="fourth-img" :src="this.clusterImage[this.clustersBestTwoSongIds[3][0]]"/>
   
                       </div>
+                      </a>
                 </div>
 
           </div>
@@ -197,12 +214,26 @@
           <a href="/" style="text-decoration: none; color: white">
           <div class="row cluster-result" :style="this.clusterRowStyles">
                     <div class="col-md-7" style = "text-align: left;">
-                        <h1 class="progress-title"><strong>&lt;</strong></h1>
+                        <h1 class="progress-title"><strong>←</strong></h1>
                     </div>                
                
 
           </div>
           </a>
+
+          <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          All data is provided by &nbsp;
+                          <a href = 'https://open.spotify.com/' target = '_blank'>
+                          <img height = "75px" width = 'auto' src = '../assets/Spotify_Logo_CMYK_White.png'>
+                          </a> 
+                       </p>
+                      </li>
+                    </ul>
+          </div>
 
       <!-- <a href="/" class="btn btn-primary">
       <div class="row cluster-result" :style="this.clusterRowStyles">
@@ -227,7 +258,8 @@
 
 <script>
   import router from '../router';
-import Api from '../services/Api';
+  import Api from '../services/Api';
+  import Header from './Header.vue';
 
   export default {
     name: 'Login',
@@ -247,9 +279,11 @@ import Api from '../services/Api';
         albumStyles: "opacity: 0%;",
         clusterRowStyles: "opacity: 0%;",
         titleRowStyles: "opacity: 0%;",
-        profileStyle: ""
+        profileStyle: "",
+        idToAlbumImageUrls: [],
       }
     },
+    components: {Header},
     methods:
     {
       getAccessToken: async () => {
@@ -303,7 +337,11 @@ import Api from '../services/Api';
         }
         
       },
-
+      logOut: function () {
+          setCookie('access_token', "")
+          setCookie('refresh_token', "")
+          router.replace('/')
+      },
        toRecommend : function (clusterIndex){
           console.log('in to recommend')
           
@@ -425,9 +463,11 @@ import Api from '../services/Api';
       console.log(error);
     }
 
-    this.dataHasLoaded = true;
+    
     
     window.history.replaceState({}, document.title, "/");
+
+    try {
 
     const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
     const topResponse = await Api().post('gettopcovers', {token: this.access_token})
@@ -442,6 +482,7 @@ import Api from '../services/Api';
     const songImage = await clusterResponse.data.idAndImage;
     const clustersBestTwoSongIds = await clusterResponse.data.clustersBestTwoSongs;
     const songIdToNameMap = await clusterResponse.data.songIdToName;
+    const idToAlbumImageUrls = await clusterResponse.data.idToAlbumImageUrls;
 
     console.log('toppies')
    
@@ -459,8 +500,12 @@ import Api from '../services/Api';
     this.ID = songID;
     this.songIdToNameMap = songIdToNameMap;
     this.clustersBestTwoSongIds = clustersBestTwoSongIds;
+    this.idToAlbumImageUrls = idToAlbumImageUrls;
     
-
+    this.dataHasLoaded = true;
+    
+    }
+    catch (error) {console.log(error);}
 
     const colorMap = ["#6CC9CF", "#EA8FCB",
                   // "#F2E991", pastel yellow
@@ -617,6 +662,7 @@ li {
   transition: opacity 500ms;
   transition: height 0.25s;
   position: relative;
+  margin-top: 30px;
 }
 
 .cluster-result:hover {
@@ -647,8 +693,9 @@ li {
 }
 
 .img-container img {
-  border: 5px white solid;
-  border-radius: 15px; 
+  /* put back after extension */
+  /* border: 5px white solid; */
+  border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;
@@ -681,7 +728,7 @@ li {
     animation: float 6s ease-in-out infinite;
   }
 
-  #third-img {
+  /* #third-img {
     position: relative;
     left: 100px;
   }
@@ -689,7 +736,30 @@ li {
   #first-img {
     position: relative;
     left: 100px;
+  } */
+
+/* remove this after extension */
+
+#second-img {
+    position: relative;
+    left: 0px;
   }
+
+  #fourth-img {
+    position: relative;
+    left: 0px;
+  } 
+  
+
+  #third-img {
+    position: relative;
+    left: 0px;
+  }
+
+  #first-img {
+    position: relative;
+    left: 0px;
+  } 
 
   .cluster-result {
     height: 200px;
@@ -723,7 +793,8 @@ li {
     width: 215px;
   }
 
-  #second-img {
+  /* after extension is granted, change left of second and fourth images back to 45px */
+  /* #second-img {
     position: relative;
     left: 45px;
   }
@@ -741,7 +812,10 @@ li {
   #first-img {
     position: relative;
     left: 130px;
-  }
+  } */
+
+
+  
 
   .cluster-result:hover .img-container img{
     height: auto;

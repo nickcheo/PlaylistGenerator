@@ -62,7 +62,7 @@ app.post('/getprofile', async (req, res) => {
 		// console.log(data.images[0].url)
 
 		// if no profile pic exist, default to spotify logo as referenced from components
-		profileURL = data.images[0] != null ? data.images[0].url : '../assets/spotify-icon-2.png'
+		profileURL = data.images[0] != null ? data.images[0].url : '';
 		userID = data.id
 		const userPlaylist = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
 			method: 'POST',
@@ -191,6 +191,7 @@ app.post('/getclusters', async (req, res) => {
 	let artistIdToGenre = {}
 	// 2D Array of user song vectors, passable into SK.js libraries
 	let userAttributeMatrix = []
+	let idToAlbumImageUrls = {}
 
 	if (data.items != null) {
 		for (let i = 0; i < data.items.length; i++) {
@@ -199,6 +200,7 @@ app.post('/getclusters', async (req, res) => {
 			idToSongName[userTopTrackIdList[i]] = data.items[i].name + ' by ' + artist
 			IDtoImageURL[userTopTrackIdList[i]] = data.items[i].album.images[0].url
 			songIdToArtistId[userTopTrackIdList[i]] = data.items[i].artists[0].id
+			idToAlbumImageUrls[userTopTrackIdList[i]] = data.items[i].external_urls.spotify;
 		}
 		console.log('testNick')
 		console.log(IDtoImageURL)
@@ -278,6 +280,7 @@ app.post('/getclusters', async (req, res) => {
 		response['songIdToName'] = idToSongName
 		response['idAndImage'] = IDtoImageURL
 		response['centroids'] = centroids
+		response['idToAlbumImageUrls'] = idToAlbumImageUrls
 
 		response['clustersBestTwoSongs'] = computeClosestSongsToCentroids(
 			centroids,
@@ -370,6 +373,10 @@ app.post('/getrecommendations', async (req, res) => {
 
 	res.send(JSON.stringify(recommendationResponse))
 })
+
+app.get('/.well-known/acme-challenge/:content', function(req, res) {
+	res.send('Osx10G6jUQd9qS_ZipAQrzL7XW8HEajrJnPK9bFfs-A.qagbMepL8kuRI1Qi34f44VjrOKy9uFV64Ct-YgsgrKU')
+  })
 
 function parseClusterGroups(songIdToClusterLabelMap, songIdToNameMap, k) {
 	let clusterGroups = []

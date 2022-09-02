@@ -18,11 +18,11 @@
       <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://localhost:* 'unsafe-inline' 'unsafe-eval'" />
     </head>
   
-  
-  
+
+<Header></Header>  
                 
                     <div class="container-fluid" style="padding:10px;" id="loading-row" v-if="!dataHasLoaded && !arrowClicked">
-                    <div class="hero gradient">
+                    <div class="gradient">
       <div class="container-fluid" v-if="!filterChoiceClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
                     <div class="col-lg-12 offset-1" style = "text-align: left; padding-top: 150px;">
@@ -62,37 +62,52 @@
                                     </div>
 
 
-                                     <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
-                                     <div class="row main-row justify-content-between align-items-center">
+    <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded">
+      <div class="row main-row justify-content-between align-items-center">
+          <div class="row text-end" style = 'padding-top: 5px; padding-bottom: 25px'>
+                                <div class = 'col-sm-3'></div>
+                                <div class = 'col-sm-6' align = 'center'>
+                                  <a type = "button" @click="moveToPlaylistPage" class="btn" id="icon3"
+                                    style = "background-color: transparent">
+                                            <span class="glyphicon glyphicon-refresh" id="icon2"></span>
+                                                  Generate a similar playlist →
+                                            <span class="glyphicon glyphicon-arrow-right" id="icon2"></span>
+                                  </a>
+                                  </div>
+                                  <div class = 'col-sm-3'></div>
+             </div>
         <div class = 'row'>
             <div class="col-sm-4">
+                <a :href = 'this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+                </a>
             </div>
             <div class="col-sm-4">
+              <a :href = 'this.coverData.tracks[1].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
             <div class="col-sm-4">
+              <a :href = 'this.coverData.tracks[2].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+              </a>
             </div>
         </div>
         <div class = 'row' style = 'padding-bottom: 10px;'></div>
         <div class = 'row'>
           <div class ='col-sm-2'></div>
             <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
+              <a :href = 'this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+              </a>
             </div>
            
             <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
+              <a :href = 'this.coverData.tracks[4].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
              <div class ='col-sm-2'></div>
-             <div class="col text-end">
-                                                <a type = "button" @click="moveToPlaylistPage" class="btn" id="icon3"
-                                                  style = "background-color: transparent">
-                                                  <span class="glyphicon glyphicon-refresh" id="icon2"></span>
-                                                  Generate a similar playlist >
-                                                </a>
-             </div>
         </div>
       </div>
 
@@ -120,32 +135,45 @@
                                      <div class="container px-3" v-if = "!filterChoiceClicked && !dataHasLoaded && arrowClicked">
                                      <div class="row main-row justify-content-between align-items-center">
         <div class = 'row' v-if="!dataHasLoaded" style="padding-top: 25px">
+            
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[0].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[0].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+              </a>
             </div>
+            
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[1].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[1].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+              </a>
             </div>
+
             <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[2].external_urls.spotify' target = '_blank'>
                 <img :src="this.coverData.tracks[2].album.images[0].url" alt="bg image" class="album-covers" id="third-img"/>
+              </a>
             </div>
         </div>
         <div class = 'row' style = 'padding-bottom: 10px;' v-if="!dataHasLoaded"></div>
         <div class = 'row'>
           <div class ='col-sm-2'></div>
-            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 4">
-                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="first-img"/>
+           <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[3].external_urls.spotify' target = '_blank'>
+                <img :src="this.coverData.tracks[3].album.images[0].url" alt="bg image" class="album-covers" id="fourth-img"/>
+              </a>
             </div>
-           
-            <div class="col-sm-4" v-if="this.coverData.tracks.length >= 5">
-                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="second-img"/>
+           <div class="col-sm-4">
+              <a :href ='this.coverData.tracks[4].external_urls.spotify' target = '_blank'>
+                <img :src="this.coverData.tracks[4].album.images[0].url" alt="bg image" class="album-covers" id="fifth-img"/>
+              </a>
             </div>
         </div>
       </div>
-      <div class="hero gradient" v-if="arrowClicked">
+      <div class="gradient" v-if="arrowClicked">
       <div class="container-fluid" v-if="!filterChoiceClicked && arrowClicked">
           <div class="row" id="title-row" :style="this.titleRowStyles">
-                    <div class="col-lg-12" style = "text-align: left; padding-top: 0px;">
+                    <div class="col-lg-12" style = "text-align: left; padding-top: 10px;">
+                    <br/>
                       <h1 class="display-4" align = 'left'><strong>What type of playlist would you like to generate?</strong></h1>     
                         <p class="lead"><strong>Fresh, but familiar does this and Spice it up does that.</strong></p>
 
@@ -159,7 +187,7 @@
 
 
       
-                                        <div class="row gx-5">
+                                        <div class="row gx-5" style = "padding-top: 20px;">
                                                 <div class="col text-end">
                                                 <a type = "button" @click="chooseFilterAndRecommend('FALSE')" class="btn" id="icon3"
                                                   style = "background-color: #6CC9CF;">
@@ -202,7 +230,7 @@
                                     <h1 class="display-4"><strong>Here's your new mix{{username}}</strong></h1>
                                     <br/>
                                     <br/>
-                                    <iframe style="border-radius:12px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                    <iframe style="border-radius:0px" :src='this.embedPlaylistUrl' width="75%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                                          as="style" rel="stylesheet preload prefetch" ></iframe>
                                     <br/>
                                     <br/>
@@ -216,20 +244,35 @@
                                               </div>
                                               <div class="col text-start">
                                                   <a :href="this.externalPlaylistUrl"  target = "_blank" class="btn">
-                                                    <img src="../assets/spotifylogo.png" id="icon"/> 
-                                                    View in Spotify
+                                                    <img src="../assets/Spotify_Icon_RGB_White.png" id="icon"/> 
+                                                    Listen on Spotify
                                                   </a>
                                               </div>
                                         
                                         </div>
                                     </div>
+                                    
 
 
                             </div>
                   </div>
+
+                  
                 </div>
              
-        
+        <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          All data is provided by &nbsp;
+                          <a href = 'https://open.spotify.com/' target = '_blank'>
+                          <img height = "75px" width = 'auto' src = '../assets/Spotify_Logo_CMYK_White.png'>
+                          </a> 
+                       </p>
+                      </li>
+                    </ul>
+        </div>
     
 
   
@@ -245,6 +288,7 @@
 import { onBeforeMount } from 'vue';
 import router from '../router';
 import Api from '../services/Api';
+import Header from './Header.vue';
 const querystring = require('querystring');
   export default {
     name: 'Login',
@@ -276,6 +320,7 @@ const querystring = require('querystring');
 
       }
     },
+    components: {Header},
     methods:
     {
       getAccessToken: async () => {
@@ -428,6 +473,10 @@ const querystring = require('querystring');
       moveToPlaylistPage: async function()
       {
         this.$data.arrowClicked = true;
+      },
+      handleBack: function()
+      {
+        router.replace('/')
       }
     },
     async mounted(){
@@ -515,65 +564,7 @@ const querystring = require('querystring');
 
         console.log(seedString)
         window.history.replaceState({}, document.title, "/");
-    //   const recResult = await Api().post('/getrecommendations', 
-    //   {
-    //     seedString: seedString,
-    //     token: this.access_token,
-    //     isStrongFiltered: "TRUE"
-    //   });
-    //   const recData = await recResult.data
-    //   const recSongUriList = recData.recommendedSongUris.filter(el => el != null);
-    //   console.log('rec song uri list')
-    //   console.log(recSongUriList);
-    
-    // // get user id
-    //   const meResponse = await fetch(`https://api.spotify.com/v1/me`, {
-    //         method: 'GET',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-		// 			   'Content-Type' : 'application/json'}
-    //     });
-	  //   const meData  = await (meResponse.json());
-    //     console.log(meData);
-    //     const userId = meData['id'];
-    //     console.log('user Id: ' + userId)
-    //   // generate playlist
-    //   const playlistGen = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-    //         method: 'POST',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-    //                     'Content-Type' : 'application/json'
-		// 			},
-    //         body: JSON.stringify(
-    //           {
-    //             name: "My Variefy Mix", 
-    //             description: `A fresh playlist recommendation based on your music tastes. Composed with songs similar to ${topSongNames[0]} and ${topSongNames[1]}. Made with the Variefy app.`
-    //           }
-    //         )
-            
-    //     });
-	  //       const playlistData  = await (playlistGen.json());
-    //       const playlistId = playlistData.id;
-    //       this.playlistId = playlistId;
-    //       const playlistUrl = playlistData.external_urls.spotify;
-    //       this.externalPlaylistUrl = playlistUrl;
-    //       let playlistUrlParts = playlistUrl.split(".com/")
-    //       this.embedPlaylistUrl = playlistUrlParts[0] + ".com/embed/" + playlistUrlParts[1];
-    //       console.log('created playlist???')
-    //       console.log(playlistId)
-    //       console.log(this.externalPlaylistUrl)
-    //     // add songs to playlist
-    //     const addToPlaylistRequest = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-    //         method: 'POST',
-    //         headers: { 'Authorization' : 'Bearer ' + getCookie("access_token"),
-    //                     'Content-Type' : 'application/json'
-		// 			},
-    //         body: JSON.stringify({uris: recSongUriList})
-            
-    //     });
-    //     const addToPlaylistData  = await (addToPlaylistRequest.json());
-    //     this.dataHasLoaded = true;
-    //     console.log('token on mount ' + this.access_token)      
-    //     window.history.replaceState({}, document.title, "/");
-    
+  
     const clusterResponse = await Api().post('/getclusters', {token: this.access_token})
     const topResponse = await Api().post('gettopcovers', {token: this.access_token})
 
@@ -607,9 +598,9 @@ const querystring = require('querystring');
           this.albumStyles = "opacity: 100%;"
           this.styleStrings = updatedStyleStrings;
 
-        }, 20);
-      }, 500);
-    }, 10);
+        }, 2);
+      }, 5);
+    }, 1);
       try {
         const topResponse = await Api().post('/gettopcovers', {token: this.access_token})
         console.log(topResponse)
@@ -628,7 +619,7 @@ const querystring = require('querystring');
           shuffledImages = shuffledImages.concat(currentImages);
           
           this.topURLImages = shuffledImages;
-        }, 10000);
+        }, 1000);
       }
       catch (error){
         console.log('something went wrong fetching top album pics');
@@ -723,9 +714,9 @@ function setCookie(cname, cvalue, exhours) {
         transition: all 0.2s ease-in-out;
     
       }
-      .btn:hover{ 
-        border: 3.5px white solid; 
-      }
+      /* .btn:hover{ 
+        /* border: 3.5px white solid; 
+      } */
       .btn:hover + .display-1  {
         box-shadow: -2px 6px 8pxgba(59, 50, 50,  r0.4)
         
@@ -758,8 +749,9 @@ html, body, template {
 }
 
 .album-covers {
-  border: 5px white solid;
-  border-radius: 15px; 
+  /* put back after extension */
+  border: 0px white solid;
+  border-radius: 0px; 
   transition: box-shadow 0.3s ease-in-out;
   transition: opacity 500ms;
   transition: width 250ms ease-in-out;

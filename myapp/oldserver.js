@@ -10,6 +10,7 @@ const { URLSearchParams } = require('url');
 // let location = require('location')
 // let request = require('request');
 // const { Client } = require('spotify-api.js');
+// remove bad commit message
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
@@ -208,7 +209,7 @@ app.get('/next', async (req, res) =>
 
 function constructClusterHTMLString(clusterGroups)
 {
-	var html = "<div> "
+	var html = "<div> yaaaaaaa "
 
 	for(let i = 0; i < clusterGroups.length; i++)
 	{

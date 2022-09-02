@@ -20,64 +20,10 @@
       
     </head>
 
-    
-<nav color-on-scroll="100" class="fixed-top navbar-transparent navbar navbar-expand-lg">
-<div class="container">
-<div class="navbar-translate" style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;">
-<a data-placement="bottom" rel="noopener noreferrer" title="Designed and Developed by @_kalpal" class="navbar-brand" href="/"><span></span></a>
-<button aria-expanded="false" class="navbar-toggler navbar-toggler"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span>
-</button>
-</div>
-  
-  <div class="justify-content-end undefined collapse navbar-collapse" aria-expanded="false">
-    <div class="navbar-collapse-header">
-      <div class="row">
-        <div class="collapse-brand col-6">
-          <a href="#pablo">
-            <div role="img" class="nav-logo" aria-label="coolboy" style="background-image: url(&quot;/logo-sml.png&quot;); transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"></div>
-          </a>
-        </div>
-        <div class="collapse-close text-right col-6"><button aria-expanded="false" class="navbar-toggler"><i class="tim-icons icon-simple-remove"></i></button></div>
-      </div>
-    </div>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/">Home</a></div>
-      </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/about">About</a></div>
-      </li>
-      <li class="nav-item">
-        <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="/contact">Contact</a></div>
-      </li>
-      <li class="nav-item">
-      <div class="dropdown"><a type = "button" @click="dropDown()"><img id="profile-pic" :style="this.profileStyle"/></a>
-             
-          <!-- Dropdown Menu -->
-            <div v-if="dropped">
-            <p>hello</p>
-              
-                <!-- <li>
-                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Account</a></div>
-                </li>
-                <hr>
-                <li @click="logout">
-                    <div style="transform: none; opacity: 1; transform-origin: 50% 50% 0px; border-radius: 0px;"><a class="nav-link" href="#">Sign out</a></div>
-                </li> -->
-            </div>
-       </div>
-       </li>
-       </ul>
-      
-  </div>
-  
-  </div>
-  
-</nav>
-
+<Header></Header>
 
     <div id="login-container">
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
             <img :src="this.topURLImages[0]" alt="bg image" class="album-covers" id="first-img"/>
         </div>
@@ -87,7 +33,7 @@
         <div class="col-sm">
             <img :src="this.topURLImages[2]" alt="bg image" class="album-covers" id="third-img"/>
         </div>
-      </div>
+      </div> -->
       
 
       <div class="row main-row align-items-center">
@@ -116,8 +62,26 @@
                 </div>
             </div>
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div class="container-fluid" id="developers">
+                    <hr>
+                    <ul>
+                      <li>
+                        <p class="lead">
+                          Variefy uses the Spotify API to retrieve metadata including user song data and audio feature data, and to generate recommendations. 
+                       </p>
+                      </li>
+                      <br/>
+                      <li>
+                        <p class = 'lead'>Variefy is not affiliated with Spotify or its partners in any way.</p>
+                      </li>
+                    </ul>
+                  </div>
 
-      <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
+      <!-- <div class="row main-row justify-content-between align-items-center" v-if="dataHasLoaded">
         <div class="col-sm">
             <img :src="this.topURLImages[3]" alt="bg image" class="album-covers" id="fourth-img"/>
         </div>
@@ -127,7 +91,7 @@
         <div class="col-sm">
             <img :src="this.topURLImages[5]" alt="bg image" class="album-covers" id="sixth-img"/>
         </div>
-      </div>
+      </div> -->
     </div>
 
 
@@ -146,8 +110,9 @@
 
 
   import Vue, { onBeforeMount, ref } from 'vue';
-import router from '../router';
-import Api from '../services/Api';
+  import router from '../router';
+  import Api from '../services/Api';
+  import Header from './Header.vue';
 
 
   export default {
@@ -164,14 +129,9 @@ import Api from '../services/Api';
         // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
       }
     },
-    // name: "App",
-    // data() {
-    //   return {
-    //     // image: "https://i.scdn.co/image/ab67616d0000b27368968350c2550e36d96344ee",
-    //   }
-    // },
-
-
+    components: {
+        Header,
+    },
     methods:
     {
    
@@ -187,6 +147,11 @@ import Api from '../services/Api';
         return this.$data.dropped;
         
         
+      },
+      logOut: function () {
+          setCookie('access_token', "")
+          setCookie('refresh_token', "")
+          router.replace('/')
       },
     
       getAccessToken: async () => {
@@ -529,6 +494,10 @@ import Api from '../services/Api';
 
 
 <style scoped>
+
+      body {
+        overflow-y: auto;
+      }
       .btn{
         font-size: 20px;
         cursor: pointer;
