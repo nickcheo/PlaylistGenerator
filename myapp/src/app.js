@@ -21,7 +21,7 @@ app.use(history({verbose: true}))
 
 const path = __dirname + '/../../client/dist'
 
-
+// work pls
 app.use(express.static(path))
 
 app.get('/', function (req, res) {
